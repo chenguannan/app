@@ -41,8 +41,6 @@ public class PermissionSetDialogUtils {
                 .setPositiveButton("去打开", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-//                        Intent intent = new Intent(Settings.ACTION_SETTINGS);
-//                        activity.startActivity(intent);
                         Intent intent = new Intent();
                         intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                         intent.addCategory(Intent.CATEGORY_DEFAULT);
