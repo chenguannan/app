@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/actionbar_layout"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteColor"
+        android:layout_marginTop="@dimen/y20"
+        android:padding="@dimen/x10">
+
+        <TextView
+            android:id="@+id/tv_shop_info_base_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@mipmap/information_icon"
+            android:drawablePadding="@dimen/x10"
+            android:gravity="center"
+            android:text="@string/base_info"
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/s16"/>
+
+        <View
+            android:id="@+id/v_shop_info_base_info_underline"
+            style="@style/v_underline"
+            android:layout_below="@+id/tv_shop_info_base_info"/>
+
+        <TextView
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_shop_info_base_info_underline"
+            android:text="@string/merchant_authority"/>
+
+        <TextView
+            android:id="@+id/tv_shop_info_open_merchant"
+            style="@style/tv_right"
+            android:layout_below="@+id/v_shop_info_base_info_underline"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/redColor"/>
+        <View
+            android:id="@+id/v_shop_info_open_merchant_underline"
+            style="@style/v_underline"
+            android:layout_below="@+id/tv_shop_info_open_merchant"/>
+
+        <TextView
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_shop_info_open_merchant_underline"
+            android:text="@string/user_name"/>
+
+        <TextView
+            android:id="@+id/tv_shop_info_name"
+            style="@style/tv_right"
+            android:layout_below="@+id/v_shop_info_open_merchant_underline"
+            android:layout_alignParentEnd="true"/>
+        <View
+            android:id="@+id/v_shop_info_name_underline"
+            style="@style/v_underline"
+            android:layout_below="@+id/tv_shop_info_name"/>
+
+        <TextView
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_shop_info_name_underline"
+            android:text="@string/idcard"/>
+
+        <TextView
+            android:id="@+id/tv_shop_info_idcard"
+            style="@style/tv_right"
+            android:layout_below="@+id/v_shop_info_name_underline"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteColor"
+        android:layout_marginTop="@dimen/y20"
+        android:padding="@dimen/x10">
+
+        <TextView
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:text="@string/shopname"
+            tools:ignore="RelativeOverlap"/>
+
+        <TextView
+            android:id="@+id/tv_shop_info_shop_name"
+            style="@style/tv_right"
+            android:layout_alignParentEnd="true"/>
+        <View
+            android:id="@+id/v_shop_info_shop_name_underline"
+            style="@style/v_underline"
+            android:layout_below="@+id/tv_shop_info_shop_name"/>
+
+        <TextView
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_shop_info_shop_name_underline"
+            android:text="@string/shopaddress"/>
+
+        <TextView
+            android:id="@+id/tv_shop_info_shop_address"
+            style="@style/tv_right"
+            android:layout_below="@+id/v_shop_info_shop_name_underline"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+</LinearLayout>

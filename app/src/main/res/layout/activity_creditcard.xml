@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/actionbar_layout"/>
+
+    <LinearLayout
+        android:id="@+id/ll_creditcard_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/x10"
+        android:background="@drawable/circle_radius_white_bg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/y10"
+        android:paddingBottom="@dimen/y10">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/add_bankcard"
+            tools:ignore="ContentDescription"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/x10"
+            android:gravity="center"
+            android:text="@string/add_creditcard"
+            android:textColor="@color/mainColor"
+            android:textSize="@dimen/s16"/>
+    </LinearLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.sl_group.recycleviewdemo.MainActivity">
+
+        <com.sl_group.jinyuntong_oem.SlideRecyclerView
+            android:id="@+id/recycleView_creditcard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.sl_group.jinyuntong_oem.SlideRecyclerView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</LinearLayout>

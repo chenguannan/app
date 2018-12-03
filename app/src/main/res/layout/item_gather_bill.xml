@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/whiteColor"
+    android:layout_marginTop="@dimen/y20"
+    android:padding="@dimen/x10">
+
+    <TextView
+        android:id="@+id/tv_gather_bill_order_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/item_order"
+        android:textColor="@color/blackColor"
+        android:textSize="@dimen/s14"/>
+
+    <TextView
+        android:id="@+id/tv_gather_bill_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/tv_gather_bill_state"
+        android:layout_toEndOf="@+id/tv_gather_bill_order_hint"
+        android:textColor="@color/grayColor_6"
+        android:textSize="@dimen/s14"/>
+
+    <TextView
+        android:id="@+id/tv_gather_bill_date_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_gather_bill_order_hint"
+        android:layout_alignStart="@+id/tv_gather_bill_order_hint"
+        android:layout_alignEnd="@+id/tv_gather_bill_order_hint"
+        android:layout_marginTop="@dimen/y5"
+        android:gravity="end"
+        android:text="@string/item_date"
+        android:textColor="@color/blackColor"
+        android:textSize="@dimen/s14"/>
+
+    <TextView
+        android:id="@+id/tv_gather_bill_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_gather_bill_order"
+        android:layout_marginTop="@dimen/y5"
+        android:layout_toStartOf="@+id/tv_gather_bill_state"
+        android:layout_toEndOf="@+id/tv_gather_bill_date_hint"
+        android:textColor="@color/grayColor_6"
+        android:textSize="@dimen/s14"/>
+
+    <TextView
+        android:id="@+id/tv_gather_bill_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_gather_bill_order_hint"
+        android:layout_alignBottom="@+id/tv_gather_bill_date_hint"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:textColor="@color/redColor"
+        android:textSize="@dimen/s16"/>
+
+    <View
+        android:id="@+id/v_gather_bill_underline"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:layout_below="@+id/tv_gather_bill_state"
+        android:layout_marginTop="@dimen/y10"
+        android:layout_marginBottom="@dimen/y10"
+        android:background="@color/grayColor_line_E5"/>
+
+    <TextView
+        android:id="@+id/tv_gather_bill_dealfee_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_gather_bill_underline"
+        android:text="@string/item_deal_fee"
+        android:textColor="@color/blackColor"
+        android:textSize="@dimen/s14"/>
+
+    <TextView
+        android:id="@+id/tv_gather_bill_dealfee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_gather_bill_underline"
+        android:layout_toEndOf="@+id/tv_gather_bill_dealfee_hint"
+        android:textColor="@color/grayColor_6"
+        android:textSize="@dimen/s14"/>
+
+    <TextView
+        android:id="@+id/tv_gather_bill_extractfee_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_gather_bill_underline"
+        android:layout_marginStart="@dimen/x10"
+        android:layout_toEndOf="@+id/tv_gather_bill_dealfee"
+        android:text="@string/item_extract_fee"
+        android:textColor="@color/blackColor"
+        android:textSize="@dimen/s14"/>
+
+    <TextView
+        android:id="@+id/tv_gather_bill_extractfee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_gather_bill_underline"
+        android:layout_toStartOf="@+id/tv_gather_bill_query_details"
+        android:layout_toEndOf="@+id/tv_gather_bill_extractfee_hint"
+        android:textColor="@color/grayColor_6"
+        android:textSize="@dimen/s14"/>
+
+    <TextView
+        android:id="@+id/tv_gather_bill_gather_money_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_gather_bill_dealfee_hint"
+        android:layout_marginTop="@dimen/y5"
+        android:text="@string/item_gather_money"
+        android:textColor="@color/blackColor"
+        android:textSize="@dimen/s14"/>
+
+    <TextView
+        android:id="@+id/tv_gather_bill_gather_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_gather_bill_dealfee_hint"
+        android:layout_marginTop="@dimen/y5"
+        android:layout_toStartOf="@+id/tv_gather_bill_query_details"
+        android:layout_toEndOf="@+id/tv_gather_bill_gather_money_hint"
+        android:textColor="@color/grayColor_6"
+        android:textSize="@dimen/s14"/>
+
+    <TextView
+        android:id="@+id/tv_gather_bill_real_money_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_gather_bill_gather_money_hint"
+        android:layout_marginTop="@dimen/y5"
+        android:text="@string/item_real_money"
+        android:textColor="@color/blackColor"
+        android:textSize="@dimen/s14"/>
+
+    <TextView
+        android:id="@+id/tv_gather_bill_real_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_gather_bill_gather_money"
+        android:layout_marginTop="@dimen/y5"
+        android:layout_toStartOf="@+id/tv_gather_bill_query_details"
+        android:layout_toEndOf="@+id/tv_gather_bill_gather_money_hint"
+        android:textColor="@color/redColor"
+        android:textSize="@dimen/s14"/>
+
+    <TextView
+        android:id="@+id/tv_gather_bill_query_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_gather_bill_dealfee_hint"
+        android:layout_alignBottom="@+id/tv_gather_bill_real_money_hint"
+        android:layout_alignParentEnd="true"
+        android:gravity="center_vertical"
+        android:text="@string/look_details"
+        android:textColor="@color/blackColor"
+        android:textSize="@dimen/s16"/>
+</RelativeLayout>

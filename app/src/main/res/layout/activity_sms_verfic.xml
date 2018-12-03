@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/actionbar_layout"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x20"
+        android:layout_marginTop="@dimen/y50"
+        android:layout_marginEnd="@dimen/x20">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/tv_change_gesture_password_get_verficcode">
+
+            <EditText
+                android:id="@+id/et_sms_tel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/input_tel"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:textSize="@dimen/s16"
+                tools:ignore="Autofill,TextFields"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_sms_get_verficcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="@string/get_verfic_code"
+            android:textColor="@color/mainColor"
+            android:textSize="@dimen/s16"
+            tools:ignore="RelativeOverlap"/>
+
+    </RelativeLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x20"
+        android:layout_marginTop="@dimen/y10"
+        android:layout_marginEnd="@dimen/x20">
+
+        <EditText
+            android:id="@+id/et_sms_verficcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_sms_verfic_code"
+            android:inputType="number"
+            android:maxLength="6"
+            android:textSize="@dimen/s16"
+            tools:ignore="Autofill,TextFields"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_sms_next"
+        style="@style/btn_common"
+        android:layout_margin="@dimen/x50"
+        android:text="@string/next"/>
+</LinearLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/face_to_face_actionbar"
+        layout="@layout/actionbar_layout"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/face_to_face_actionbar"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/bj1"
+        tools:ignore="ContentDescription"/>
+
+    <ImageView
+        android:id="@+id/img_share_face_to_face_qrcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_share_face_to_face_longclick"
+        android:layout_marginStart="@dimen/x20"
+        android:src="@mipmap/qrcode_loading"
+        tools:ignore="ContentDescription"/>
+
+    <TextView
+        android:id="@+id/tv_share_face_to_face_longclick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_alignStart="@+id/img_share_face_to_face_qrcode"
+        android:layout_alignEnd="@+id/img_share_face_to_face_qrcode"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/y10"
+        android:layout_marginBottom="@dimen/y50"
+        android:gravity="center"
+        android:text="@string/longclick_qrcode"
+        android:textColor="@color/blackColor"
+        android:textSize="@dimen/s12"/>
+</RelativeLayout>

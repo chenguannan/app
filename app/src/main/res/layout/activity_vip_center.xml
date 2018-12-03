@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/actionbar_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteColor"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/x10"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/vip_bg"
+            tools:ignore="ContentDescription"/>
+
+        <TextView
+            android:id="@+id/tv_vip_center_buy_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/x10"
+            android:text="@string/buy_vip_content"
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/s16"/>
+
+        <TextView
+            android:id="@+id/tv_vip_center_buy_discounts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/x10"
+            android:layout_marginEnd="@dimen/x10"
+            android:text="@string/buy_vip_discounts"
+            android:textColor="@color/grayColor_6"
+            android:textSize="@dimen/s14"/>
+
+        <Button
+            android:id="@+id/btn_vip_center_immediately_buy"
+            style="@style/btn_common"
+            android:layout_marginStart="@dimen/x50"
+            android:layout_marginTop="@dimen/y20"
+            android:layout_marginEnd="@dimen/x50"
+            android:layout_marginBottom="@dimen/y20"
+            android:background="@drawable/vip_btn_bg"
+            android:text="@string/immediately_buy"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/x10"
+        android:background="@drawable/vip_bg_border"
+        android:orientation="vertical"
+        android:padding="@dimen/x10">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y10"
+            android:layout_marginBottom="@dimen/y10"
+            android:src="@mipmap/buy_vip"
+            tools:ignore="ContentDescription"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1"
+            android:layout_marginTop="@dimen/y10"
+            android:background="@color/grayColor_line_E5"/>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/y10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/bankname"
+                android:textColor="@color/blackColor"
+                android:textSize="@dimen/s18"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/normal_rate"
+                android:textColor="@color/blackColor"
+                android:textSize="@dimen/s18"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/vip_rate"
+                android:textColor="@color/vipColor"
+                android:textSize="@dimen/s18"/>
+        </LinearLayout>
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.sl_group.recycleviewdemo.MainActivity">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycleView_bankcard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

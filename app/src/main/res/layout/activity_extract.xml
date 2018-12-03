@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/actionbar_layout"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/x10"
+        android:background="@drawable/circle_white_bg"
+        android:padding="@dimen/x10">
+
+        <TextView
+            android:id="@+id/tv_apply_extract_can_extract_hint"
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:text="@string/can_extract_brokerage"
+            android:textSize="@dimen/s16"/>
+
+        <TextView
+            android:id="@+id/tv_apply_extract_can_extract"
+            style="@style/tv_right"
+            android:layout_toEndOf="@+id/tv_apply_extract_can_extract_hint"/>
+
+        <View
+            android:id="@+id/v_apply_extract_can_extract_underline"
+            style="@style/v_underline"
+            android:layout_below="@+id/tv_apply_extract_can_extract_hint"/>
+
+        <TextView
+            android:id="@+id/tv_apply_extract_extract_cardnumber_hint"
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_apply_extract_can_extract_underline"
+            android:layout_alignStart="@+id/tv_apply_extract_can_extract_hint"
+            android:layout_alignEnd="@+id/tv_apply_extract_can_extract_hint"
+            android:text="@string/extract_cardnumber"
+            android:textSize="@dimen/s16"/>
+
+        <TextView
+            android:id="@+id/tv_apply_extract_extract_cardnumber"
+            style="@style/tv_right"
+            android:layout_below="@+id/v_apply_extract_can_extract_underline"
+            android:layout_toEndOf="@+id/tv_apply_extract_extract_cardnumber_hint"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/x10"
+        android:background="@drawable/circle_white_bg"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:padding="@dimen/x10"
+            android:text="@string/extract_money"/>
+
+        <EditText
+            android:id="@+id/et_apply_extract_extract_money"
+            style="@style/et_right"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:digits="1234567890."
+            android:maxLines="1"
+            android:hint="@string/input_extract_money"
+            android:paddingTop="@dimen/x10"
+            android:paddingBottom="@dimen/x10"
+            tools:ignore="Autofill,TextFields"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x10"
+        android:text="@string/extract_hint"
+        android:textColor="@color/grayColor_6"
+        android:textSize="@dimen/s14"/>
+
+    <Button
+        android:id="@+id/btn_apply_extract_makesure"
+        style="@style/btn_common"
+        android:layout_margin="@dimen/x50"
+        android:text="@string/makesure_extract"/>
+
+</LinearLayout>

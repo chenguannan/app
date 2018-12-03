@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv_gesture_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/glv_login"
+        android:gravity="center"
+        android:text="@string/slide_gesture_password_login"
+        android:textColor="@color/grayColor_6"
+        android:textSize="@dimen/s18"/>
+
+    <com.wangnan.library.GestureLockView
+        android:id="@+id/glv_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        app:error_color="#ff0000"
+        app:line_thickness="3dp"
+        app:press_color="#0084FF"/>
+
+    <View
+        android:id="@+id/v_gesture_login_spiltline"
+        android:layout_width="@dimen/x1"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_gesture_login_input_password_login"
+        android:layout_alignBottom="@+id/tv_gesture_login_input_password_login"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/y10"
+        android:background="@color/blackColor"/>
+
+    <TextView
+        android:id="@+id/tv_gesture_login_input_password_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/x20"
+        android:layout_marginBottom="@dimen/y10"
+        android:layout_toStartOf="@+id/v_gesture_login_spiltline"
+        android:gravity="center"
+        android:text="@string/input_password_login"
+        android:textColor="@color/mainColor"
+        android:textSize="@dimen/s16"
+        tools:ignore="RelativeOverlap"/>
+
+    <TextView
+        android:id="@+id/tv_gesture_login_forget_gesture_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/x20"
+        android:layout_marginBottom="@dimen/y10"
+        android:layout_toEndOf="@+id/v_gesture_login_spiltline"
+        android:gravity="center"
+        android:text="@string/forget_gesture_password"
+        android:textColor="@color/mainColor"
+        android:textSize="@dimen/s16"/>
+</RelativeLayout>

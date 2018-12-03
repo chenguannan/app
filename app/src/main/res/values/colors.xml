@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="mainColor">#309EFF</color>
+    <color name="whiteColor">#FFFFFFFF</color>
+    <color name="whiteColor_alpha_7">#B3FFFFFF</color>
+    <color name="blackColor">#FF000000</color>
+    <color name="blackColor_alpha_8">#CC000000</color>
+    <color name="blackColor_alpha_6">#99000000</color>
+    <color name="grayColor_E">#FFEEEEEE</color>
+    <color name="grayColor_D">#FFDDDDDD</color>
+    <color name="grayColor_C">#FFCCCCCC</color>
+    <color name="grayColor_B">#FFBBBBBB</color>
+    <color name="grayColor_A">#FFAAAAAA</color>
+    <color name="grayColor_line_E5">#FFE5E5E5</color>
+    <color name="grayColor_9">#FF999999</color>
+    <color name="grayColor_6">#FF666666</color>
+    <color name="blueColor1">#FF14C3FC</color>
+    <color name="blueColor2">#FF01AAEF</color>
+    <color name="redColor">#FFFF0000</color>
+    <color name="redColor_alpha_8">#CCFF0000</color>
+    <color name="bgColor">#FFF0F1F6</color>
+    <color name="channelColor">#FFFFA647</color>
+    <color name="successColor">#FF32CC72</color>
+    <color name="failColor">#FFFF0000</color>
+    <color name="ingColor">#FFFFA647</color>
+    <color name="purpleColor">#AFB6DA</color>
+    <color name="vipColor">#DDA728</color>
+
+
+
+    <color name="super_real_nav_bar">#309EFF</color>
+    <color name="super_real_light">#309EFF</color>
+    <color name="super_real_nav_text">#FFFFFF</color>
+    <color name="ocr_manual_buttonTitleColor">#309EFF</color>
+    <color name="ocr_agreement_buttonTitleColor">#309EFF</color>
+
+    <color name="line_color">#12d4dc</color>
+    <color name="text_color">#a6ffffff</color>
+    <color name="line_bottom_color">#26000000</color>
+    <color name="card_num_color">#d9000000</color>
+    <color name="card_name_color">#000000</color>
+    <color name="viewfinder_frame">#303F9F</color>
+    <color name="viewfinder_laser">#ffff0000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#b0000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="new_color">#12d4dc</color>
+    <color name="white_color">#ffffffff</color>
+</resources>

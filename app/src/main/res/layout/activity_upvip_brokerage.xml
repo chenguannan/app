@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bgColor"
+              android:orientation="vertical">
+
+    <include layout="@layout/actionbar_layout"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mainColor"
+        android:paddingStart="@dimen/x20"
+        android:paddingTop="@dimen/y20"
+        android:paddingEnd="@dimen/x20"
+        android:paddingBottom="@dimen/y20"
+        android:text="@string/up_vip_brokerage"
+        android:textColor="@color/whiteColor_alpha_7"
+        android:textSize="@dimen/s14"/>
+
+    <TextView
+        android:id="@+id/tv_upvip_brokerage_money"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mainColor"
+        android:paddingStart="@dimen/x20"
+        android:paddingEnd="@dimen/x20"
+        android:paddingBottom="@dimen/y20"
+        android:textColor="@color/whiteColor"
+        android:textSize="@dimen/s30"/>
+
+    <include layout="@layout/select_date"/>
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.sl_group.recycleviewdemo.MainActivity">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleView_upvip_brokerage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

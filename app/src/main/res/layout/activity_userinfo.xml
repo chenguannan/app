@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bgColor"
+              android:orientation="vertical">
+
+    <include layout="@layout/actionbar_layout"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y10"
+        android:background="@color/whiteColor"
+        android:paddingStart="@dimen/x10"
+        android:paddingEnd="@dimen/x10"
+        android:paddingBottom="@dimen/y10">
+
+        <TextView
+            android:id="@+id/tv_userinfo_head_portrait"
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:paddingTop="@dimen/y10"
+            android:paddingBottom="@dimen/y10"
+            android:text="@string/head_portrait"
+            tools:ignore="RelativeOverlap"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_userinfo_head_portrait"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"
+            android:layout_marginEnd="@dimen/x10"
+            android:layout_alignTop="@+id/tv_userinfo_head_portrait"
+            android:layout_alignBottom="@+id/tv_userinfo_head_portrait"
+            android:layout_toStartOf="@+id/img_userinfo_arrow"
+            android:src="@mipmap/my_head_portrait"
+            tools:ignore="ContentDescription"/>
+
+        <ImageView
+            android:id="@+id/img_userinfo_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tv_userinfo_head_portrait"
+            android:layout_alignBottom="@+id/tv_userinfo_head_portrait"
+            android:layout_alignParentEnd="true"
+            android:src="@mipmap/big_arrow"
+            tools:ignore="ContentDescription"/>
+
+        <View
+            android:id="@+id/v_userinfo_head_portrait_underline"
+            style="@style/v_underline"
+            android:layout_below="@+id/tv_userinfo_head_portrait"
+            android:layout_marginTop="0dp"/>
+
+        <TextView
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_userinfo_head_portrait_underline"
+            android:text="@string/name"/>
+
+        <TextView
+            android:id="@+id/tv_userinfo_name"
+            style="@style/tv_right"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_userinfo_head_portrait_underline"
+            android:layout_alignParentEnd="true"/>
+
+        <View
+            android:id="@+id/v_userinfo_name_underline"
+            style="@style/v_underline"
+            android:layout_below="@+id/tv_userinfo_name"/>
+
+        <TextView
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_userinfo_name_underline"
+            android:text="@string/level"/>
+
+        <TextView
+            android:id="@+id/tv_userinfo_level"
+            style="@style/tv_right"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_userinfo_name_underline"
+            android:layout_alignParentEnd="true"/>
+
+        <View
+            android:id="@+id/v_userinfo_level_underline"
+            style="@style/v_underline"
+            android:layout_below="@+id/tv_userinfo_level"/>
+
+        <TextView
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_userinfo_level_underline"
+            android:text="@string/realname"/>
+
+        <TextView
+            android:id="@+id/tv_userinfo_realname"
+            style="@style/tv_right"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_userinfo_level_underline"
+            android:layout_alignParentEnd="true"/>
+
+        <View
+            android:id="@+id/v_userinfo_realname_underline"
+            style="@style/v_underline"
+            android:layout_below="@+id/tv_userinfo_realname"/>
+
+        <TextView
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_userinfo_realname_underline"
+            android:text="@string/open_merchant"/>
+
+        <TextView
+            android:id="@+id/tv_userinfo_open_merchant"
+            style="@style/tv_right"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_userinfo_realname_underline"
+            android:layout_alignParentEnd="true"/>
+
+        <View
+            android:id="@+id/v_userinfo_open_merchant_underline"
+            style="@style/v_underline"
+            android:layout_below="@+id/tv_userinfo_open_merchant"/>
+
+        <TextView
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_userinfo_open_merchant_underline"
+            android:text="@string/service_provide"/>
+
+        <TextView
+            android:id="@+id/tv_userinfo_service_provide"
+            style="@style/tv_right"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_userinfo_open_merchant_underline"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+</LinearLayout>

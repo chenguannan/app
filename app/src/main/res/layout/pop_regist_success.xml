@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/pop_bg">
+
+        <TextView
+            android:id="@+id/tv_pop_regist_success"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/regist_success"
+            android:layout_marginTop="@dimen/y100"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/mainColor"
+            android:textSize="@dimen/s22"/>
+
+        <Button
+            android:id="@+id/btn_pop_regist_success_realname"
+            style="@style/btn_common"
+            android:layout_below="@+id/tv_pop_regist_success"
+            android:layout_margin="@dimen/x20"
+            android:text="@string/immediately_realname"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/img_pop_regist_success_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y10"
+        android:src="@mipmap/cmp_close"
+        tools:ignore="ContentDescription"/>
+</LinearLayout>

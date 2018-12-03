@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/actionbar_layout"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y20"
+        android:background="@color/whiteColor"
+        android:padding="@dimen/x10">
+
+        <TextView
+            android:id="@+id/tv_settle_info_base_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@mipmap/information_icon"
+            android:drawablePadding="@dimen/x10"
+            android:gravity="center"
+            android:text="@string/settle_info"
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/s16"/>
+
+        <View
+            android:id="@+id/v_settle_info_base_info_underline"
+            style="@style/v_underline"
+            android:layout_below="@+id/tv_settle_info_base_info"/>
+
+        <TextView
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_settle_info_base_info_underline"
+            android:text="@string/user_name"/>
+
+        <TextView
+            android:id="@+id/tv_settle_info_name"
+            style="@style/tv_right"
+            android:layout_below="@+id/v_settle_info_base_info_underline"
+            android:layout_alignParentEnd="true"/>
+
+        <View
+            android:id="@+id/v_settle_info_name_underline"
+            style="@style/v_underline"
+            android:layout_below="@+id/tv_settle_info_name"/>
+
+        <TextView
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_settle_info_name_underline"
+            android:text="@string/idcard"/>
+
+        <TextView
+            android:id="@+id/tv_settle_info_idcard"
+            style="@style/tv_right"
+            android:layout_below="@+id/v_settle_info_name_underline"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_settle_info_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y20"
+        android:background="@color/whiteColor"
+        android:padding="@dimen/x10">
+
+        <TextView
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:text="@string/settle_cardnumber"
+            tools:ignore="RelativeOverlap"/>
+
+        <TextView
+            android:id="@+id/tv_settle_info_cardnumber"
+            style="@style/tv_right"
+            android:layout_alignParentEnd="true"/>
+
+        <View
+            android:id="@+id/v_settle_info_dis_cardnumber_underline"
+            style="@style/v_underline"
+            android:layout_below="@+id/tv_settle_info_cardnumber"/>
+
+        <TextView
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_settle_info_dis_cardnumber_underline"
+            android:text="@string/bank_tel"/>
+
+        <TextView
+            android:id="@+id/tv_settle_info_tel"
+            style="@style/tv_right"
+            android:layout_below="@+id/v_settle_info_dis_cardnumber_underline"
+            android:layout_alignParentEnd="true"/>
+
+        <View
+            android:id="@+id/v_settle_info_tel_underline"
+            style="@style/v_underline"
+            android:layout_below="@+id/tv_settle_info_tel"/>
+
+        <TextView
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_settle_info_tel_underline"
+            android:text="@string/bank_name"/>
+
+        <TextView
+            android:id="@+id/tv_settle_info_bankname"
+            style="@style/tv_right"
+            android:layout_below="@+id/v_settle_info_tel_underline"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_settle_info_change"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y20"
+        android:background="@color/whiteColor"
+        android:padding="@dimen/x10"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_settle_info_cardnumber_hint"
+            style="@style/tv_left"
+            android:layout_alignEnd="@+id/tv_settle_info_tel_hint"
+            android:text="@string/settle_cardnumber"
+            tools:ignore="RelativeOverlap"/>
+
+        <EditText
+            android:id="@+id/et_settle_info_cardnumber"
+            style="@style/et_right"
+            android:layout_toStartOf="@+id/img_settle_info_scan"
+            android:layout_toEndOf="@+id/tv_settle_info_cardnumber_hint"
+            android:hint="@string/input_depositcard_number"
+            android:inputType="number"
+            android:maxLength="20"
+            tools:ignore="Autofill"/>
+
+        <ImageView
+            android:id="@+id/img_settle_info_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/et_settle_info_cardnumber"
+            android:layout_alignBottom="@+id/et_settle_info_cardnumber"
+            android:layout_alignParentEnd="true"
+            android:paddingStart="@dimen/x20"
+            android:paddingEnd="@dimen/x20"
+            android:src="@mipmap/autonym_xj"
+            tools:ignore="ContentDescription"/>
+
+        <View
+            android:id="@+id/v_settle_info_cardnumber_underline"
+            style="@style/v_underline"
+            android:layout_below="@+id/et_settle_info_cardnumber"/>
+
+        <TextView
+            android:id="@+id/tv_settle_info_tel_hint"
+            style="@style/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/v_settle_info_cardnumber_underline"
+            android:text="@string/bank_tel"/>
+
+        <EditText
+            android:id="@+id/et_settle_info_tel"
+            style="@style/et_right"
+            android:layout_below="@+id/v_settle_info_cardnumber_underline"
+            android:layout_toEndOf="@+id/tv_settle_info_tel_hint"
+            android:hint="@string/input_bancard_tel"
+            android:inputType="phone"
+            android:maxLength="11"
+            tools:ignore="Autofill"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_settle_info_change_finsh"
+        style="@style/btn_common"
+        android:layout_margin="@dimen/x50"
+        android:text="修改结算卡"/>
+</LinearLayout>

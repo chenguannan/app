@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/fx_bj"
+        tools:ignore="ContentDescription"/>
+
+    <TextView
+        android:id="@+id/tv_share_face_to_face"
+        style="@style/tv_share"
+        android:drawableStart="@mipmap/fx_mdm"
+        android:text="@string/face_to_face"/>
+
+    <TextView
+        android:id="@+id/tv_share_regist"
+        style="@style/tv_share"
+        android:drawableStart="@mipmap/fx_zc"
+        android:text="@string/share_register"/>
+
+    <TextView
+        android:id="@+id/tv_share_official"
+        style="@style/tv_share"
+        android:drawableStart="@mipmap/fx_wenan"
+        android:text="@string/official_generalize"/>
+</LinearLayout>

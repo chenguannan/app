@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/actionbar_layout"/>
+
+    <TextView
+        android:id="@+id/tv_extract_record_details_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y20"
+        android:layout_marginBottom="@dimen/y50"
+        android:gravity="center"
+        android:textColor="@color/blackColor"
+        android:textSize="@dimen/s18"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tv_extract_record_details_order_hint"
+            style="@style/tv_details_left_common"
+            android:layout_alignEnd="@+id/tv_extract_record_details_money_hint"
+            android:text="@string/order_"/>
+
+        <TextView
+            android:id="@+id/tv_extract_record_details_order"
+            style="@style/tv_details__right_common"
+            android:layout_toEndOf="@+id/tv_extract_record_details_order_hint"/>
+
+        <TextView
+            android:id="@+id/tv_extract_record_details_date_hint"
+            style="@style/tv_details_left_common"
+            android:layout_below="@+id/tv_extract_record_details_order_hint"
+            android:text="@string/deal_date_"/>
+
+        <TextView
+            android:id="@+id/tv_extract_record_details_date"
+            style="@style/tv_details__right_common"
+            android:layout_below="@+id/tv_extract_record_details_order"
+            android:layout_toEndOf="@+id/tv_extract_record_details_date_hint"/>
+
+        <TextView
+            android:id="@+id/tv_extract_record_details_money_hint"
+            style="@style/tv_details_left_common"
+            android:layout_below="@+id/tv_extract_record_details_date_hint"
+            android:text="@string/extract_money_"/>
+
+        <TextView
+            android:id="@+id/tv_extract_record_details_money"
+            style="@style/tv_details__right_common"
+            android:layout_below="@+id/tv_extract_record_details_date"
+            android:layout_toEndOf="@+id/tv_extract_record_details_money_hint"/>
+
+        <TextView
+            android:id="@+id/tv_extract_record_details_fee_hint"
+            style="@style/tv_details_left_common"
+            android:layout_below="@+id/tv_extract_record_details_money_hint"
+            android:layout_alignEnd="@+id/tv_extract_record_details_money_hint"
+            android:text="@string/fee_"/>
+
+        <TextView
+            android:id="@+id/tv_extract_details_fee"
+            style="@style/tv_details__right_common"
+            android:layout_below="@+id/tv_extract_record_details_money"
+            android:layout_toEndOf="@+id/tv_extract_record_details_fee_hint"/>
+
+        <TextView
+            android:id="@+id/tv_extract_record_details_realmoney_hint"
+            style="@style/tv_details_left_common"
+            android:layout_below="@+id/tv_extract_record_details_fee_hint"
+            android:layout_alignEnd="@+id/tv_extract_record_details_money_hint"
+            android:text="@string/real_money_"/>
+
+        <TextView
+            android:id="@+id/tv_extract_details_realmoney"
+            style="@style/tv_details__right_common"
+            android:layout_below="@+id/tv_extract_details_fee"
+            android:layout_toEndOf="@+id/tv_extract_record_details_realmoney_hint"/>
+
+        <TextView
+            android:id="@+id/tv_extract_record_details_accountnumber_hint"
+            style="@style/tv_details_left_common"
+            android:layout_below="@+id/tv_extract_record_details_realmoney_hint"
+            android:layout_alignEnd="@+id/tv_extract_record_details_money_hint"
+            android:text="@string/account_number_"/>
+
+        <TextView
+            android:id="@+id/tv_extract_record_details_accountnumber"
+            style="@style/tv_details__right_common"
+            android:layout_below="@+id/tv_extract_details_realmoney"
+            android:layout_toEndOf="@+id/tv_extract_record_details_accountnumber_hint"/>
+        <TextView
+            android:id="@+id/tv_extract_record_details_fail_hint"
+            style="@style/tv_details_left_common"
+            android:visibility="gone"
+            android:layout_below="@+id/tv_extract_record_details_accountnumber_hint"
+            android:layout_alignEnd="@+id/tv_extract_record_details_money_hint"
+            android:text="@string/fail_reason_"/>
+
+        <TextView
+            android:id="@+id/tv_extract_record_details_fail"
+            style="@style/tv_details__right_common"
+            android:visibility="gone"
+            android:layout_below="@+id/tv_extract_record_details_accountnumber"
+            android:layout_toEndOf="@+id/tv_extract_record_details_fail_hint"/>
+    </RelativeLayout>
+</LinearLayout>

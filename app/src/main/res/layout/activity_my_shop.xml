@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor">
+
+    <include
+        android:id="@+id/myshop_actionbar"
+        layout="@layout/actionbar_layout"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/myshop_actionbar"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/shop_bg"
+        tools:ignore="ContentDescription"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/myshop_actionbar"
+        android:layout_marginTop="@dimen/y120"
+        android:scrollbars="none">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/x20"
+            android:layout_marginEnd="@dimen/x20"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_my_shop_shop_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/whiteColor"
+                android:padding="@dimen/x20">
+
+                <ImageView
+                    android:id="@+id/img_myshop_shopinformation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/shop_information_bigicon"
+                    tools:ignore="ContentDescription"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/x20"
+                    android:layout_toEndOf="@+id/img_myshop_shopinformation"
+                    android:orientation="vertical"
+                    tools:ignore="RelativeOverlap">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shop_info"
+                        android:textColor="@color/blackColor"
+                        android:textSize="@dimen/s18"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y5"
+                        android:text="@string/shop_info_hint"
+                        android:textColor="@color/grayColor_9"
+                        android:textSize="@dimen/s14"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/shop_small_arrows"
+                    tools:ignore="ContentDescription"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_my_shop_settle_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y10"
+                android:background="@color/whiteColor"
+                android:padding="@dimen/x20">
+
+                <ImageView
+                    android:id="@+id/img_myshop_settleinformation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/billing_information_bigicon"
+                    tools:ignore="ContentDescription"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/x20"
+                    android:layout_toEndOf="@+id/img_myshop_settleinformation"
+                    android:orientation="vertical"
+                    tools:ignore="RelativeOverlap">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settle_info"
+                        android:textColor="@color/blackColor"
+                        android:textSize="@dimen/s18"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y5"
+                        android:text="@string/settle_info_hint"
+                        android:textColor="@color/grayColor_9"
+                        android:textSize="@dimen/s14"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/shop_small_arrows"
+                    tools:ignore="ContentDescription"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_my_shop_gather_bill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y10"
+                android:background="@color/whiteColor"
+                android:padding="@dimen/x20">
+
+                <ImageView
+                    android:id="@+id/img_myshop_gatherbill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/progress_billing_bigicon"
+                    tools:ignore="ContentDescription"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/x20"
+                    android:layout_toEndOf="@+id/img_myshop_gatherbill"
+                    android:orientation="vertical"
+                    tools:ignore="RelativeOverlap">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gather_bill"
+                        android:textColor="@color/blackColor"
+                        android:textSize="@dimen/s18"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y5"
+                        android:text="@string/gather_bill_hint"
+                        android:textColor="@color/grayColor_9"
+                        android:textSize="@dimen/s14"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/shop_small_arrows"
+                    tools:ignore="ContentDescription"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_my_shop_gather_rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y10"
+                android:background="@color/whiteColor"
+                android:padding="@dimen/x20">
+
+                <ImageView
+                    android:id="@+id/img_myshop_gatherrate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/rate_bigicon"
+                    tools:ignore="ContentDescription"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/x20"
+                    android:layout_toEndOf="@+id/img_myshop_gatherrate"
+                    android:orientation="vertical"
+                    tools:ignore="RelativeOverlap">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gather_rate"
+                        android:textColor="@color/blackColor"
+                        android:textSize="@dimen/s18"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y5"
+                        android:text="@string/gathre_rate_hint"
+                        android:textColor="@color/grayColor_9"
+                        android:textSize="@dimen/s14"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/shop_small_arrows"
+                    tools:ignore="ContentDescription"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_my_shop_my_team"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y10"
+                android:background="@color/whiteColor"
+                android:padding="@dimen/x20">
+
+                <ImageView
+                    android:id="@+id/img_myshop_my_team"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/my_team"
+                    tools:ignore="ContentDescription"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/x20"
+                    android:layout_toEndOf="@+id/img_myshop_my_team"
+                    android:orientation="vertical"
+                    tools:ignore="RelativeOverlap">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/my_team"
+                        android:textColor="@color/blackColor"
+                        android:textSize="@dimen/s18"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y5"
+                        android:text="@string/my_team_hint"
+                        android:textColor="@color/grayColor_9"
+                        android:textSize="@dimen/s14"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/shop_small_arrows"
+                    tools:ignore="ContentDescription"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

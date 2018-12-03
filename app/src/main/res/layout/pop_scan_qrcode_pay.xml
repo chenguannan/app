@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/whiteColor"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_pop_scan_qrcode_pay_makesure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="@dimen/y10"
+        android:paddingBottom="@dimen/y10"
+        android:text="确认付款"
+        android:textColor="@color/blackColor"
+        android:textSize="@dimen/s18"/>
+
+    <ImageView
+        android:id="@+id/img_pop_scan_qrcode_pay_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_pop_scan_qrcode_pay_makesure"
+        android:layout_alignBottom="@+id/tv_pop_scan_qrcode_pay_makesure"
+        android:paddingStart="@dimen/x10"
+        android:paddingEnd="@dimen/x10"
+        android:src="@mipmap/cha_icon"
+        tools:ignore="ContentDescription"/>
+
+    <View
+        android:id="@+id/v_pop_scan_qrcode_pay_makesure_underline"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:layout_below="@+id/tv_pop_scan_qrcode_pay_makesure"
+        android:background="@color/grayColor_line_E5"/>
+
+    <TextView
+        android:id="@+id/tv_pop_scan_qrcode_pay_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_pop_scan_qrcode_pay_makesure_underline"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/y20"
+        android:drawableStart="@mipmap/rmb_icon"
+        android:drawablePadding="@dimen/x5"
+        android:gravity="center"
+        android:textColor="@color/blackColor"
+        android:textSize="@dimen/s40"
+        android:textStyle="bold"/>
+
+    <View
+        android:id="@+id/v_pop_scan_qrcode_pay_price_underline"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:layout_below="@+id/tv_pop_scan_qrcode_pay_price"
+        android:background="@color/grayColor_line_E5"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_pop_scan_qrcode_pay_selectcard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_pop_scan_qrcode_pay_price_underline"
+        android:padding="@dimen/x10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择付款卡"
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/s16"/>
+
+        <TextView
+            android:id="@+id/tv_pop_scan_qrcode_pay_selectcard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:drawableEnd="@mipmap/big_arrow"
+            android:textColor="@color/grayColor_6"
+            android:textSize="@dimen/s16"/>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/v_pop_scan_qrcode_pay_selectcard_underline"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:layout_below="@+id/rl_pop_scan_qrcode_pay_selectcard"
+        android:background="@color/grayColor_line_E5"/>
+
+    <Button
+        android:id="@+id/btn_pop_scan_qrcode_pay_immediately_pay"
+        style="@style/btn_common"
+        android:layout_below="@+id/v_pop_scan_qrcode_pay_selectcard_underline"
+        android:layout_marginStart="@dimen/x50"
+        android:layout_marginTop="@dimen/x50"
+        android:layout_marginEnd="@dimen/x50"
+        android:text="立即付款"
+        android:layout_marginBottom="@dimen/y20"/>
+</RelativeLayout>

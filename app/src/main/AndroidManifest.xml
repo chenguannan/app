@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.sl_group.jinyuntong_oem">
+
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.BATTERY_STATS"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+
+    <application
+        android:name=".base.BaseApplication"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/MyTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".welcome.view.WelcomeActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".register.view.RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.sl_group.jinyuntong_oem.login.gesture.GestureLoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".myshop.MyShopActivty"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".login.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".gather.view.GatherActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".gather.set_money.SetMoneyActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".creditcard.view.CreditCardListActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".bindcard.view.BindCreditCardActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".realname.view.RealnameActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ScanCameraActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".safe_set.login_password.view.ChangeLoginPasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".open_merchant.view.OpenMerchantActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".open_merchant.OpenMerchantSuccessActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".merchant_info.view.MerchantinfoActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".safe_set.SafeSetActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".safe_set.gesture_password.view.GesturePasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".safe_set.gesture_password.set_gesture.view.SetGesturePasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".safe_set.gesture_password.change_gesture.view.ChangeGesturePasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".sms.view.SMSActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".vip.view.VipCenterActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".web.LoadWebActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".myshop.shop_info.ShopInfoActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".myshop.settle_info.view.SettleInfoActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".myshop.gather_bill.view.GatherBillActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".myshop.gather_bill.GatherBillDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".pay_bill.view.PayBillActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".pay_bill.PayBillDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".scan_input_money.view.ScanQrcodeInputMoneyActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".myshop.gather_rate.GatherRateActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".safe_set.pay_password.change_pay_password.view.ChangePayPasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".safe_set.pay_password.PayPasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".share.ShareFaceToFaceActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".share.OfficialActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".share.ShareRegistActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".extract.view.ExtractActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".extract.ExtractResultActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".extract_record.ExtractRecordActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".extract_record_details.ExtractRecordDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".deal_record.DealRecordActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".deal_record_details.DealRecordDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".upvip_borkerage.UpVipBrokerageActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".share.OfficialDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".new_details.NewDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".news.view.NewsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".my_team.MyTeamActivity"
+            android:screenOrientation="portrait"/>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.sl_group.jinyuntong_oem.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths"/>
+        </provider>
+
+
+        <meta-data
+            android:name="design_width"
+            android:value="720"/>
+        <meta-data
+            android:name="design_height"
+            android:value="1280"/>
+
+
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="tencent101528316"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <!-- umengAppKey -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5bfa300ff1f556c66e000a22">
+        </meta-data>
+
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Umeng">
+        </meta-data>
+
+
+        <!-- User defined.  For test only  用户自定义的广播接收器-->
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION"/> <!--Required  用户注册SDK的intent-->
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED"/> <!--Required  用户接收SDK消息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED"/> <!--Required  用户接收SDK通知栏信息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED"/> <!--Required  用户打开自定义通知栏的intent-->
+                <action android:name="cn.jpush.android.intent.CONNECTION"/><!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="com.sl_group.jinyuntong_oem"/>
+            </intent-filter>
+        </receiver>
+    </application>
+
+
+</manifest>

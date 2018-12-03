@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/circle_white_bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_pop_save_qrcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="@dimen/y15"
+            android:paddingBottom="@dimen/y15"
+            android:text="@string/save_qrcode"
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/s18"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1"
+            android:background="@color/grayColor_line_E5"/>
+
+        <TextView
+            android:id="@+id/tv_pop_share_qrcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="@dimen/y15"
+            android:paddingBottom="@dimen/y15"
+            android:text="@string/share_qrcode"
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/s18"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_pop_save_qrcode_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y20"
+        android:layout_marginBottom="@dimen/y20"
+        android:background="@drawable/circle_white_bg"
+        android:gravity="center"
+        android:paddingTop="@dimen/y15"
+        android:paddingBottom="@dimen/y15"
+        android:text="@string/cancel"
+        android:textColor="@color/blackColor"
+        android:textSize="@dimen/s18"/>
+</LinearLayout>

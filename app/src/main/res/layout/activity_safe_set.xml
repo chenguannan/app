@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/actionbar_layout"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y10"
+        android:background="@color/whiteColor"
+        android:paddingStart="@dimen/x10"
+        android:paddingEnd="@dimen/x10">
+
+        <TextView
+            android:id="@+id/tv_safe_set_login_password"
+            android:text="@string/login_password"
+            style="@style/tv_safe_set"/>
+
+        <View
+            android:id="@+id/v_safe_set_login_password_underline"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1"
+            android:layout_below="@+id/tv_safe_set_login_password"
+            android:background="@color/grayColor_line_E5"/>
+        <TextView
+            android:id="@+id/tv_safe_set_pay_password"
+            android:text="@string/pay_password"
+            android:layout_below="@+id/v_safe_set_login_password_underline"
+            style="@style/tv_safe_set"/>
+
+        <View
+            android:id="@+id/v_safe_set_pay_password_underline"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1"
+            android:layout_below="@+id/tv_safe_set_pay_password"
+            android:background="@color/grayColor_line_E5"/>
+        <TextView
+            android:id="@+id/tv_safe_set_gesture_password"
+            android:text="@string/gesture_password"
+            android:layout_below="@+id/v_safe_set_pay_password_underline"
+            style="@style/tv_safe_set"/>
+    </RelativeLayout>
+    <Button
+        android:id="@+id/btn_safe_set_exit_login"
+        style="@style/btn_common"
+        android:layout_margin="@dimen/x50"
+        android:text="@string/exit_login"/>
+</LinearLayout>

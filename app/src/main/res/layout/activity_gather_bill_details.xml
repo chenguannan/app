@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/actionbar_layout"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/y20"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/whiteColor"
+                android:padding="@dimen/x10">
+
+                <TextView
+                    android:id="@+id/tv_gather_bill_details_bill_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@mipmap/bill_icon"
+                    android:drawablePadding="@dimen/x10"
+                    android:text="@string/bill_info"
+                    android:textColor="@color/blackColor"
+                    android:textSize="@dimen/s16"/>
+
+                <View
+                    android:id="@+id/v_gather_bill_details_bill_info_underline"
+                    style="@style/v_underline"
+                    android:layout_below="@+id/tv_gather_bill_details_bill_info"/>
+
+                <TextView
+                    style="@style/tv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/v_gather_bill_details_bill_info_underline"
+                    android:text="@string/date"/>
+
+                <TextView
+                    android:id="@+id/tv_gather_bill_details_date"
+                    style="@style/tv_right"
+                    android:layout_below="@+id/v_gather_bill_details_bill_info_underline"
+                    android:layout_alignParentEnd="true"/>
+
+                <View
+                    android:id="@+id/v_gather_bill_details_date_underline"
+                    style="@style/v_underline"
+                    android:layout_below="@+id/tv_gather_bill_details_date"/>
+
+                <TextView
+                    style="@style/tv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/v_gather_bill_details_date_underline"
+                    android:text="@string/order"/>
+
+                <TextView
+                    android:id="@+id/tv_gather_bill_details_order"
+                    style="@style/tv_right"
+                    android:layout_below="@+id/v_gather_bill_details_date_underline"
+                    android:layout_alignParentEnd="true"/>
+
+                <View
+                    android:id="@+id/v_gather_bill_details_order_underline"
+                    style="@style/v_underline"
+                    android:layout_below="@+id/tv_gather_bill_details_order"/>
+
+                <TextView
+                    style="@style/tv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/v_gather_bill_details_order_underline"
+                    android:text="@string/pay_cardnumber"/>
+
+                <TextView
+                    android:id="@+id/tv_gather_bill_details_paycard"
+                    style="@style/tv_right"
+                    android:layout_below="@+id/v_gather_bill_details_order_underline"
+                    android:layout_alignParentEnd="true"/>
+
+                <View
+                    android:id="@+id/v_gather_bill_details_paycard_underline"
+                    style="@style/v_underline"
+                    android:layout_below="@+id/tv_gather_bill_details_paycard"/>
+
+                <TextView
+                    style="@style/tv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/v_gather_bill_details_paycard_underline"
+                    android:text="@string/pay_people"/>
+
+                <TextView
+                    android:id="@+id/tv_gather_bill_details_paypeople"
+                    style="@style/tv_right"
+                    android:layout_below="@+id/v_gather_bill_details_paycard_underline"
+                    android:layout_alignParentEnd="true"/>
+
+                <View
+                    android:id="@+id/v_gather_bill_details_paypeople_underline"
+                    style="@style/v_underline"
+                    android:layout_below="@+id/tv_gather_bill_details_paypeople"/>
+
+                <TextView
+                    style="@style/tv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/v_gather_bill_details_paypeople_underline"
+                    android:text="@string/gather_money"/>
+
+                <TextView
+                    android:id="@+id/tv_gather_bill_details_gather_money"
+                    style="@style/tv_right"
+                    android:layout_below="@+id/v_gather_bill_details_paypeople_underline"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/redColor"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20"
+                android:background="@color/whiteColor"
+                android:padding="@dimen/x10">
+
+                <TextView
+                    style="@style/tv_left"
+                    android:layout_width="wrap_content"
+                    android:text="@string/deal_fee"
+                    tools:ignore="RelativeOverlap"/>
+
+                <TextView
+                    android:id="@+id/tv_gather_bill_details_payfee"
+                    style="@style/tv_right"
+                    android:layout_alignParentEnd="true"/>
+
+                <View
+                    android:id="@+id/v_gather_bill_details_payfee_underline"
+                    style="@style/v_underline"
+                    android:layout_below="@+id/tv_gather_bill_details_payfee"/>
+
+                <TextView
+                    style="@style/tv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/v_gather_bill_details_payfee_underline"
+                    android:text="@string/extract_fee"/>
+
+                <TextView
+                    android:id="@+id/tv_gather_bill_details_extractfee"
+                    style="@style/tv_right"
+                    android:layout_below="@+id/v_gather_bill_details_payfee_underline"
+                    android:layout_alignParentEnd="true"/>
+
+                <View
+                    android:id="@+id/v_gather_bill_details_extractfee_underline"
+                    style="@style/v_underline"
+                    android:layout_below="@+id/tv_gather_bill_details_extractfee"/>
+
+                <TextView
+                    style="@style/tv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/v_gather_bill_details_extractfee_underline"
+                    android:text="@string/real_money"/>
+
+                <TextView
+                    android:id="@+id/tv_gather_bill_details_realmoney"
+                    style="@style/tv_right"
+                    android:layout_below="@+id/v_gather_bill_details_extractfee_underline"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/redColor"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y20"
+                android:background="@color/whiteColor"
+                android:padding="@dimen/x10">
+
+                <TextView
+                    style="@style/tv_left"
+                    android:layout_width="wrap_content"
+                    android:text="@string/deal_state"
+                    tools:ignore="RelativeOverlap"/>
+
+                <TextView
+                    android:id="@+id/tv_gather_bill_details_dealstate"
+                    style="@style/tv_right"
+                    android:layout_alignParentEnd="true"/>
+
+                <View
+                    android:id="@+id/v_gather_bill_details_dealstate_underline"
+                    style="@style/v_underline"
+                    android:layout_below="@+id/tv_gather_bill_details_dealstate"/>
+
+                <TextView
+                    style="@style/tv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/v_gather_bill_details_dealstate_underline"
+                    android:text="@string/settle_cardnumber"/>
+
+                <TextView
+                    android:id="@+id/tv_gather_bill_details_settlecard"
+                    style="@style/tv_right"
+                    android:layout_below="@+id/v_gather_bill_details_dealstate_underline"
+                    android:layout_alignParentEnd="true"/>
+
+                <View
+                    android:id="@+id/v_gather_bill_details_settlecard_underline"
+                    style="@style/v_underline"
+                    android:layout_below="@+id/tv_gather_bill_details_settlecard"/>
+
+                <TextView
+                    style="@style/tv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_below="@+id/v_gather_bill_details_settlecard_underline"
+                    android:text="@string/settle_state"/>
+
+                <TextView
+                    android:id="@+id/tv_gather_bill_details_settle_state"
+                    style="@style/tv_right"
+                    android:layout_below="@+id/v_gather_bill_details_settlecard_underline"
+                    android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

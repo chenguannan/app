@@ -1,0 +1,93 @@
+package com.sl_group.jinyuntong_oem.deal_record_details;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.sl_group.jinyuntong_oem.R;
+import com.sl_group.jinyuntong_oem.base.BaseActivity;
+import com.sl_group.jinyuntong_oem.bean.DealBrokerageDetailsBean;
+import com.sl_group.jinyuntong_oem.bean.ExtractBrokerageDetailsBean;
+import com.sl_group.jinyuntong_oem.brokerage_details.persenter.BrokerageDetailsPersenter;
+import com.sl_group.jinyuntong_oem.brokerage_details.view.BrokerageDetailsView;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+/**
+ * Created by 马天 on 2018/11/24.
+ * description：交易记录详情
+ */
+public class DealRecordDetailsActivity extends BaseActivity implements BrokerageDetailsView {
+    private ImageView mImgActionbarBack;
+    private TextView mTvActionbarTitle;
+    private TextView mTvDealRecordDetailsResult;
+    private TextView mTvDealRecordDetailsType;
+    private TextView mTvDealRecordDetailsDate;
+    private TextView mTvDealRecordDetailsMoney;
+    private TextView mTvDealDetailsPeople;
+
+
+    private BrokerageDetailsPersenter mBrokerageDetailsPersenter;
+
+    @Override
+    public int bindLayout() {
+        return R.layout.activity_deal_record_details;
+    }
+
+    @Override
+    public void initView(View view) {
+        mImgActionbarBack = findViewById(R.id.img_actionbar_back);
+        mTvActionbarTitle = findViewById(R.id.tv_actionbar_title);
+        mTvDealRecordDetailsResult = findViewById(R.id.tv_deal_record_details_result);
+        mTvDealRecordDetailsType = findViewById(R.id.tv_deal_record_details_type);
+        mTvDealRecordDetailsDate = findViewById(R.id.tv_deal_record_details_date);
+        mTvDealRecordDetailsMoney = findViewById(R.id.tv_deal_record_details_money);
+        mTvDealDetailsPeople = findViewById(R.id.tv_deal_details_people);
+
+    }
+
+    @Override
+    public void initData() {
+        mTvActionbarTitle.setText("交易详情");
+
+        mBrokerageDetailsPersenter = new BrokerageDetailsPersenter(this, this);
+    }
+
+    @Override
+    public void setListener() {
+        mImgActionbarBack.setOnClickListener(this);
+    }
+
+    @Override
+    public void widgetClick(View v) {
+
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            mBrokerageDetailsPersenter.brokerageDetails(bundle.getString("intoType", "10"), bundle.getString("logId", ""));
+        }
+
+    }
+
+    @Override
+    public void brokerageDetails(ExtractBrokerageDetailsBean.DataBean data) {
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void dealDetails(DealBrokerageDetailsBean.DataBean data) {
+        mTvDealRecordDetailsResult.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.mipmap.tx), null, null);
+        mTvDealRecordDetailsType.setText("交易佣金");
+        mTvDealRecordDetailsDate.setText(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss",Locale.getDefault()).format(data.getCreatedDate()));
+        mTvDealRecordDetailsMoney.setText(String.format(Locale.CHINA,"%.2f", data.getAmt()) + "元");
+        mTvDealDetailsPeople.setText(data.getMerchantName());
+    }
+}

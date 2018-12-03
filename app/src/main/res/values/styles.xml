@@ -1,0 +1,178 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/mainColor</item>
+        <item name="android:textColorHint">@color/grayColor_9</item>
+        <item name="colorControlNormal">@color/grayColor_9</item>
+        <item name="colorControlActivated">@color/mainColor</item>
+        <item name="colorControlHighlight">@color/mainColor</item>
+    </style>
+
+    <style name="PopupAnimationCenter" parent="android:Animation" mce_bogus="1">
+        <item name="android:windowEnterAnimation">@anim/pop_center_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_center_out</item>
+    </style>
+    <style name="PopupAnimationBottom" parent="android:Animation" mce_bogus="1">
+        <item name="android:windowEnterAnimation">@anim/pop_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_bottom_out</item>
+    </style>
+
+    <style name="et_common">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColorHint">@color/grayColor_A</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/grayColor_6</item>
+        <item name="android:textSize">@dimen/s16</item>
+    </style>
+
+    <style name="rb_main">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:textSize">@dimen/s14</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="tv_firstpage_top_pic">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:drawablePadding">@dimen/y2</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/s14</item>
+        <item name="android:textColor">@color/grayColor_6</item>
+    </style>
+
+    <style name="btn_cancel_sure">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/x10</item>
+        <item name="android:layout_marginEnd">@dimen/x10</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/btn_circle_small_radius</item>
+        <item name="android:textColor">@color/whiteColor</item>
+        <item name="android:textSize">@dimen/s16</item>
+    </style>
+
+    <style name="v_underline">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/y1</item>
+        <item name="android:background">@color/grayColor_line_E5</item>
+        <item name="android:layout_marginTop">@dimen/y10</item>
+        <item name="android:layout_marginBottom">@dimen/y10</item>
+    </style>
+
+    <style name="tv_left">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/blackColor</item>
+        <item name="android:textSize">@dimen/s16</item>
+    </style>
+
+    <style name="tv_right">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/x20</item>
+        <item name="android:textColor">@color/grayColor_9</item>
+        <item name="android:textSize">@dimen/s16</item>
+    </style>
+    <style name="et_right" parent="tv_right">
+        <item name="android:background">@null</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColorHint">@color/grayColor_9</item>
+        <item name="android:textColor">@color/grayColor_6</item>
+    </style>
+
+    <style name="btn_common">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/btn_circle_radius</item>
+        <item name="android:textSize">@dimen/s16</item>
+        <item name="android:textColor">@color/whiteColor</item>
+    </style>
+
+    <style name="tv_mine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/whiteColor</item>
+        <item name="android:drawablePadding">@dimen/x20</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginTop">@dimen/y10</item>
+        <item name="android:paddingStart">@dimen/x20</item>
+        <item name="android:paddingTop">@dimen/y10</item>
+        <item name="android:paddingEnd">@dimen/x20</item>
+        <item name="android:paddingBottom">@dimen/y10</item>
+        <item name="android:textColor">@color/blackColor</item>
+        <item name="android:textSize">@dimen/s18</item>
+        <item name="android:drawableEnd">@mipmap/big_arrow</item>
+    </style>
+
+    <style name="tv_safe_set">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableEnd">@mipmap/big_arrow</item>
+        <item name="android:paddingTop">@dimen/y10</item>
+        <item name="android:paddingBottom">@dimen/y10</item>
+        <item name="android:textColor">@color/blackColor</item>
+        <item name="android:textSize">@dimen/s18</item>
+    </style>
+
+    <style name="tv_share">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/x10</item>
+        <item name="android:layout_marginStart">@dimen/x10</item>
+        <item name="android:layout_marginEnd">@dimen/x10</item>
+        <item name="android:background">@drawable/circle_white_bg</item>
+        <item name="android:drawableEnd">@mipmap/big_arrow</item>
+        <item name="android:drawablePadding">@dimen/x10</item>
+        <item name="android:paddingStart">@dimen/x10</item>
+        <item name="android:paddingTop">@dimen/y15</item>
+        <item name="android:paddingEnd">@dimen/x10</item>
+        <item name="android:paddingBottom">@dimen/y15</item>
+        <item name="android:textColor">@color/blackColor</item>
+        <item name="android:textSize">@dimen/s16</item>
+    </style>
+
+    <style name="tv_share_type">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:drawablePadding">@dimen/y5</item>
+        <item name="android:textSize">@dimen/s12</item>
+        <item name="android:textColor">@color/blackColor</item>
+    </style>
+
+    <style name="tv_details_left_common">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/grayColor_6</item>
+        <item name="android:textSize">@dimen/s16</item>
+        <item name="android:layout_marginTop">@dimen/y10</item>
+    </style>
+    <style name="tv_details__right_common" parent="tv_details_left_common">
+            <item name="android:layout_marginStart">@dimen/x20</item>
+        </style>
+
+    <style name="img_official">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/y100</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+
+</resources>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/x40"
+    android:paddingEnd="@dimen/x40">
+
+    <RelativeLayout
+        android:id="@+id/rl_login_tel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y30">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/tv_tel_login_get_verfic_code">
+
+            <EditText
+                android:id="@+id/et_tel_login_tel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/phone"
+                android:drawablePadding="@dimen/x20"
+                android:hint="@string/input_tel"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:textSize="@dimen/s16"
+                tools:ignore="Autofill"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_tel_login_get_verfic_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/line_circle_maincolor"
+            android:paddingStart="@dimen/x10"
+            android:paddingTop="@dimen/y5"
+            android:paddingEnd="@dimen/x10"
+            android:paddingBottom="@dimen/y5"
+            android:text="@string/get_verfic_code"
+            android:textColor="@color/mainColor"
+            android:textSize="@dimen/s12"
+            tools:ignore="RelativeOverlap"/>
+
+    </RelativeLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_tel_login_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_login_tel"
+        android:layout_marginTop="@dimen/y5">
+
+        <EditText
+            android:id="@+id/et_tel_login_verfic_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@mipmap/verify"
+            android:drawablePadding="@dimen/x20"
+            android:hint="@string/input_verfic_code"
+            android:inputType="number"
+            android:maxLength="6"
+            tools:ignore="Autofill"/>
+    </android.support.design.widget.TextInputLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_login_verfic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/til_tel_login_username"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/y5">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_tel_login_pic_verfic_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/img_pic_verfic">
+
+            <EditText
+                android:id="@+id/et_tel_login_pic_verfic_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
+                android:drawableStart="@mipmap/graphic_verification"
+                android:drawablePadding="@dimen/x20"
+                android:hint="@string/input_pic_verfic_code"
+                android:maxLength="6"
+                android:textSize="@dimen/s16"
+                tools:ignore="Autofill,TextFields"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/img_pic_verfic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/til_tel_login_pic_verfic_code"
+            android:layout_alignBottom="@+id/til_tel_login_pic_verfic_code"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="@dimen/y2"
+            tools:ignore="ContentDescription"/>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_tel_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_login_verfic"
+        android:layout_marginStart="@dimen/x40"
+        android:layout_marginTop="@dimen/y50"
+        android:layout_marginEnd="@dimen/x40"
+        android:background="@drawable/btn_circle_radius"
+        android:text="@string/immediately_login"
+        android:textColor="@color/whiteColor"
+        android:textSize="@dimen/s16"/>
+
+    <TextView
+        android:id="@+id/tv_tel_login_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_tel_login_service_tel"
+        android:layout_below="@id/btn_tel_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/y20"
+        android:text="@string/new_register"
+        android:textColor="@color/mainColor"
+        android:textSize="@dimen/s16"/>
+
+    <TextView
+        android:id="@+id/tv_tel_login_service_tel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:layout_marginBottom="@dimen/y10"
+        android:text="@string/service_tel"/>
+
+</RelativeLayout>

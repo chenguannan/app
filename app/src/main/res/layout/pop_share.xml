@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#EAEDF2"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="@dimen/y10"
+        android:paddingBottom="@dimen/y10"
+        android:text="@string/select_share_type"
+        android:textColor="@color/blackColor"
+        android:textSize="@dimen/s18"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1"
+        android:background="@color/whiteColor"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y10"
+        android:orientation="horizontal"
+        android:padding="@dimen/x15">
+
+        <TextView
+            android:id="@+id/tv_pop_share_wechat"
+            style="@style/tv_share_type"
+            android:drawableTop="@mipmap/tg_icon_wechat"
+            android:text="@string/wechat"/>
+
+        <TextView
+            android:id="@+id/tv_pop_share_moments"
+            style="@style/tv_share_type"
+            android:drawableTop="@mipmap/tg_icon_moments"
+            android:text="@string/moment"/>
+
+        <TextView
+            android:id="@+id/tv_pop_share_qq"
+            style="@style/tv_share_type"
+            android:drawableTop="@mipmap/tg_icon_qq"
+            android:text="@string/qq"/>
+
+        <TextView
+            android:id="@+id/tv_pop_share_qzone"
+            style="@style/tv_share_type"
+            android:drawableTop="@mipmap/tg_icon_qzone"
+            android:text="@string/qzone"/>
+    </LinearLayout>
+</LinearLayout>

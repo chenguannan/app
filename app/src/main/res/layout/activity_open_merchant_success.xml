@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/actionbar_layout"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_open_merchant_success_complete"
+        android:layout_centerHorizontal="true"
+        android:drawableTop="@mipmap/opened_successfully"
+        android:drawablePadding="@dimen/y10"
+        android:gravity="center"
+        android:text="@string/open_success"
+        android:textColor="@color/grayColor_6"
+        android:textSize="@dimen/s22"/>
+
+    <Button
+        android:id="@+id/btn_open_merchant_success_complete"
+        style="@style/btn_common"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/x50"
+        android:text="@string/complete"/>
+</RelativeLayout>

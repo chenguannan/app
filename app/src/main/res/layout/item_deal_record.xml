@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/x10"
+    android:layout_marginTop="@dimen/x10"
+    android:layout_marginEnd="@dimen/x10"
+    android:background="@drawable/circle_white_bg"
+    android:padding="@dimen/x10">
+
+    <TextView
+        android:id="@+id/tv_item_deal_record_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blackColor"
+        android:textSize="@dimen/s18"
+        tools:ignore="RelativeOverlap"/>
+
+    <TextView
+        android:id="@+id/tv_item_deal_record_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_item_deal_record_money"
+        android:layout_marginTop="@dimen/y10"
+        android:textColor="@color/grayColor_6"
+        android:textSize="@dimen/s16"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/shop_small_arrows"
+        tools:ignore="ContentDescription"/>
+</RelativeLayout>

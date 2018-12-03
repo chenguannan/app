@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/actionbar_layout"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y10"
+        android:background="@color/whiteColor"
+        android:padding="@dimen/x10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bankcard_username"
+            android:textColor="@color/grayColor_6"
+            android:textSize="@dimen/s16"/>
+
+        <TextView
+            android:id="@+id/tv_bind_creditcard_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/grayColor_9"
+            android:textSize="@dimen/s16"
+            tools:ignore="RelativeOverlap"/>
+
+        <View
+            android:id="@+id/v_bind_creditcard_underline"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1"
+            android:layout_below="@+id/tv_bind_creditcard_username"
+            android:layout_marginTop="@dimen/y10"
+            android:layout_marginBottom="@dimen/y10"
+            android:background="@color/grayColor_line_E5"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/v_bind_creditcard_underline"
+            android:text="@string/idcard"
+            android:textColor="@color/grayColor_6"
+            android:textSize="@dimen/s16"/>
+
+        <TextView
+            android:id="@+id/tv_bind_creditcard_idcard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/v_bind_creditcard_underline"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/grayColor_9"
+            android:textSize="@dimen/s16"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="@dimen/y10"
+        android:paddingBottom="@dimen/y10"
+        android:text="@string/add_bankcard_hint"
+        android:textColor="@color/grayColor_9"
+        android:textSize="@dimen/s16"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteColor"
+        android:paddingStart="@dimen/x10"
+        android:paddingEnd="@dimen/x10">
+
+        <TextView
+            android:id="@+id/tv_bind_creditcard_cardnumber_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bankcard_cardnumber"
+            android:paddingTop="@dimen/x10"
+            android:paddingBottom="@dimen/x10"
+            android:textColor="@color/grayColor_6"
+            android:textSize="@dimen/s16"/>
+
+        <EditText
+            android:id="@+id/et_bind_creditcard_cardnumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/img_bind_creditcard_scan"
+            android:layout_toEndOf="@+id/tv_bind_creditcard_cardnumber_hint"
+            android:background="@null"
+            android:hint="@string/input_bankcard_cardnumber"
+            android:inputType="number"
+            android:maxLength="20"
+            android:padding="@dimen/x10"
+            android:textColor="@color/grayColor_6"
+            android:textColorHint="@color/grayColor_9"
+            android:textSize="@dimen/s16"
+            tools:ignore="Autofill"/>
+
+        <ImageView
+            android:id="@+id/img_bind_creditcard_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/et_bind_creditcard_cardnumber"
+            android:layout_alignBottom="@+id/et_bind_creditcard_cardnumber"
+            android:layout_alignParentEnd="true"
+            android:paddingStart="@dimen/x10"
+            android:paddingEnd="@dimen/x10"
+            android:src="@mipmap/autonym_xj"
+            tools:ignore="ContentDescription"/>
+
+        <View
+            android:id="@+id/v_bind_creditcard_cardnumber_underline"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1"
+            android:layout_below="@+id/tv_bind_creditcard_cardnumber_hint"
+            android:background="@color/grayColor_line_E5"/>
+
+
+        <TextView
+            android:id="@+id/v_bind_creditcard_cardtel_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/v_bind_creditcard_cardnumber_underline"
+            android:text="@string/bankcard_tel"
+            android:paddingTop="@dimen/x10"
+            android:paddingBottom="@dimen/x10"
+            android:textColor="@color/grayColor_6"
+            android:textSize="@dimen/s16"/>
+
+        <EditText
+            android:id="@+id/et_bind_creditcard_cardtel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/v_bind_creditcard_cardnumber_underline"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/v_bind_creditcard_cardtel_hint"
+            android:background="@null"
+            android:hint="@string/input_add_bankcard_tel"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:padding="@dimen/x10"
+            android:textColor="@color/grayColor_6"
+            android:textColorHint="@color/grayColor_9"
+            android:textSize="@dimen/s16"
+            tools:ignore="Autofill,LabelFor"/>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_bind_creditcard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/x50"
+        android:background="@drawable/btn_circle_radius"
+        android:text="@string/makesure_bindcard"
+        android:textColor="@color/whiteColor"
+        android:textSize="@dimen/s16"/>
+</LinearLayout>

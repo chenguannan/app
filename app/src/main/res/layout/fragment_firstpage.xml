@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grayColor_line_E5"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/firstpage_top_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="@string/firstpage"
+                android:textColor="@color/whiteColor"
+                android:textSize="@dimen/s18"
+                tools:ignore="RelativeOverlap"/>
+
+            <ImageView
+                android:id="@+id/img_firstpage_news"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:paddingStart="@dimen/x20"
+                android:paddingTop="@dimen/y10"
+                android:paddingEnd="@dimen/x20"
+                android:src="@mipmap/home_information"
+                tools:ignore="ContentDescription"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y20"
+            android:layout_marginBottom="@dimen/y20"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_firstpage_scan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/home_richscan"
+                android:drawablePadding="@dimen/y2"
+                android:gravity="center"
+                android:text="@string/scan"
+                android:textColor="@color/whiteColor"/>
+
+            <TextView
+                android:id="@+id/tv_firstpage_gather"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/home_gathering"
+                android:drawablePadding="@dimen/y2"
+                android:gravity="center"
+                android:text="@string/gather"
+                android:textColor="@color/whiteColor"/>
+
+            <TextView
+                android:id="@+id/tv_firstpage_creditcard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/home_bank_card"
+                android:drawablePadding="@dimen/y2"
+                android:gravity="center"
+                android:text="@string/card_package"
+                android:textColor="@color/whiteColor"/>
+
+            <TextView
+                android:id="@+id/tv_firstpage_shop"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/home_store"
+                android:drawablePadding="@dimen/y2"
+                android:gravity="center"
+                android:text="@string/shop"
+                android:textColor="@color/whiteColor"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteColor"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/y20"
+        android:paddingBottom="@dimen/y20">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_firstpage_recommend_card"
+                style="@style/tv_firstpage_top_pic"
+                android:drawableTop="@mipmap/bank_icon"
+                android:text="@string/recommend_card"/>
+
+            <TextView
+                android:id="@+id/tv_firstpage_group_buy"
+                style="@style/tv_firstpage_top_pic"
+                android:drawableTop="@mipmap/shopping_icon"
+                android:text="@string/group_buy"/>
+
+            <TextView
+                android:id="@+id/tv_firstpage_service_center"
+                style="@style/tv_firstpage_top_pic"
+                android:drawableTop="@mipmap/service_icon"
+                android:text="@string/service_center"/>
+
+            <TextView
+                android:id="@+id/tv_firstpage_integral_shop"
+                style="@style/tv_firstpage_top_pic"
+                android:drawableTop="@mipmap/store_icon"
+                android:text="@string/integral_shop"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y20"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/rl_firstpage_vip_center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_firstpage_vip_center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@mipmap/vip_icon"
+                    android:gravity="center"
+                    android:text="@string/vip_center"
+                    android:textColor="@color/grayColor_6"
+                    android:textSize="@dimen/s14"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_firstpage_vip_center"
+                    android:gravity="center"
+                    android:text="@string/vip_center_hint"
+                    android:textColor="@color/mainColor"
+                    android:textSize="@dimen/s10"/>
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tv_firstpage_myshop"
+                style="@style/tv_firstpage_top_pic"
+                android:drawableTop="@mipmap/mystore_icon"
+                android:text="@string/my_shop"/>
+
+            <TextView
+                android:id="@+id/tv_firstpage_guide"
+                style="@style/tv_firstpage_top_pic"
+                android:drawableTop="@mipmap/guide_icon"
+                android:text="@string/guide"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_firstpage_shop_discount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@mipmap/discount_icon"
+                    android:gravity="center"
+                    android:text="@string/shop_discount"
+                    android:textColor="@color/grayColor_6"
+                    android:textSize="@dimen/s14"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/x10"
+                    android:src="@mipmap/jdtm_icon"
+                    tools:ignore="ContentDescription"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y5"
+        android:background="@color/grayColor_line_E5"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y20"
+            android:background="@color/whiteColor"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/x10"
+                android:layout_marginStart="@dimen/x5"
+                android:drawableStart="@drawable/line_firstpage_v"
+                android:drawablePadding="@dimen/x5"
+                android:text="@string/life_service"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y10"
+                android:layout_marginBottom="@dimen/y10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_firstpage_water"
+                    style="@style/tv_firstpage_top_pic"
+                    android:drawableTop="@mipmap/life_water_icon"
+                    android:text="@string/water"/>
+
+                <TextView
+                    android:id="@+id/tv_firstpage_ele"
+                    style="@style/tv_firstpage_top_pic"
+                    android:drawableTop="@mipmap/life_ele_icon"
+                    android:text="@string/ele"/>
+
+                <TextView
+                    android:id="@+id/tv_firstpage_gas"
+                    style="@style/tv_firstpage_top_pic"
+                    android:drawableTop="@mipmap/life_gas_icon"
+                    android:text="@string/gas"/>
+
+                <TextView
+                    style="@style/tv_firstpage_top_pic"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y5"
+                android:background="@color/grayColor_line_E5"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/x10"
+                android:layout_marginStart="@dimen/x5"
+                android:drawableStart="@drawable/line_firstpage_v"
+                android:drawablePadding="@dimen/x5"
+                android:text="@string/information_query"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y10"
+                android:layout_marginBottom="@dimen/y10"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_firstpage_shebao_query"
+                    style="@style/tv_firstpage_top_pic"
+                    android:drawableTop="@mipmap/life_shebao_icon"
+                    android:text="@string/shebao_query"/>
+
+                <TextView
+                    android:id="@+id/tv_firstpage_gongjijin_query"
+                    style="@style/tv_firstpage_top_pic"
+                    android:drawableTop="@mipmap/life_gongjijin_icon"
+                    android:text="@string/gongjijin_query"/>
+
+                <TextView
+                    android:id="@+id/tv_firstpage_express_query"
+                    style="@style/tv_firstpage_top_pic"
+                    android:drawableTop="@mipmap/life_express_icon"
+                    android:text="@string/express_query"/>
+
+                <TextView
+                    android:id="@+id/tv_firstpage_company_query"
+                    style="@style/tv_firstpage_top_pic"
+                    android:drawableTop="@mipmap/life_company_icon"
+                    android:text="@string/company_query"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

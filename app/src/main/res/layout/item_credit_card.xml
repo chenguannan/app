@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_margin="@dimen/x10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bancard_bg"
+        android:padding="@dimen/x10">
+
+        <ImageView
+            android:id="@+id/img_bankcard_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/x10"
+            android:src="@mipmap/unionpay_icon"
+            tools:ignore="ContentDescription"/>
+
+        <TextView
+            android:id="@+id/tv_bankcard_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/img_bankcard_icon"
+            android:textColor="@color/whiteColor"
+            android:textSize="@dimen/s16"/>
+
+        <TextView
+            android:id="@+id/tv_bankcard_cardnumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_bankcard_name"
+            android:layout_marginTop="@dimen/y10"
+            android:layout_toEndOf="@+id/img_bankcard_icon"
+            android:textColor="@color/whiteColor"
+            android:textSize="@dimen/s16"/>
+
+        <TextView
+            android:id="@+id/tv_bankcard_banktype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_bankcard_cardnumber"
+            android:layout_marginTop="@dimen/y10"
+            android:layout_toEndOf="@+id/img_bankcard_icon"
+            android:textColor="@color/whiteColor"
+            android:textSize="@dimen/s16"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="@dimen/x100"
+        android:layout_height="match_parent"
+        android:background="@color/redColor"
+        android:layout_margin="@dimen/x10"
+        android:gravity="center"
+        android:text="@string/delete"
+        android:textColor="@color/whiteColor"
+        android:textSize="@dimen/s16"/>
+</LinearLayout>
