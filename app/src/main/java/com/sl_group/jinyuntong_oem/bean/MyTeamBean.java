@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Created by 马天 on 2018/4/1.
- * description：推荐的人
+ * description：推荐的人，我的团队
  */
 
 public class MyTeamBean {

@@ -2,7 +2,7 @@ package com.sl_group.jinyuntong_oem.bean;
 
 /**
  * Created by 马天 on 2018/11/26.
- * description：
+ * description：设置结算卡
  */
 public class SetSettleCardBean {
 

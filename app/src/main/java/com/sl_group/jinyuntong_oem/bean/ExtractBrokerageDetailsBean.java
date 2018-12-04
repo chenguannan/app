@@ -2,7 +2,7 @@ package com.sl_group.jinyuntong_oem.bean;
 
 /**
  * Created by 马天 on 2018/4/1.
- * description：提现详情
+ * description：提现佣金详情
  */
 
 public class ExtractBrokerageDetailsBean {

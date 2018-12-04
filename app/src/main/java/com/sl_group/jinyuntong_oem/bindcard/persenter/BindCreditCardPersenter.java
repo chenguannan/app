@@ -4,11 +4,12 @@ import android.app.Activity;
 
 import com.google.gson.Gson;
 import com.sl_group.jinyuntong_oem.CompelLogin;
+import com.sl_group.jinyuntong_oem.bean.BindCreditCardBean;
 import com.sl_group.jinyuntong_oem.bindcard.model.BindCreditCardModel;
 import com.sl_group.jinyuntong_oem.bindcard.model.BindCreditCardModelImpl;
 import com.sl_group.jinyuntong_oem.bindcard.view.BindCreditCardView;
-import com.sl_group.jinyuntong_oem.bean.AddBankcardBean;
 import com.sl_group.jinyuntong_oem.utils.LogUtils;
+import com.sl_group.jinyuntong_oem.utils.StringUtils;
 import com.sl_group.jinyuntong_oem.utils.ToastUtils;
 
 /**
@@ -27,26 +28,37 @@ public class BindCreditCardPersenter {
     }
 
     /**
-      * 绑定信用卡
+      *
+      * @param accountNumber 银行卡号
+      * @param bankcardTel 银行预留手机号
       */
     public void bindBankcard(String accountNumber,String bankcardTel){
         //校验参数
-        if (!mAddBankcardModel.verficBindCreditCardData(accountNumber,bankcardTel)){
-            return;
+        if (StringUtils.isEmpty(accountNumber)) {
+            ToastUtils.showToast("请输入银行卡卡号或扫描银行卡");
+            return ;
+        }
+        if (StringUtils.isEmpty(bankcardTel)) {
+            ToastUtils.showToast("请输入银行预留手机号");
+            return ;
+        }
+        if (bankcardTel.length() != 11) {
+            ToastUtils.showToast("请输入正确的手机号");
+            return ;
         }
         mAddBankcardModel.bindCreditCard(accountNumber, bankcardTel, new BindCreditCardModel.IBindCreditCardCallBack() {
             @Override
             public void onSuccess(String data) {
                 LogUtils.i("绑定银行卡："+data);
-                AddBankcardBean addBankcardBean = new Gson().fromJson(data,AddBankcardBean.class);
-                if ("000000".equals(addBankcardBean.getCode())){
-                    mBindCreditCardView.openUnionpay(addBankcardBean.getData());
+                BindCreditCardBean bindCreditCardBean = new Gson().fromJson(data,BindCreditCardBean.class);
+                if ("000000".equals(bindCreditCardBean.getCode())){
+                    mBindCreditCardView.openUnionpay(bindCreditCardBean.getData());
                     return;
-                }else if ("888888".equals(addBankcardBean.getCode())) {
+                }else if ("888888".equals(bindCreditCardBean.getCode())) {
                     new CompelLogin(mActivity).popExitLogin();
                     return;
                 }
-                ToastUtils.showToast(addBankcardBean.getMessage());
+                ToastUtils.showToast(bindCreditCardBean.getMessage());
             }
         });
 

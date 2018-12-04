@@ -13,7 +13,7 @@ import com.sl_group.jinyuntong_oem.utils.ToastUtils;
 
 /**
  * Created by 马天 on 2018/11/19.
- * description：
+ * description：信用卡列表业务
  */
 public class CreditCardListPersenter {
     private Activity mActivity;

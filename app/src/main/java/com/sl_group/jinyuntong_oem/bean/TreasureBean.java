@@ -2,7 +2,7 @@ package com.sl_group.jinyuntong_oem.bean;
 
 /**
  * Created by 马天 on 2018/3/31.
- * description：业绩
+ * description：业绩，财富
  */
 
 public class TreasureBean {

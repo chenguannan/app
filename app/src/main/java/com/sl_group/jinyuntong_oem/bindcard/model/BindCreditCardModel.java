@@ -6,14 +6,6 @@ package com.sl_group.jinyuntong_oem.bindcard.model;
  */
 public interface BindCreditCardModel {
 
-    /**
-     * 检查添加信用卡参数
-     * @param accountNumber 银行卡号
-     * @param bankcardTel 银行预留手机号
-     * @return boolean
-     */
-    boolean verficBindCreditCardData(String accountNumber, String bankcardTel);
-
 
     /**
      * @param accountNumber    银行卡号

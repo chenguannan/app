@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.adapter.OfficialAdapter;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
-import com.sl_group.jinyuntong_oem.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;

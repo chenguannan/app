@@ -30,12 +30,15 @@ public class ExtractActivity extends BaseActivity implements MerchantinfoView,Ex
     private TextView mTvApplyExtractExtractCardnumber;
     private EditText mEtApplyExtractExtractMoney;
     private Button mBtnApplyExtractMakesure;
-
+    //商户信息persenter
     private MerchantinfoPersenter mMerchantinfoPersenter;
+    //提现persenter
     private ExtractPersenter mExtractPersenter;
-
+    //可提现余额
     private double canExtractMoney;
-    private String extractHoldName;
+    //提现持卡人姓名
+    private String extractHolderName;
+    //提现卡号
     private String extractAccountNumber;
 
 
@@ -56,6 +59,7 @@ public class ExtractActivity extends BaseActivity implements MerchantinfoView,Ex
 
     @Override
     public void initData() {
+        //设置标题
         mTvActionbarTitle.setText("申请提现");
 
         mMerchantinfoPersenter = new MerchantinfoPersenter(this,this);
@@ -84,7 +88,7 @@ public class ExtractActivity extends BaseActivity implements MerchantinfoView,Ex
             case R.id.btn_apply_extract_makesure:
                 //申请提现
                 String extractMoney = mEtApplyExtractExtractMoney.getText().toString().trim();
-                mExtractPersenter.applyExtact(extractMoney,extractHoldName,extractAccountNumber);
+                mExtractPersenter.applyExtact(extractMoney, extractHolderName,extractAccountNumber);
                 break;
         }
     }
@@ -98,7 +102,7 @@ public class ExtractActivity extends BaseActivity implements MerchantinfoView,Ex
     public void getMerchantInfo(MerchantInfoBean.DataBean dataBean) {
 
         mTvApplyExtractCanExtract.setText(String.format("%.2f",canExtractMoney)+"元");
-        extractHoldName = dataBean.getHolderName();
+        extractHolderName = dataBean.getHolderName();
         extractAccountNumber = dataBean.getAccountNumber();
         mTvApplyExtractExtractCardnumber.setText(StringUtils.getStarString(extractAccountNumber,4,extractAccountNumber.length()-4));
 

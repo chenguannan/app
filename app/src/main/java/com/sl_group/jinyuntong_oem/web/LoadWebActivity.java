@@ -30,6 +30,7 @@ import android.webkit.DownloadListener;
 import android.webkit.SslErrorHandler;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -156,13 +157,16 @@ public class LoadWebActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
-        mWvLoadweb.setWebViewClient(new WebViewClient() {
+        mWvLoadweb.setWebViewClient(new WebViewClient()
+        {
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
                 handler.proceed();  // 接受所有网站的证书
+                super.onReceivedSslError(view, handler, error);
             }
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                LogUtils.i("onPageStarted："+url);
                 super.onPageStarted(view, url, favicon);
                 mPb.setVisibility(View.VISIBLE);
             }
@@ -170,14 +174,22 @@ public class LoadWebActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
+                LogUtils.i("onPageFinished："+url);
+                mWvLoadweb.setLayerType(View.LAYER_TYPE_HARDWARE,null);
                 //pb进度条隐藏
                 mPb.setVisibility(View.GONE);
             }
 
             @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                LogUtils.i("shouldOverrideUrlLoading："+request.toString());
+                return super.shouldOverrideUrlLoading(view, request);
+            }
+
+            @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 LogUtils.i("shouldOverrideUrlLoading："+url);
-//                view.loadUrl(url);
+                view.loadUrl(url);
 //                //启动支付宝,并跳转到付款页面
 //                if (parseScheme(url)) {
 //                    try {
@@ -202,7 +214,8 @@ public class LoadWebActivity extends BaseActivity {
 //                }
                 return false;
             }
-        });
+        }
+        );
     }
 
     public boolean parseScheme(String url) {
@@ -248,7 +261,8 @@ public class LoadWebActivity extends BaseActivity {
             }
         });
 
-        mWvLoadweb.setWebViewClient(new WebViewClient());
+        mWvLoadweb.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
+
         //js打开新窗口
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         //设置支持插件
@@ -274,7 +288,8 @@ public class LoadWebActivity extends BaseActivity {
 
         webSettings.setAllowFileAccess(true);
         //设置APP
-        mWvLoadweb.getSettings().setAppCacheEnabled(true);
+        webSettings.setAppCacheEnabled(true);
+
     }
 
 
@@ -287,7 +302,8 @@ public class LoadWebActivity extends BaseActivity {
 //                return;
 //            }
             mWvLoadweb.loadUrl(mBundle.getString("url"));
-            mWvLoadweb.reload();
+            LogUtils.i("loadUrl："+mBundle.getString("url"));
+//            mWvLoadweb.reload();
         }
 
 

@@ -4,7 +4,7 @@ package com.sl_group.jinyuntong_oem.bean;
  * Created by 马天 on 2018/11/19.
  * description：添加信用卡对象
  */
-public class AddBankcardBean {
+public class BindCreditCardBean {
 
     /**
      * code : 000000

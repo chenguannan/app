@@ -108,6 +108,10 @@ public class BindCreditCardActivity extends BaseActivity implements BindCreditCa
     }
 
 
+    /**
+      * 跳转到银联页面开通
+      * @param data  银联URL
+      */
     @Override
     public void openUnionpay(String data) {
         Bundle bundle = new Bundle();
@@ -116,6 +120,10 @@ public class BindCreditCardActivity extends BaseActivity implements BindCreditCa
         finish();
     }
 
+    /**
+      * 获取商户信息
+      * @param dataBean 商户信息对象
+      */
     @Override
     public void getMerchantInfo(MerchantInfoBean.DataBean dataBean) {
         mTvBindCredirCardUsername.setText(dataBean.getHolderName());
@@ -137,6 +145,7 @@ public class BindCreditCardActivity extends BaseActivity implements BindCreditCa
         );
         // 如果这权限全都拥有, 则直接执行更新
         if (isAllGranted) {
+            //打开相机扫描识别银行卡
             Intent scanIntent = new Intent(BindCreditCardActivity.this, ScanCameraActivity.class);
             startActivityForResult(scanIntent, SCAN_BANKCARD_REQUEST_CODE);
             return;

@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Created by 马天 on 2018/4/1.
- * description：推荐佣金
+ * description：直接推荐佣金，升级VIP奖励
  */
 
 public class UpVipBrokerageBean {

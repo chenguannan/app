@@ -2,7 +2,7 @@ package com.sl_group.jinyuntong_oem.bean;
 
 /**
  * Created by 马天 on 2018/11/26.
- * description：
+ * description：更新，txt文本
  */
 public class UpDateBean {
 

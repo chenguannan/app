@@ -23,24 +23,6 @@ public class BindCreditCardModelImpl implements BindCreditCardModel {
         mActivity = activity;
     }
 
-    @Override
-    public boolean verficBindCreditCardData(String accountNumber, String bankcardTel) {
-        if (StringUtils.isEmpty(accountNumber)) {
-            ToastUtils.showToast("请输入银行卡卡号或扫描银行卡");
-            return false;
-        }
-        if (StringUtils.isEmpty(bankcardTel)) {
-            ToastUtils.showToast("请输入银行预留手机号");
-            return false;
-        }
-        if (bankcardTel.length() != 11) {
-            ToastUtils.showToast("请输入正确的手机号");
-            return false;
-        }
-
-        return true;
-    }
-
 
     @Override
     public void bindCreditCard(String accountNumber, String bankcardTel, final IBindCreditCardCallBack bindCallBack) {

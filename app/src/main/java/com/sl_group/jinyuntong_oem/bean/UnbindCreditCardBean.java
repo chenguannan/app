@@ -2,7 +2,7 @@ package com.sl_group.jinyuntong_oem.bean;
 
 /**
  * Created by 马天 on 2018/5/10.
- * description：
+ * description：解绑信用卡
  */
 
 public class UnbindCreditCardBean {

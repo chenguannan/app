@@ -1,6 +1,5 @@
 package com.sl_group.jinyuntong_oem.adapter;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,17 +38,17 @@ public class UpVipBrokerageAdapter extends RecyclerView.Adapter<UpVipBrokerageAd
         final UpVipBrokerageBean.DataBean.ResultListBean dataBean = mBeanList.get(position);
         holder.tvItemUpvipBrokerageMoney.setText(String.format(Locale.CHINA,"%.2f",dataBean.getAmt()));
         holder.tvItemUpvipBrokerageDate.setText(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss",Locale.getDefault()).format(dataBean.getCreatedDate()));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("intoType","10");
-                bundle.putString("logId",String.valueOf(dataBean.getLogId()));
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Bundle bundle = new Bundle();
+//                bundle.putString("intoType","10");
+//                bundle.putString("logId",String.valueOf(dataBean.getLogId()));
 //                Intent intent = new Intent(mActivity,DealBrokerageDetailsBean.class);
 //                intent.putExtras(bundle);
 //                mActivity.startActivity(intent);
-            }
-        });
+//            }
+//        });
     }
 
     @Override

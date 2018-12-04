@@ -2,7 +2,7 @@ package com.sl_group.jinyuntong_oem.bean;
 
 /**
  * Created by 马天 on 2018/11/22.
- * description：
+ * description：设置头像
  */
 public class SetHeadImgBean {
 

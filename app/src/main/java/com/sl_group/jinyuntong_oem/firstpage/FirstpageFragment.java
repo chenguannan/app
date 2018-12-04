@@ -264,6 +264,7 @@ public class FirstpageFragment extends BaseFragment implements FirstpageView, Sy
                 break;
             case R.id.tv_firstpage_water:
 //                mBundle.putString("url", CommonSet.WATER);
+//                mBundle.putString("url", "http://220.248.70.91:8151/dep-page-service/cg1045");
                 mBundle.putString("url", "https://name.znyoo.cn/oss-transaction/unpay/toOpen/bdfe8293-988e-4ec2-9408-7147b00cb9f8");
                 startActivity(LoadWebActivity.class, mBundle);
                 break;

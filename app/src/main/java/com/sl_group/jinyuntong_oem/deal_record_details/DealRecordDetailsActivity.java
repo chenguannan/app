@@ -30,7 +30,7 @@ public class DealRecordDetailsActivity extends BaseActivity implements Brokerage
     private TextView mTvDealRecordDetailsMoney;
     private TextView mTvDealDetailsPeople;
 
-
+    //佣金详情persenter
     private BrokerageDetailsPersenter mBrokerageDetailsPersenter;
 
     @Override
@@ -52,8 +52,9 @@ public class DealRecordDetailsActivity extends BaseActivity implements Brokerage
 
     @Override
     public void initData() {
+        //设置标题
         mTvActionbarTitle.setText("交易详情");
-
+        //初始化佣金详情persenter
         mBrokerageDetailsPersenter = new BrokerageDetailsPersenter(this, this);
     }
 
@@ -64,7 +65,11 @@ public class DealRecordDetailsActivity extends BaseActivity implements Brokerage
 
     @Override
     public void widgetClick(View v) {
-
+        switch (v.getId()){
+            case R.id.img_actionbar_back:
+                finish();
+                break;
+        }
     }
 
     @Override
@@ -81,6 +86,10 @@ public class DealRecordDetailsActivity extends BaseActivity implements Brokerage
 
     }
 
+    /**
+      * 获取交易佣金详情
+      * @param data 交易佣金详情对象
+      */
     @SuppressLint("SetTextI18n")
     @Override
     public void dealDetails(DealBrokerageDetailsBean.DataBean data) {

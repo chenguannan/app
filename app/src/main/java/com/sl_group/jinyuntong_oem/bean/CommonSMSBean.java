@@ -2,7 +2,7 @@ package com.sl_group.jinyuntong_oem.bean;
 
 /**
  * Created by 马天 on 2018/11/16.
- * description：实名认证短信
+ * description：通用短信
  */
 public class CommonSMSBean {
 

@@ -50,11 +50,13 @@ public class CreditCardListActivity extends BaseActivity implements CreditCardLi
     @Override
     protected void onStart() {
         super.onStart();
-
+        //信用卡列表
         mCreditCardListPersenter = new CreditCardListPersenter(this,this);
+        //查询信用卡列表
+        mCreditCardListPersenter.creditCardList(true);
+        //解绑信用卡
         mUnBindCreditCardPercenter = new UnBindCreditCardPercenter(this,this);
 
-        mCreditCardListPersenter.creditCardList(true);
     }
 
     @Override
@@ -77,6 +79,7 @@ public class CreditCardListActivity extends BaseActivity implements CreditCardLi
 
         Bundle bundle = getIntent().getExtras();
         if (bundle!=null){
+            //是否是支付选卡
             isPay = bundle.getBoolean("isPay");
         }
         //初始化数据
@@ -93,7 +96,7 @@ public class CreditCardListActivity extends BaseActivity implements CreditCardLi
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshlayout) {
-
+                //刷新查询信用卡列表
                 mCreditCardListPersenter.creditCardList(false);
             }
         });
@@ -112,6 +115,7 @@ public class CreditCardListActivity extends BaseActivity implements CreditCardLi
                 }
             }
         });
+        //侧滑删除解绑信用卡
         mCreditCardAdapter.setOnDeleteClickListener(new InventoryAdapter.OnDeleteClickLister() {
             @Override
             public void onDeleteClick(View view, int position) {
@@ -142,10 +146,12 @@ public class CreditCardListActivity extends BaseActivity implements CreditCardLi
     @Override
     public void doBusiness(Context mContext) {
 
-
     }
 
-
+    /**
+      * 获取信用卡列表
+      * @param list 信用卡对象集合
+      */
     @Override
     public void getCreditCardList(List<CreditCardBean.DataBean> list) {
         mBeanList.clear();
@@ -154,6 +160,9 @@ public class CreditCardListActivity extends BaseActivity implements CreditCardLi
         mRefreshLayout.finishRefresh();
     }
 
+    /**
+      * 解绑信用卡
+      */
     @Override
     public void unBindCreditCardSuccess() {
 //        mCreditCardListPersenter.creditCardList(true);

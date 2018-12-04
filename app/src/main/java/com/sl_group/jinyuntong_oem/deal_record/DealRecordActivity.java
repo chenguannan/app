@@ -69,9 +69,9 @@ public class DealRecordActivity extends BaseActivity implements BrokerageView {
 
     @Override
     public void initData() {
-
+        //设置标题
         mTvActionbarTitle.setText("交易佣金");
-
+        //初始化佣金persenter
         mBrokeragePersenter = new BrokeragePersenter(this,this);
         //初始化集合
         mListBeans = new ArrayList<>();
@@ -87,6 +87,7 @@ public class DealRecordActivity extends BaseActivity implements BrokerageView {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshlayout) {
+                //刷新，重置查询页码，清空数据集合
                 curPage = 0;
                 mListBeans.clear();
                 mBrokeragePersenter.brokerage(CommonSet.INTOTYPE_DEAL,false, curPage, "10", mTvSelectDate.getText().toString().trim());
@@ -96,6 +97,7 @@ public class DealRecordActivity extends BaseActivity implements BrokerageView {
         mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                //上拉加载更多，页码自增
                 curPage++;
                 mBrokeragePersenter.brokerage(CommonSet.INTOTYPE_DEAL,false, curPage, "10", mTvSelectDate.getText().toString().trim());
             }
@@ -123,6 +125,7 @@ public class DealRecordActivity extends BaseActivity implements BrokerageView {
 
     @Override
     public void doBusiness(Context mContext) {
+        //查询交易佣金
         mBrokeragePersenter.brokerage(CommonSet.INTOTYPE_DEAL,true, curPage, "10", mTvSelectDate.getText().toString().trim());
     }
 
@@ -164,6 +167,10 @@ public class DealRecordActivity extends BaseActivity implements BrokerageView {
 
     }
 
+    /**
+      * 获取交易佣金
+      * @param data 交易佣金对象
+      */
     @Override
     public void dealRecord(DealRecordBean.DataBean data) {
         mTvDealRecordMoney.setText(String.format(Locale.CHINA,"%.2f",data.getTxnAmt()));

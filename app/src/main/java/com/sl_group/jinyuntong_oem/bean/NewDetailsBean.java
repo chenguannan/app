@@ -2,7 +2,7 @@ package com.sl_group.jinyuntong_oem.bean;
 
 /**
  * Created by 马天 on 2018/4/16.
- * description：
+ * description：消息详情
  */
 
 public class NewDetailsBean {

@@ -2,7 +2,7 @@ package com.sl_group.jinyuntong_oem.bean;
 
 /**
  * Created by 马天 on 2018/11/26.
- * description：连接对象
+ * description：各种连接，协议，客服，新手指引
  */
 public class SystemPropBean {
 

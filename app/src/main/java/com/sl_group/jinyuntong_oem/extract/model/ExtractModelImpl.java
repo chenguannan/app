@@ -24,23 +24,6 @@ public class ExtractModelImpl implements ExtractModel {
     }
 
     @Override
-    public boolean checkParams(String extractMoney, String holderName, String accountNumber) {
-        if (StringUtils.isEmpty(extractMoney)){
-            ToastUtils.showToast("请输入提现金额");
-            return false;
-        }
-        if (Double.parseDouble(extractMoney)<CommonSet.EXTRACT_LIMIT){
-            ToastUtils.showToast("满10元可提");
-            return false;
-        }
-        if (StringUtils.isEmpty(holderName)||StringUtils.isEmpty(accountNumber)){
-            ToastUtils.showToast("网络异常");
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public void extract(String extractMoney, String holderName, String accountNumber, final IApplyExtractCallBack applyExtractCallBack) {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);
         obj.put("method", URLConstants.APPLY_EXTRACT);

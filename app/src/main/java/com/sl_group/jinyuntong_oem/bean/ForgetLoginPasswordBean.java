@@ -2,7 +2,7 @@ package com.sl_group.jinyuntong_oem.bean;
 
 /**
  * Created by 马天 on 2018/3/29.
- * description：修改登录密码
+ * description：设置登录密码，修改和忘记
  */
 
 public class ForgetLoginPasswordBean {

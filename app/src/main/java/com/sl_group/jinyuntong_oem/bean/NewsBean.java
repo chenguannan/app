@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Created by 马天 on 2018/3/2.
- * description：消息
+ * description：消息列表
  */
 
 public class NewsBean {

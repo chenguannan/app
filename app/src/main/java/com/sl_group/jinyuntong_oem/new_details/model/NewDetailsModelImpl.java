@@ -29,6 +29,7 @@ public class NewDetailsModelImpl implements NewDetailsModel {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);
         obj.put("method", URLConstants.NEWS_DETAILS);
         obj.put("mid",SPUtil.get(mActivity, "mid", ""));
+        obj.put("agencyId",SPUtil.get(mActivity, "agencyId", ""));
         obj.put("messageId", messageId);
         obj.put("isReady", isReady);
         HttpUtils.getInstance().postJson(
