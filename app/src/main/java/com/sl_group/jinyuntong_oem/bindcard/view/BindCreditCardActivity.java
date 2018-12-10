@@ -125,7 +125,7 @@ public class BindCreditCardActivity extends BaseActivity implements BindCreditCa
       * @param dataBean 商户信息对象
       */
     @Override
-    public void getMerchantInfo(MerchantInfoBean.DataBean dataBean) {
+    public void merchantInfoSuccess(MerchantInfoBean.DataBean dataBean) {
         mTvBindCredirCardUsername.setText(dataBean.getHolderName());
         mTvBindCredirCardIdcard.setText(dataBean.getIdCard());
     }

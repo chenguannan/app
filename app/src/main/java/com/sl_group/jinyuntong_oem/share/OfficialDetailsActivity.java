@@ -250,8 +250,6 @@ public class OfficialDetailsActivity extends BaseActivity {
 
         popupWindow = PopupWindowUtils.getPop(this, view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setAnimationStyle(R.style.PopupAnimationBottom);
-        popupWindow.setOutsideTouchable(false);
-        popupWindow.setFocusable(false);
         popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
 
         tvPopShareWechat.setOnClickListener(new View.OnClickListener() {

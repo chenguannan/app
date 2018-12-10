@@ -25,10 +25,13 @@ public class ChangeGesturePasswordModelImpl implements ChangeGesturePasswordMode
     }
 
     @Override
-    public void changeGesturePassword(String gesturePassword, final changeGesturePasswordCallBack changeGesturePasswordCallBack) {
+    public void changeGesturePassword(String cellPhone,String checkCode,String uuid,String gesturePassword, final changeGesturePasswordCallBack changeGesturePasswordCallBack) {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);
         obj.put("method", URLConstants.CHANGE_GESTURE_PASSWORD);
         obj.put("mid",SPUtil.get(mActivity, "mid", ""));
+        obj.put("cellPhone",cellPhone);
+        obj.put("checkCode",checkCode);
+        obj.put("uuid",uuid);
         obj.put("gesturePassword",gesturePassword);
 
         HttpUtils.getInstance().postJson(

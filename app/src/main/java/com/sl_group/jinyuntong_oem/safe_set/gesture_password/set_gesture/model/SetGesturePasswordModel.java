@@ -6,7 +6,7 @@ package com.sl_group.jinyuntong_oem.safe_set.gesture_password.set_gesture.model;
  */
 public interface SetGesturePasswordModel {
 
-    void setGesturePassword(String gesturePassword,SetGesturePasswordModel.setGesturePasswordCallBack setGesturePasswordCallBack);
+    void setGesturePassword(String cellPhone,String checkCode,String uuid,String gesturePassword,SetGesturePasswordModel.setGesturePasswordCallBack setGesturePasswordCallBack);
 
     interface setGesturePasswordCallBack{
         void onSuccess(String data);

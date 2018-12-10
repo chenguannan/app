@@ -102,7 +102,7 @@ public class GesturePasswordActivity extends BaseActivity implements GesturePass
     }
 
     @Override
-    public void getMerchantInfo(MerchantInfoBean.DataBean dataBean) {
+    public void merchantInfoSuccess(MerchantInfoBean.DataBean dataBean) {
         gesturePwd = dataBean.getGesturePassword();
         if (!StringUtils.isEmpty(dataBean.getGesturePassword())) {
             mTvGetturePasswordOpenClose.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.mipmap.open_icon), null);

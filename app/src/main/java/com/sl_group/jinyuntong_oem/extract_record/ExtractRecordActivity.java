@@ -15,6 +15,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.sl_group.jinyuntong_oem.CommonSet;
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.adapter.ExtractRecordAdapter;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by 马天 on 2018/11/24.
@@ -41,13 +43,14 @@ public class ExtractRecordActivity extends BaseActivity implements BrokerageView
     private TextView mTvSelectDate;
     private SmartRefreshLayout mRefreshLayout;
     private RecyclerView mRecycleViewExtractRecord;
-
+    //当前页码
     private int curPage = 0;
-
+    //提现记录集合
     private List<ExtractRecordBean.DataBean.ResultListBean> mListBeans;
+    //提现记录适配器
     private ExtractRecordAdapter mExtractRecordAdapter;
+    //佣金persenter
     private BrokeragePersenter mBrokeragePersenter;
-
 
     @Override
     public int bindLayout() {
@@ -67,30 +70,37 @@ public class ExtractRecordActivity extends BaseActivity implements BrokerageView
 
     @Override
     public void initData() {
+        //标题
         mTvActionbarTitle.setText("累计提现");
-
+        //初始化佣金persenter
         mBrokeragePersenter = new BrokeragePersenter(this,this);
-
+        //初始化集合
         mListBeans = new ArrayList<>();
+        //初始化适配器
         mExtractRecordAdapter = new ExtractRecordAdapter(mListBeans,this);
-
+        //初始化recycleview线性布局
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        //设置方向
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        //绑定适配器
         mRecycleViewExtractRecord.setAdapter(mExtractRecordAdapter);
         mRecycleViewExtractRecord.setLayoutManager(linearLayoutManager);
+        //刷新
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshlayout) {
+                //重置当前页码，清空集合
                 curPage = 0;
                 mListBeans.clear();
-                mBrokeragePersenter.brokerage("14",false, curPage, "10", mTvSelectDate.getText().toString().trim());
+                mBrokeragePersenter.brokerage(CommonSet.INTOTYPE_EXTRACT,false, curPage, "10", mTvSelectDate.getText().toString().trim());
             }
         });
         mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                //页码自增
                 curPage++;
-                mBrokeragePersenter.brokerage("14",false, curPage, "10", mTvSelectDate.getText().toString().trim());
+                mBrokeragePersenter.brokerage(CommonSet.INTOTYPE_EXTRACT,false, curPage, "10", mTvSelectDate.getText().toString().trim());
             }
         });
     }
@@ -108,6 +118,7 @@ public class ExtractRecordActivity extends BaseActivity implements BrokerageView
                 finish();
                 break;
             case R.id.tv_select_date:
+                //选择时间
                 selectDate();
                 break;
         }
@@ -115,7 +126,8 @@ public class ExtractRecordActivity extends BaseActivity implements BrokerageView
 
     @Override
     public void doBusiness(Context mContext) {
-        mBrokeragePersenter.brokerage("14",true, curPage, "10", mTvSelectDate.getText().toString().trim());
+        //查询提现记录佣金
+        mBrokeragePersenter.brokerage(CommonSet.INTOTYPE_EXTRACT,true, curPage, "10", mTvSelectDate.getText().toString().trim());
     }
 
 
@@ -128,7 +140,7 @@ public class ExtractRecordActivity extends BaseActivity implements BrokerageView
             @Override
             public void onTimeSelect(Date date, View v) {
                 //选中事件回调
-                mTvSelectDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(date));
+                mTvSelectDate.setText(new SimpleDateFormat("yyyy-MM-dd",Locale.getDefault()).format(date));
                 curPage = 0;
                 mListBeans.clear();
                 mBrokeragePersenter.brokerage("14",true, curPage, "10", mTvSelectDate.getText().toString().trim());
@@ -151,11 +163,19 @@ public class ExtractRecordActivity extends BaseActivity implements BrokerageView
         pvTime.show();
     }
 
+    /**
+      * 获取提现记录
+      * @param data 提现记录对象
+      */
     @Override
     public void extractRecord(ExtractRecordBean.DataBean data) {
-        mTvExtractRecordMoney.setText(String.format("%.2f",data.getEncAmt()));
+        //提现金额
+        mTvExtractRecordMoney.setText(String.format(Locale.CHINA,"%.2f",data.getEncAmt()));
+        //添加数据
         mListBeans.addAll(data.getResultList());
+        //刷新适配器
         mExtractRecordAdapter.notifyDataSetChanged();
+        //结束刷新或者加载动作
         if (mRefreshLayout.isEnableRefresh()) {
             mRefreshLayout.finishRefresh();
         }

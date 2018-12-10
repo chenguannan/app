@@ -42,6 +42,9 @@ public class SystemPropPersenter {
                         case "xinshou":
                             mSystemPropView.getXinShouURL(systemPropBean.getData().getXinshou());
                             break;
+                            case "yaoqingma":
+                            mSystemPropView.getYaoQingMaURL(systemPropBean.getData().getYaoqing());
+                            break;
                     }
                     return;
                 }

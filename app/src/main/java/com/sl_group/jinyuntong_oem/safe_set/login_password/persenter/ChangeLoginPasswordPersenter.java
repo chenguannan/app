@@ -28,18 +28,17 @@ public class ChangeLoginPasswordPersenter {
     }
 
 
-    public void forgetLoginPassword(String tel, String password, String passswordAgain) {
-        if (!mForgetLoginPasswordModel.checkForgetLoginPasswordParams(tel, password, passswordAgain)) {
+    public void forgetLoginPassword(String cellPhone,String checkCode,String uuid,String password, String passswordAgain) {
+        if (!mForgetLoginPasswordModel.checkForgetLoginPasswordParams(cellPhone, password, passswordAgain)) {
             return;
         }
-        mForgetLoginPasswordModel.forgetLoginPassword(tel, password, new ChangeLoginPasswordModel.IForgetLoginPasswordCallBack() {
+        mForgetLoginPasswordModel.forgetLoginPassword( cellPhone, checkCode, uuid, password, new ChangeLoginPasswordModel.IForgetLoginPasswordCallBack() {
             @Override
             public void onSuccess(String data) {
-                LogUtils.i("忘记登录密码：" + data);
+                LogUtils.i("修改登录密码：" + data);
                 ForgetLoginPasswordBean forgetLoginPasswordBean = new Gson().fromJson(data, ForgetLoginPasswordBean.class);
                 if ("000000".equals(forgetLoginPasswordBean.getCode())) {
                     mActivity.finish();
-                    return;
                 }else if ("888888".equals(forgetLoginPasswordBean.getCode())) {
                     new CompelLogin(mActivity).popExitLogin();
                     return;

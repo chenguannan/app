@@ -93,7 +93,7 @@
                 android:drawableStart="@mipmap/graphic_verification"
                 android:drawablePadding="@dimen/x20"
                 android:hint="@string/input_pic_verfic_code"
-                android:maxLength="6"
+                android:maxLength="4"
                 android:textSize="@dimen/s16"
                 tools:ignore="Autofill,TextFields"/>
         </android.support.design.widget.TextInputLayout>

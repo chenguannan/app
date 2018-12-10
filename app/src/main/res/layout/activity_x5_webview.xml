@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/rl_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/mainColor">
+
+        <ImageView
+            android:id="@+id/img_actionbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingStart="@dimen/x20"
+            android:paddingTop="@dimen/y20"
+            android:paddingEnd="@dimen/x20"
+            android:paddingBottom="@dimen/y3"
+            android:src="@mipmap/back_icon"
+            tools:ignore="ContentDescription"/>
+
+        <TextView
+            android:id="@+id/tv_actionbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:text="@string/app_name"
+            android:textColor="@color/whiteColor"
+            android:textSize="@dimen/s18"/>
+
+        <TextView
+            android:id="@+id/tv_actionbar_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:paddingStart="@dimen/x20"
+            android:paddingTop="@dimen/y10"
+            android:paddingEnd="@dimen/x20"
+            android:text="@string/close"
+            android:textColor="@color/whiteColor"
+            android:textSize="@dimen/s16"
+            tools:ignore="RelativeOverlap"/>
+    </RelativeLayout>
+
+    <com.sl_group.jinyuntong_oem.X5WebView
+        android:id="@+id/x5_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_actionbar"/>
+
+    <ProgressBar
+        android:id="@+id/pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"/>
+</RelativeLayout>

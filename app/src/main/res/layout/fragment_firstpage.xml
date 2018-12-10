@@ -113,10 +113,10 @@
                 android:text="@string/recommend_card"/>
 
             <TextView
-                android:id="@+id/tv_firstpage_group_buy"
+                android:id="@+id/tv_firstpage_merchant_policy"
                 style="@style/tv_firstpage_top_pic"
-                android:drawableTop="@mipmap/shopping_icon"
-                android:text="@string/group_buy"/>
+                android:drawableTop="@mipmap/zhengce"
+                android:text="@string/merchant_policy"/>
 
             <TextView
                 android:id="@+id/tv_firstpage_service_center"
@@ -158,6 +158,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_firstpage_vip_center"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:text="@string/vip_center_hint"
                     android:textColor="@color/mainColor"
                     android:textSize="@dimen/s10"/>

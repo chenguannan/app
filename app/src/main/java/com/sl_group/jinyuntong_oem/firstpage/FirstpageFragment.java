@@ -4,17 +4,21 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -23,17 +27,18 @@ import android.widget.TextView;
 import com.sl_group.jinyuntong_oem.CommonSet;
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.RealnameStates;
+import com.sl_group.jinyuntong_oem.analyze_qrcode.persenter.AnalyzeQrcodePersenter;
+import com.sl_group.jinyuntong_oem.analyze_qrcode.view.AnalyzeQrcodeView;
 import com.sl_group.jinyuntong_oem.base.BaseFragment;
+import com.sl_group.jinyuntong_oem.bean.AnalyzeQrcodeBean;
 import com.sl_group.jinyuntong_oem.bean.MerchantInfoBean;
 import com.sl_group.jinyuntong_oem.creditcard.view.CreditCardListActivity;
-import com.sl_group.jinyuntong_oem.firstpage.persenter.FirstpagePersenter;
-import com.sl_group.jinyuntong_oem.firstpage.view.FirstpageView;
 import com.sl_group.jinyuntong_oem.gather.view.GatherActivity;
+import com.sl_group.jinyuntong_oem.gather_rate.GatherRateActivity;
 import com.sl_group.jinyuntong_oem.merchant_info.persenter.MerchantinfoPersenter;
 import com.sl_group.jinyuntong_oem.merchant_info.view.MerchantinfoView;
 import com.sl_group.jinyuntong_oem.myshop.MyShopActivty;
-import com.sl_group.jinyuntong_oem.myshop.gather_rate.GatherRateActivity;
-import com.sl_group.jinyuntong_oem.news.view.NewsActivity;
+import com.sl_group.jinyuntong_oem.news.NewsActivity;
 import com.sl_group.jinyuntong_oem.open_merchant.view.OpenMerchantActivity;
 import com.sl_group.jinyuntong_oem.scan_input_money.view.ScanQrcodeInputMoneyActivity;
 import com.sl_group.jinyuntong_oem.system_prop.persenter.SystemPropPersenter;
@@ -64,8 +69,12 @@ import static com.sl_group.jinyuntong_oem.utils.AppUtils.getVersionName;
  * Created by 马天 on 2018/11/13.
  * description：首页
  */
-public class FirstpageFragment extends BaseFragment implements FirstpageView, SystemPropView, MerchantinfoView {
+public class FirstpageFragment extends BaseFragment implements AnalyzeQrcodeView, SystemPropView, MerchantinfoView {
+    //权限读写内存，相机权限
     private static final int PERMISSIONS_READ_WRITE_CAMERA = 1;
+    //读写内存的权限
+    private static final int PERMISSIONS_READ_WRITE = 2;
+    //扫码请求码
     private static final int REQUEST_CODE_SCAN = 1;
     private ImageView mImgFirstpageNews;
     private TextView mTvFirstpageScan;
@@ -73,7 +82,7 @@ public class FirstpageFragment extends BaseFragment implements FirstpageView, Sy
     private TextView mTvFirstpageCreditcard;
     private TextView mTvFirstpageShop;
     private TextView mTvFirstpageRecommendCard;
-    private TextView mTvFirstpageGroupBuy;
+    private TextView mTvFirstpageMerchantPolicy;
     private TextView mTvFirstpageServiceCenter;
     private TextView mTvFirstpageIntegralShop;
     private RelativeLayout mRlFirstpageVipCenter;
@@ -87,15 +96,18 @@ public class FirstpageFragment extends BaseFragment implements FirstpageView, Sy
     private TextView mTvFirstpageGongjijinQuery;
     private TextView mTvFirstpageExpressQuery;
     private TextView mTvFirstpageCompanyQuery;
-
-    private FirstpagePersenter mFirstpagePersenter;
+    //解析二维码persenter
+    private AnalyzeQrcodePersenter mAnalyzeQrcodePersenter;
+    //系统链接，协议，服务，指引等等
     private SystemPropPersenter mSystemPropPersenter;
+    //商户信息persenter
     private MerchantinfoPersenter mMerchantinfoPersenter;
     private Bundle mBundle;
+    //二维码内容
     private String qrCodeContent;
+    //是否开通商户权限
     private String canReceived;
-    private boolean isclickGather = false;
-    private static final int PERMISSIONS_READ_WRITE = 2;
+    private int vipLevel = -1;
     //更新日志
     private String changelog;
     //版本名
@@ -118,7 +130,7 @@ public class FirstpageFragment extends BaseFragment implements FirstpageView, Sy
         mTvFirstpageCreditcard = view.findViewById(R.id.tv_firstpage_creditcard);
         mTvFirstpageShop = view.findViewById(R.id.tv_firstpage_shop);
         mTvFirstpageRecommendCard = view.findViewById(R.id.tv_firstpage_recommend_card);
-        mTvFirstpageGroupBuy = view.findViewById(R.id.tv_firstpage_group_buy);
+        mTvFirstpageMerchantPolicy = view.findViewById(R.id.tv_firstpage_merchant_policy);
         mTvFirstpageServiceCenter = view.findViewById(R.id.tv_firstpage_service_center);
         mTvFirstpageIntegralShop = view.findViewById(R.id.tv_firstpage_integral_shop);
         mRlFirstpageVipCenter = view.findViewById(R.id.rl_firstpage_vip_center);
@@ -136,19 +148,24 @@ public class FirstpageFragment extends BaseFragment implements FirstpageView, Sy
 
     @Override
     public void initData() {
-        mFirstpagePersenter = new FirstpagePersenter(getActivity(), this);
+        //初始化persenter
+        mAnalyzeQrcodePersenter = new AnalyzeQrcodePersenter(getActivity(), this);
         mSystemPropPersenter = new SystemPropPersenter(getActivity(), this);
         mMerchantinfoPersenter = new MerchantinfoPersenter(getActivity(), this);
-        mBundle = new Bundle();
 
+        mBundle = new Bundle();
         //获取保存的版本号
         String version = (String) SPUtil.get(getActivity(), "version", "");
         changelog = (String) SPUtil.get(getActivity(), "changelog", "");
         versionShort = (String) SPUtil.get(getActivity(), "versionShort", "");
         install_url = (String) SPUtil.get(getActivity(), "install_url", "");
+        //如果需要更新的话，先检查权限
         if (!StringUtils.isEmpty(version) && AppUtils.getVersionCode(getActivity()) < Integer.parseInt(version)) {
-            permissionCheck();
+            upDate();
+        }else {
+            mMerchantinfoPersenter.merchantInfo();
         }
+
 
     }
 
@@ -160,7 +177,7 @@ public class FirstpageFragment extends BaseFragment implements FirstpageView, Sy
         mTvFirstpageCreditcard.setOnClickListener(this);
         mTvFirstpageShop.setOnClickListener(this);
         mTvFirstpageRecommendCard.setOnClickListener(this);
-        mTvFirstpageGroupBuy.setOnClickListener(this);
+        mTvFirstpageMerchantPolicy.setOnClickListener(this);
         mTvFirstpageServiceCenter.setOnClickListener(this);
         mTvFirstpageIntegralShop.setOnClickListener(this);
         mRlFirstpageVipCenter.setOnClickListener(this);
@@ -178,21 +195,24 @@ public class FirstpageFragment extends BaseFragment implements FirstpageView, Sy
 
     @Override
     public void widgetClick(View v) {
+        //检查实名认证
         if (!new RealnameStates(getActivity()).isRealname()) {
             return;
         }
         switch (v.getId()) {
             case R.id.img_firstpage_news:
+                //消息列表
                 startActivity(NewsActivity.class);
                 break;
             case R.id.tv_firstpage_scan:
+                //扫码
                 makeCamerMethod();
                 break;
             case R.id.tv_firstpage_gather:
-                isclickGather = true;
-                canReceived = (String) SPUtil.get(getActivity(), "canReceived", "");
+                //收款，如果没开通商户权限，先去开通商户权限
+                //是否开通商户权限
                 if (StringUtils.isEmpty(canReceived)) {
-                    mMerchantinfoPersenter.merchantInfo();
+                    ToastUtils.showToast("数据加载异常");
                     return;
                 }
                 if ("t".equals(canReceived)) {
@@ -203,13 +223,13 @@ public class FirstpageFragment extends BaseFragment implements FirstpageView, Sy
                 }
                 break;
             case R.id.tv_firstpage_creditcard:
+                //卡包，信用卡列表
                 startActivity(CreditCardListActivity.class);
                 break;
             case R.id.tv_firstpage_shop:
-                isclickGather = false;
-                canReceived = (String) SPUtil.get(getActivity(), "canReceived", "");
+                //商铺，如果开通商户权限，跳我的店铺，没开通跳开通
                 if (StringUtils.isEmpty(canReceived)) {
-                    mMerchantinfoPersenter.merchantInfo();
+                    ToastUtils.showToast("数据加载异常");
                     return;
                 }
                 if ("t".equals(canReceived)) {
@@ -219,34 +239,37 @@ public class FirstpageFragment extends BaseFragment implements FirstpageView, Sy
                 }
                 break;
             case R.id.tv_firstpage_recommend_card:
-
+                //推荐办卡
                 break;
-            case R.id.tv_firstpage_group_buy:
-
+            case R.id.tv_firstpage_merchant_policy:
+                //商户政策
                 break;
             case R.id.tv_firstpage_service_center:
+                //客服
                 mSystemPropPersenter.systemProp("kefu");
                 break;
             case R.id.tv_firstpage_integral_shop:
-
+                //积分商城
                 break;
             case R.id.rl_firstpage_vip_center:
-
-                int currentLevel = (int) SPUtil.get(getActivity(), "vipLevel", 0);
-                switch (currentLevel) {
+                //vip中心
+                switch (vipLevel) {
+                    case -1:
+                        ToastUtils.showToast("数据加载异常");
+                        break;
                     case 0:
+                        //普通商户  跳转到VIP中心
                         startActivity(VipCenterActivity.class);
                         break;
                     case 1:
+                        //VIP商户，跳转到收款费率
                         startActivity(GatherRateActivity.class);
                 }
-
                 break;
             case R.id.tv_firstpage_myshop:
-                isclickGather = false;
-                canReceived = (String) SPUtil.get(getActivity(), "canReceived", "");
+                //商铺，如果开通商户权限，跳我的店铺，没开通跳开通
                 if (StringUtils.isEmpty(canReceived)) {
-                    mMerchantinfoPersenter.merchantInfo();
+                    ToastUtils.showToast("数据加载异常");
                     return;
                 }
                 if ("t".equals(canReceived)) {
@@ -257,38 +280,44 @@ public class FirstpageFragment extends BaseFragment implements FirstpageView, Sy
 
                 break;
             case R.id.tv_firstpage_guide:
+                //新手指引
                 mSystemPropPersenter.systemProp("xinshou");
                 break;
             case R.id.rl_firstpage_shop_discount:
-
+                //商城优惠券
                 break;
             case R.id.tv_firstpage_water:
-//                mBundle.putString("url", CommonSet.WATER);
-//                mBundle.putString("url", "http://220.248.70.91:8151/dep-page-service/cg1045");
-                mBundle.putString("url", "https://name.znyoo.cn/oss-transaction/unpay/toOpen/bdfe8293-988e-4ec2-9408-7147b00cb9f8");
+                //水费
+                mBundle.putString("url", CommonSet.WATER);
                 startActivity(LoadWebActivity.class, mBundle);
                 break;
             case R.id.tv_firstpage_ele:
+                //电费
                 mBundle.putString("url", CommonSet.ELE);
                 startActivity(LoadWebActivity.class, mBundle);
                 break;
             case R.id.tv_firstpage_gas:
+                //燃气费
                 mBundle.putString("url", CommonSet.GAS);
                 startActivity(LoadWebActivity.class, mBundle);
                 break;
             case R.id.tv_firstpage_shebao_query:
+                //社保查询
                 mBundle.putString("url", CommonSet.SHEBAO);
                 startActivity(LoadWebActivity.class, mBundle);
                 break;
             case R.id.tv_firstpage_gongjijin_query:
+                //公积金查询
                 mBundle.putString("url", CommonSet.GONGJIJIN);
                 startActivity(LoadWebActivity.class, mBundle);
                 break;
             case R.id.tv_firstpage_express_query:
+                //快递查询
                 mBundle.putString("url", CommonSet.EXPRESS);
                 startActivity(LoadWebActivity.class, mBundle);
                 break;
             case R.id.tv_firstpage_company_query:
+                //公司查询
                 mBundle.putString("url", CommonSet.COMPANY);
                 startActivity(LoadWebActivity.class, mBundle);
                 break;
@@ -298,10 +327,119 @@ public class FirstpageFragment extends BaseFragment implements FirstpageView, Sy
     @Override
     public void doBusiness(Context mContext) {
 
+        //注册广播，提现后刷新数据
+        LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("android.intent.action.CART_BROADCAST");
+        BroadcastReceiver mItemViewListClickReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String msg = intent.getStringExtra("data");
+                if ("VIPrefresh".equals(msg)) {
+                    mMerchantinfoPersenter.merchantInfo();
+                }
+            }
+        };
+        broadcastManager.registerReceiver(mItemViewListClickReceiver, intentFilter);
     }
 
-    //权限
-    private void permissionCheck() {
+    @Override
+    public void analyzeQrcodeSuccess(AnalyzeQrcodeBean.DataBean dataBean) {
+        Bundle bundle = new Bundle();
+        bundle.putDouble("money", dataBean.getSrcAmt());
+        bundle.putString("merchant", dataBean.getShortName());
+        bundle.putString("receivedMid", dataBean.getReceivedMid());
+        bundle.putString("qrCodeContent", qrCodeContent);
+        startActivity(ScanQrcodeInputMoneyActivity.class, bundle);
+    }
+
+    @Override
+    public void getKeFuURL(String kefu) {
+        Bundle bundle = new Bundle();
+        bundle.putString("url", kefu);
+        startActivity(LoadWebActivity.class, bundle);
+    }
+
+    @Override
+    public void getXieYiURL(String xieyi) {
+        Bundle bundle = new Bundle();
+        bundle.putString("url", xieyi);
+        startActivity(LoadWebActivity.class, bundle);
+    }
+
+    @Override
+    public void getXinShouURL(String xinshou) {
+        Bundle bundle = new Bundle();
+        bundle.putString("url", xinshou);
+        startActivity(LoadWebActivity.class, bundle);
+    }
+
+    @Override
+    public void getYaoQingMaURL(String yaoqing) {
+        Bundle bundle = new Bundle();
+        bundle.putString("url", yaoqing);
+        startActivity(LoadWebActivity.class, bundle);
+    }
+
+    @Override
+    public void merchantInfoSuccess(MerchantInfoBean.DataBean dataBean) {
+        canReceived = dataBean.getCanReceived();
+        vipLevel = dataBean.getVipLevel();
+    }
+
+    //打开相机
+    private void makeCamerMethod() {
+
+        // 检查是否有相应的权限
+        boolean isAllGranted = PermissionSetDialogUtils.checkPermissionAllGranted(getActivity(),
+                new String[]{
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA
+                }
+        );
+        // 如果这权限全都拥有, 则直接执行更新
+        if (isAllGranted) {
+            Intent intent = new Intent(getActivity(), CaptureActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_SCAN);
+            return;
+        }
+        // 一次请求多个权限, 如果其他有权限是已经授予的将会自动忽略掉
+        ActivityCompat.requestPermissions(
+                getActivity(),
+                new String[]{
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA
+                },
+                PERMISSIONS_READ_WRITE_CAMERA
+        );
+
+    }
+
+
+    //startActivityForResult
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // 扫描二维码/条码回传
+        if (requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
+            if (data != null) {
+                qrCodeContent = data.getStringExtra(Constant.CODED_CONTENT);
+                if (StringUtils.isEmpty(qrCodeContent)) {
+                    ToastUtils.showToast("扫码失败");
+                    return;
+                }
+                LogUtils.i("扫描：" + qrCodeContent);
+                mAnalyzeQrcodePersenter.analyzeQrcode(qrCodeContent);
+            }
+        }
+
+    }
+
+    /**
+     * 更新APP，先检查权限
+     */
+    private void upDate() {
         // 检查是否有相应的权限
         boolean isAllGranted = PermissionSetDialogUtils.checkPermissionAllGranted(getActivity(),
                 new String[]{
@@ -329,7 +467,9 @@ public class FirstpageFragment extends BaseFragment implements FirstpageView, Sy
     }
 
 
-    //更新弹窗
+    /**
+     * 更新弹窗
+     */
     private void showUpdateDialog() {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
@@ -377,7 +517,7 @@ public class FirstpageFragment extends BaseFragment implements FirstpageView, Sy
                 int fileLength = connection.getContentLength();
                 // 下载文件
                 InputStream input = new BufferedInputStream(url.openStream());
-                OutputStream output = new FileOutputStream("/sdcard/jinyuntong.apk");
+                OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath() + File.separator + "jinyuntong.apk");
 
                 byte data[] = new byte[1024];
                 long total = 0;
@@ -406,12 +546,12 @@ public class FirstpageFragment extends BaseFragment implements FirstpageView, Sy
             if (Build.VERSION.SDK_INT >= 24) {
                 //判读版本是否在7.0以上
                 //参数1 上下文, 参数2 Provider主机地址 和配置文件中保持一致   参数3  共享的文件
-                Uri apkUri = FileProvider.getUriForFile(getActivity(), "com.sl_group.jinyuntong_oem.fileprovider", new File("/sdcard/jinyuntong.apk"));
+                Uri apkUri = FileProvider.getUriForFile(getActivity(), "com.sl_group.jinyuntong_oem.fileprovider", new File(Environment.getExternalStorageDirectory().getPath() + File.separator + "jinyuntong.apk"));
                 //添加这一句表示对目标应用临时授权该Uri所代表的文件
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
             } else {
-                intent.setDataAndType(Uri.fromFile(new File("/sdcard/jinyuntong.apk")), "application/vnd.android.package-archive");
+                intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory().getPath() + File.separator + "jinyuntong.apk")), "application/vnd.android.package-archive");
             }
             startActivity(intent);
         }
@@ -468,97 +608,4 @@ public class FirstpageFragment extends BaseFragment implements FirstpageView, Sy
         }
     }
 
-    //打开相机
-    private void makeCamerMethod() {
-
-        // 检查是否有相应的权限
-        boolean isAllGranted = PermissionSetDialogUtils.checkPermissionAllGranted(getActivity(),
-                new String[]{
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.CAMERA
-                }
-        );
-        // 如果这权限全都拥有, 则直接执行更新
-        if (isAllGranted) {
-            Intent intent = new Intent(getActivity(), CaptureActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_SCAN);
-            return;
-        }
-        // 一次请求多个权限, 如果其他有权限是已经授予的将会自动忽略掉
-        ActivityCompat.requestPermissions(
-                getActivity(),
-                new String[]{
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.CAMERA
-                },
-                PERMISSIONS_READ_WRITE_CAMERA
-        );
-
-    }
-
-
-    //startActivityForResult
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // 扫描二维码/条码回传
-        if (requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
-            if (data != null) {
-                qrCodeContent = data.getStringExtra(Constant.CODED_CONTENT);
-                if (StringUtils.isEmpty(qrCodeContent)) {
-                    ToastUtils.showToast("扫码失败");
-                    return;
-                }
-                LogUtils.i("扫描：" + qrCodeContent);
-                mFirstpagePersenter.analyzeQrcode(qrCodeContent);
-            }
-        }
-
-    }
-
-    @Override
-    public void getQrcodeContent(double srcAmt, String shortName, String receivedMid) {
-        Bundle bundle = new Bundle();
-        bundle.putDouble("money", srcAmt);
-        bundle.putString("merchant", shortName);
-        bundle.putString("receivedMid", receivedMid);
-        bundle.putString("qrCodeContent", qrCodeContent);
-        startActivity(ScanQrcodeInputMoneyActivity.class, bundle);
-    }
-
-    @Override
-    public void getKeFuURL(String kefu) {
-        Bundle bundle = new Bundle();
-        bundle.putString("url", kefu);
-        startActivity(LoadWebActivity.class, bundle);
-    }
-
-    @Override
-    public void getXieYiURL(String xieyi) {
-        Bundle bundle = new Bundle();
-        bundle.putString("url", xieyi);
-        startActivity(LoadWebActivity.class, bundle);
-    }
-
-    @Override
-    public void getXinShouURL(String xinshou) {
-        Bundle bundle = new Bundle();
-        bundle.putString("url", xinshou);
-        startActivity(LoadWebActivity.class, bundle);
-    }
-
-    @Override
-    public void getMerchantInfo(MerchantInfoBean.DataBean dataBean) {
-        if ("t".equals(dataBean.getCanReceived())) {
-            if (isclickGather) {
-                startActivity(GatherActivity.class);
-            } else {
-                startActivity(MyShopActivty.class);
-            }
-
-        } else if ("f".equals(dataBean.getCanReceived())) {
-            startActivity(OpenMerchantActivity.class);
-        }
-    }
 }

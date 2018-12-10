@@ -33,10 +33,13 @@ public class ChangePayPasswordModelImpl implements ChangePayPasswordModel {
     }
 
     @Override
-    public void changePayPassword(String tradePassword, final IChangePayPasswordCallBack changePayPasswordCallBack) {
+    public void changePayPassword(String cellPhone,String checkCode,String uuid,String tradePassword, final IChangePayPasswordCallBack changePayPasswordCallBack) {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);
         obj.put("method", URLConstants.CHANGE_PAY_PASSWORD);
         obj.put("mid",SPUtil.get(mActivity, "mid", ""));
+        obj.put("cellPhone",cellPhone);
+        obj.put("checkCode",checkCode);
+        obj.put("uuid",uuid);
         obj.put("tradePassword",tradePassword);
 
         HttpUtils.getInstance().postJson(

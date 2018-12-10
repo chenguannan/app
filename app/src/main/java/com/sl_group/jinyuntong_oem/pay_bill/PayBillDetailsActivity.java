@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
+import com.sl_group.jinyuntong_oem.utils.StringUtils;
 import com.sl_group.jinyuntong_oem.utils.ToastUtils;
 
 /**
@@ -50,13 +51,16 @@ public class PayBillDetailsActivity extends BaseActivity {
         mTvActionbarTitle.setText("账单详情");
         Bundle bundle = getIntent().getExtras();
         if (bundle!=null){
-            mTvPayBillDetailsDate.setText(bundle.getString("date"));
-            mTvPayBillDetailsOrder.setText(bundle.getString("bizOrderNumber"));
-            mTvPayBillDetailsPaycard.setText(bundle.getString("payAccount"));
-            mTvPayBillDetailsGatherMerchant.setText(bundle.getString("gatherMerchant"));
-            mTvPayBillDetailsPayMoney.setText("¥"+bundle.getString("payMoney"));
+            mTvPayBillDetailsDate.setText(bundle.getString("date",""));
+            mTvPayBillDetailsOrder.setText(bundle.getString("bizOrderNumber",""));
+            String payAccount = bundle.getString("payAccount","");
+            if (!StringUtils.isEmpty(payAccount)){
+                mTvPayBillDetailsPaycard.setText(StringUtils.getStarString(payAccount,6,payAccount.length()-4));
+            }
+            mTvPayBillDetailsGatherMerchant.setText(bundle.getString("gatherMerchant",""));
+            mTvPayBillDetailsPayMoney.setText("¥"+bundle.getString("payMoney",""));
 
-            switch (bundle.getString("state")){
+            switch (bundle.getString("state","")){
                 case "0":
                     mTvPayBillDetailsDealState.setText("交易处理中");
                     break;

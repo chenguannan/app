@@ -164,7 +164,7 @@ public class TreasureFragment extends BaseFragment implements TreasureView, Merc
     }
 
     @Override
-    public void getMerchantInfo(MerchantInfoBean.DataBean dataBean) {
+    public void merchantInfoSuccess(MerchantInfoBean.DataBean dataBean) {
         Bundle bundle = new Bundle();
         bundle.putString("url", dataBean.getRuleUrl());
         startActivity(LoadWebActivity.class, bundle);

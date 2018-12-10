@@ -49,11 +49,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by 马天 on 2018/11/18.
- * description：个人信息
+ * description：商户信息
  */
 public class MerchantinfoActivity extends BaseActivity implements MerchantinfoView, UpLoadImgView, SetHeadView {
-    private static final int PERMISSIONS_WRITE_CAMERA = 1;
+    //动态授权，读取内存，相机权限
+    private static final int PERMISSIONS_READ_WRITE_CAMERA = 1;
+    //拍照请求码
     private static final int UPLOAD_HEADIMG_REQUEST_CODE = 2;
+    //相册选择请求码
     private static final int UPLOAD_HEADIMG_GET_PHONE_REQUEST_CODE = 3;
     private ImageView mImgActionbarBack;
     private TextView mTvActionbarTitle;
@@ -63,10 +66,11 @@ public class MerchantinfoActivity extends BaseActivity implements MerchantinfoVi
     private TextView mTvUserinfoRealname;
     private TextView mTvUserinfoOpenMerchant;
     private TextView mTvUserinfoServiceProvide;
-
+    //头像路径
     private String mHeadImgPath;
-    private Bitmap mBitmap;
+    //上传头像persenter
     private UploadImgPersenter mUploadImgPersenter;
+    //设置头像persenter
     private SetHeadPersenter mSetHeadPersenter;
 
     @Override
@@ -88,11 +92,32 @@ public class MerchantinfoActivity extends BaseActivity implements MerchantinfoVi
 
     @Override
     public void initData() {
+        //标题
         mTvActionbarTitle.setText("个人信息");
+        //上传照片persenter
         mUploadImgPersenter = new UploadImgPersenter(this, this);
+        //设置头像persenter
         mSetHeadPersenter = new SetHeadPersenter(this, this);
         //初始化文件路径
         mHeadImgPath = Environment.getExternalStorageDirectory().getPath() + CommonSet.IMG_CACHE + "/IMG_" + System.currentTimeMillis() + RandomUtils.randomString(CommonSet.RANDOM_STR, 6) + ".png";
+
+
+        String headPortraitDirectoryName = (String) SPUtil.get(this, "headPortraitDirectoryName", "");
+        String headPortraitFilePrefix = (String) SPUtil.get(this, "headPortraitFilePrefix", "");
+        String holderName = (String) SPUtil.get(this, "holderName", "");
+        int vipLevel = (int) SPUtil.get(this, "vipLevel", 0);
+        String qualifiedState = (String) SPUtil.get(this, "qualifiedState", "");
+        String accountNumber = (String) SPUtil.get(this, "accountNumber", "");
+        String canReceived = (String) SPUtil.get(this, "canReceived", "");
+        String agentName = (String) SPUtil.get(this, "agentName", "");
+        if (StringUtils.isEmpty(holderName) || !StringUtils.isEmpty(qualifiedState) && !qualifiedState.equals("Y") ||
+                StringUtils.isEmpty(accountNumber) || StringUtils.isEmpty(canReceived) || StringUtils.isEmpty(agentName)) {
+            MerchantinfoPersenter merchantinfoPersenter = new MerchantinfoPersenter(this, this);
+            merchantinfoPersenter.merchantInfo();
+        } else {
+            displayInfo(headPortraitDirectoryName, headPortraitFilePrefix, holderName, vipLevel, qualifiedState, accountNumber, canReceived, agentName);
+        }
+
         //创建图片文件夹
         File sd = Environment.getExternalStorageDirectory();
         String path = sd.getPath() + CommonSet.IMG_CACHE;
@@ -105,64 +130,8 @@ public class MerchantinfoActivity extends BaseActivity implements MerchantinfoVi
         if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
             ToastUtils.showToast("检测sd是否可用");
         }
-
-        String headPortraitDirectoryName = (String) SPUtil.get(this, "headPortraitDirectoryName", "");
-        String headPortraitFilePrefix = (String) SPUtil.get(this, "headPortraitFilePrefix", "");
-        String holderName = (String) SPUtil.get(this, "holderName", "");
-        int vipLevel = (int) SPUtil.get(this, "vipLevel", 0);
-        String qualifiedState = (String) SPUtil.get(this, "qualifiedState", "");
-        String accountNumber = (String) SPUtil.get(this, "accountNumber", "");
-        String canReceived = (String) SPUtil.get(this, "canReceived", "");
-        String agentName = (String) SPUtil.get(this, "agentName", "");
-        if (StringUtils.isEmpty(holderName) || !StringUtils.isEmpty(qualifiedState) && !qualifiedState.equals("Y") || StringUtils.isEmpty(accountNumber) || StringUtils.isEmpty(canReceived) || StringUtils.isEmpty(agentName)) {
-            MerchantinfoPersenter merchantinfoPersenter = new MerchantinfoPersenter(this, this);
-            merchantinfoPersenter.merchantInfo();
-            return;
-        }
-        displayInfo(headPortraitDirectoryName, headPortraitFilePrefix, holderName, vipLevel, qualifiedState, accountNumber, canReceived, agentName);
-
-
     }
 
-    private void displayInfo(String headPortraitDirectoryName, String headPortraitFilePrefix, String holderName, int vipLevel, String qualifiedState, String accountNumber, String canReceived, String agentName) {
-        if (!StringUtils.isEmpty(headPortraitDirectoryName) && !StringUtils.isEmpty(headPortraitFilePrefix)) {
-            Picasso.with(this).load("https://name.znyoo.cn/oss-transaction/general/reviewImg?fileName=" + headPortraitDirectoryName + "&filePrefix=" + headPortraitFilePrefix).into(mImgUserinfoHeadPortrait);
-        } else {
-            mImgUserinfoHeadPortrait.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.my_head_portrait));
-        }
-        mTvUserinfoName.setText(holderName);
-        switch (vipLevel) {
-            case 0:
-                mTvUserinfoLevel.setText("普通用户");
-                break;
-            case 1:
-                mTvUserinfoLevel.setText("VIP用户");
-                break;
-        }
-        switch (qualifiedState) {
-            case "Y":
-                mTvUserinfoRealname.setText("已认证");
-                break;
-            case "N":
-                mTvUserinfoRealname.setText("未认证");
-                break;
-            case "a":
-                if (StringUtils.isEmpty(accountNumber)) {
-                    mTvUserinfoRealname.setText("未认证");
-                } else {
-                    mTvUserinfoRealname.setText("审核中");
-                }
-        }
-        switch (canReceived) {
-            case "t":
-                mTvUserinfoOpenMerchant.setText("已开通");
-                break;
-            case "f":
-                mTvUserinfoOpenMerchant.setText("未开通");
-                break;
-        }
-        mTvUserinfoServiceProvide.setText(agentName);
-    }
 
     @Override
     public void setListener() {
@@ -188,71 +157,59 @@ public class MerchantinfoActivity extends BaseActivity implements MerchantinfoVi
     public void doBusiness(Context mContext) {
     }
 
+    /**
+     * 获取商户信息成功
+     *
+     * @param dataBean 商户信息对象
+     */
     @Override
-    public void getMerchantInfo(MerchantInfoBean.DataBean dataBean) {
+    public void merchantInfoSuccess(MerchantInfoBean.DataBean dataBean) {
         displayInfo(dataBean.getHeadPortraitDirectoryName(), dataBean.getHeadPortraitFilePrefix(), dataBean.getHolderName(), dataBean.getVipLevel(), dataBean.getQualifiedState(), dataBean.getAccountNumber(), dataBean.getCanReceived(), dataBean.getAgentName());
     }
 
-
-    private void popHeadImg() {
-        View view = LayoutInflater.from(this).inflate(R.layout.pop_upload_headimg, null);
-
-
-        TextView tvUploadimgTakePicture = view.findViewById(R.id.tv_uploadimg_take_picture);
-        TextView tvUploadimgGetPhone = view.findViewById(R.id.tv_uploadimg_get_phone);
-        TextView tvUploadimgCancel = view.findViewById(R.id.tv_uploadimg_cancel);
-
-
-        final PopupWindow popupWindow = PopupWindowUtils.getPop(this, view, DisplayUtils.getScreenWidth(this) * 9 / 10, ViewGroup.LayoutParams.WRAP_CONTENT);
-        popupWindow.setAnimationStyle(R.style.PopupAnimationBottom);
-        popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
-
-        tvUploadimgTakePicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (popupWindow.isShowing()) {
-                    popupWindow.dismiss();
+    private void displayInfo(String headPortraitDirectoryName, String headPortraitFilePrefix, String holderName, int vipLevel, String qualifiedState, String accountNumber, String canReceived, String agentName) {
+        if (!StringUtils.isEmpty(headPortraitDirectoryName) && !StringUtils.isEmpty(headPortraitFilePrefix)) {
+            Picasso.with(this).load(CommonSet.PIC_START + headPortraitDirectoryName + CommonSet.PIC_END + headPortraitFilePrefix).into(mImgUserinfoHeadPortrait);
+        } else {
+            mImgUserinfoHeadPortrait.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.my_head_portrait));
+        }
+        //商户姓名
+        mTvUserinfoName.setText(holderName);
+        //商户等级
+        switch (vipLevel) {
+            case 0:
+                mTvUserinfoLevel.setText("普通用户");
+                break;
+            case 1:
+                mTvUserinfoLevel.setText("VIP用户");
+                break;
+        }
+        //商户实名状态
+        switch (qualifiedState) {
+            case "Y":
+                mTvUserinfoRealname.setText("已认证");
+                break;
+            case "N":
+                mTvUserinfoRealname.setText("未认证");
+                break;
+            case "a":
+                if (StringUtils.isEmpty(accountNumber)) {
+                    mTvUserinfoRealname.setText("未认证");
+                } else {
+                    mTvUserinfoRealname.setText("审核中");
                 }
-                makeCamerMethod();
-            }
-        });
-
-        tvUploadimgGetPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (popupWindow.isShowing()) {
-                    popupWindow.dismiss();
-                }
-                getPictureRes();
-
-            }
-        });
-        tvUploadimgCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (popupWindow.isShowing()) {
-                    popupWindow.dismiss();
-                }
-            }
-        });
-
-    }
-
-    //打开相机
-    private void makeCamerMethod() {
-        Intent idcardIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        idcardIntent.putExtra(MediaStore.EXTRA_OUTPUT, CameraUtils.getUriForFile(this, new File(mHeadImgPath)));
-        startActivityForResult(idcardIntent, UPLOAD_HEADIMG_REQUEST_CODE);
-    }
-
-    /**
-     * 获取相册图片
-     * param
-     */
-    private void getPictureRes() {
-        Intent getAlbum = new Intent(Intent.ACTION_GET_CONTENT);
-        getAlbum.setType("image/*");
-        startActivityForResult(getAlbum, UPLOAD_HEADIMG_GET_PHONE_REQUEST_CODE);
+        }
+        //是否开通商户权限
+        switch (canReceived) {
+            case "t":
+                mTvUserinfoOpenMerchant.setText("已开通");
+                break;
+            case "f":
+                mTvUserinfoOpenMerchant.setText("未开通");
+                break;
+        }
+        //上级代理名称
+        mTvUserinfoServiceProvide.setText(agentName);
     }
 
     /**
@@ -281,11 +238,72 @@ public class MerchantinfoActivity extends BaseActivity implements MerchantinfoVi
                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.CAMERA
                     },
-                    PERMISSIONS_WRITE_CAMERA
+                    PERMISSIONS_READ_WRITE_CAMERA
             );
         }
 
     }
+
+    //选择设置头像方式弹窗
+    private void popHeadImg() {
+        View view = LayoutInflater.from(this).inflate(R.layout.pop_upload_headimg, null);
+
+        TextView tvUploadimgTakePicture = view.findViewById(R.id.tv_uploadimg_take_picture);
+        TextView tvUploadimgGetPhone = view.findViewById(R.id.tv_uploadimg_get_phone);
+        TextView tvUploadimgCancel = view.findViewById(R.id.tv_uploadimg_cancel);
+
+        final PopupWindow popupWindow = PopupWindowUtils.getPop(this, view, DisplayUtils.getScreenWidth(this) * 9 / 10, ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setAnimationStyle(R.style.PopupAnimationBottom);
+        popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
+        //从相册选择头像
+        tvUploadimgTakePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                }
+                makeCamerMethod();
+            }
+        });
+        //拍照设置头像
+        tvUploadimgGetPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                }
+                getPictureRes();
+            }
+        });
+        //取消
+        tvUploadimgCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                }
+            }
+        });
+
+    }
+
+    //打开相机拍照
+    private void makeCamerMethod() {
+        Intent idcardIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        idcardIntent.putExtra(MediaStore.EXTRA_OUTPUT, CameraUtils.getUriForFile(this, new File(mHeadImgPath)));
+        startActivityForResult(idcardIntent, UPLOAD_HEADIMG_REQUEST_CODE);
+    }
+
+    /**
+     * 获取相册图片
+     * param
+     */
+    private void getPictureRes() {
+        Intent getAlbum = new Intent(Intent.ACTION_GET_CONTENT);
+        getAlbum.setType("image/*");
+        startActivityForResult(getAlbum, UPLOAD_HEADIMG_GET_PHONE_REQUEST_CODE);
+    }
+
 
     /**
      * 拍照完成后，回调的方法
@@ -296,30 +314,28 @@ public class MerchantinfoActivity extends BaseActivity implements MerchantinfoVi
         if (resultCode == 0) {
             return;
         }
+        Bitmap bitmap;
         switch (requestCode) {
+            //拍照上传
             case UPLOAD_HEADIMG_REQUEST_CODE:
-                mBitmap = PhotoTakeUtils.decodeSampledBitmapFromFile(mHeadImgPath, 1200, 720);
-                if (mBitmap == null) {
+                bitmap = PhotoTakeUtils.decodeSampledBitmapFromFile(mHeadImgPath, 1200, 720);
+                if (bitmap == null) {
                     return;
                 }
-                QRCodeUtil.saveQrCodePicture(this, mBitmap);
-
+                QRCodeUtil.saveQrCodePicture(this, bitmap);
                 mUploadImgPersenter.uploadImg(mHeadImgPath, UPLOAD_HEADIMG_REQUEST_CODE);
                 break;
+            //相册上传
             case UPLOAD_HEADIMG_GET_PHONE_REQUEST_CODE:
                 String photo_path = UriPathHelper.getPath(this, data.getData());
                 if (TextUtils.isEmpty(photo_path)) {
                     ToastUtils.showToast("请选择图片");
                     return;
                 }
-                //显示选择的图片
-                mBitmap = PhotoTakeUtils.decodeSampledBitmapFromFile(photo_path, mImgUserinfoHeadPortrait.getWidth(), mImgUserinfoHeadPortrait.getHeight());
-
-                QRCodeUtil.saveQrCodePicture(this, mBitmap);
-
+                bitmap = PhotoTakeUtils.decodeSampledBitmapFromFile(photo_path, mImgUserinfoHeadPortrait.getWidth(), mImgUserinfoHeadPortrait.getHeight());
+                QRCodeUtil.saveQrCodePicture(this, bitmap);
                 mUploadImgPersenter.uploadImg(photo_path, UPLOAD_HEADIMG_GET_PHONE_REQUEST_CODE);
                 break;
-
 
         }
     }
@@ -332,7 +348,7 @@ public class MerchantinfoActivity extends BaseActivity implements MerchantinfoVi
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == PERMISSIONS_WRITE_CAMERA) {
+        if (requestCode == PERMISSIONS_READ_WRITE_CAMERA) {
             boolean isAllGranted = true;
 
             // 判断是否所有的权限都已经授予了
@@ -352,15 +368,19 @@ public class MerchantinfoActivity extends BaseActivity implements MerchantinfoVi
         }
     }
 
+    /**
+     * @param data  上传照片返回的UUID
+     * @param index 主要用于多个图片上传时
+     */
     @Override
     public void uploadImgSuccess(String data, int index) {
         mSetHeadPersenter.setHeadImg(data);
-
     }
 
+    //设置头像
     @Override
     public void setHeadImgSuccess(SetHeadImgBean.DataBean data) {
-        Picasso.with(this).load("https://name.znyoo.cn/oss-transaction/general/reviewImg?fileName=" + data.getHeadPortraitDirectoryName() + "&filePrefix=" + data.getHeadPortraitFilePrefix()).into(mImgUserinfoHeadPortrait);
+        Picasso.with(this).load(CommonSet.PIC_START + data.getHeadPortraitDirectoryName() + CommonSet.PIC_END + data.getHeadPortraitFilePrefix()).into(mImgUserinfoHeadPortrait);
 
     }
 }

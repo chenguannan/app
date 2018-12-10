@@ -20,18 +20,18 @@ import android.widget.TextView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.adapter.BankFeeAdapter;
-import com.sl_group.jinyuntong_oem.creditcard.view.CreditCardListActivity;
-import com.sl_group.jinyuntong_oem.creditcard.persenter.CreditCardListPersenter;
-import com.sl_group.jinyuntong_oem.creditcard.view.CreditCardListView;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
 import com.sl_group.jinyuntong_oem.bean.BankFeeBean;
 import com.sl_group.jinyuntong_oem.bean.CreditCardBean;
+import com.sl_group.jinyuntong_oem.creditcard.persenter.CreditCardListPersenter;
+import com.sl_group.jinyuntong_oem.creditcard.view.CreditCardListActivity;
+import com.sl_group.jinyuntong_oem.creditcard.view.CreditCardListView;
 import com.sl_group.jinyuntong_oem.utils.DisplayUtils;
 import com.sl_group.jinyuntong_oem.utils.PopupWindowUtils;
 import com.sl_group.jinyuntong_oem.utils.SPUtil;
 import com.sl_group.jinyuntong_oem.utils.ToastUtils;
 import com.sl_group.jinyuntong_oem.vip.persenter.VipCenterPersenter;
-import com.sl_group.jinyuntong_oem.web.LoadWebActivity;
+import com.sl_group.jinyuntong_oem.web.X5WebViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -157,9 +157,11 @@ public class VipCenterActivity extends BaseActivity implements VipCenterView, Cr
 
     @Override
     public void buyVipSuccess(String openUrl) {
+
         Bundle bundle = new Bundle();
         bundle.putString("url",openUrl);
-        startActivity(LoadWebActivity.class,bundle);
+        bundle.putString("title","升级VIP");
+        startActivity(X5WebViewActivity.class,bundle);
         finish();
     }
 
@@ -224,5 +226,6 @@ public class VipCenterActivity extends BaseActivity implements VipCenterView, Cr
         SPUtil.remove(this,"isPaySelectCard");
         SPUtil.remove(this,"payAccountNumber");
         SPUtil.remove(this,"payBankName");
+
     }
 }

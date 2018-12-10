@@ -26,7 +26,7 @@ public interface RealnameModel {
      * 实名认证
      * @param iRealnameCallBack 实名回调接口
      */
-    void realname(String idcard, String holderName, String accountNumber, String tel, String bizPlaceSnapshot1ImageId, String bizPlaceSnapshot2ImageId, RealnameModel.IRealnameCallBack iRealnameCallBack);
+    void realname(String idcard, String holderName, String accountNumber, String tel,String checkCode ,String uuid,  String bizPlaceSnapshot1ImageId, String bizPlaceSnapshot2ImageId, RealnameModel.IRealnameCallBack iRealnameCallBack);
 
     /**
      * 实名获取验证码回调接口及回调方法

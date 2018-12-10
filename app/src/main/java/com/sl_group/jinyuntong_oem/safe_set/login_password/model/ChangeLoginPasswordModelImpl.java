@@ -54,10 +54,12 @@ public class ChangeLoginPasswordModelImpl implements ChangeLoginPasswordModel {
     }
 
     @Override
-    public void forgetLoginPassword(String tel, String password, final IForgetLoginPasswordCallBack forgetLoginPasswordCallBack) {
+    public void forgetLoginPassword(String cellPhone,String checkCode,String uuid, String password, final IForgetLoginPasswordCallBack forgetLoginPasswordCallBack) {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);
         obj.put("method", URLConstants.CHANGE_LOGIN_PASSWORD);
-        obj.put("cellPhone", tel);
+        obj.put("cellPhone", cellPhone);
+        obj.put("checkCode", checkCode);
+        obj.put("uuid", uuid);
         obj.put("password", password);
         obj.put("encryptId", "merchantApp");
         HttpUtils.getInstance().postJson(

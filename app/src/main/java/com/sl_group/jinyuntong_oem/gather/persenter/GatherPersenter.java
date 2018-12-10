@@ -27,14 +27,14 @@ public class GatherPersenter {
     }
 
 
-    public void getPayCodeMoney(String money){
-        mGatherModel.getPayCodeMoney(money, new GatherModel.IPayCodeMoneyCallBack() {
+    public void gatherWithMoney(String gatherMoney){
+        mGatherModel.gatherWithMoney(gatherMoney, new GatherModel.IGatherWithMoneyCallBack() {
             @Override
             public void onSuccess(String data) {
                 LogUtils.i("带金额收款二维码信息查询："+data);
                 PayCodeMoneyBean payCodeMoneyBean = new Gson().fromJson(data,PayCodeMoneyBean.class);
                 if ("000000".equals(payCodeMoneyBean.getCode())){
-                    mGatherView.getPayCodeMoney(payCodeMoneyBean.getData().getUuid());
+                    mGatherView.gatherWithMoneySuccess(payCodeMoneyBean.getData().getUuid());
                     return;
                 }else if ("888888".equals(payCodeMoneyBean.getCode())) {
                     new CompelLogin(mActivity).popExitLogin();

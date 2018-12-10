@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="@string/select_query_date"
             android:textColor="@color/grayColor_9"
-            android:textSize="@dimen/s16"/>
+            android:textSize="@dimen/s12"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                 android:paddingBottom="@dimen/y10"
                 android:text="@string/date_hint"
                 android:textColor="@color/blackColor"
-                android:textSize="@dimen/s16"
+                android:textSize="@dimen/s12"
                 tools:ignore="RelativeOverlap"/>
 
             <TextView
@@ -67,7 +67,7 @@
                 android:paddingBottom="@dimen/y10"
                 android:text="@string/date_hint"
                 android:textColor="@color/blackColor"
-                android:textSize="@dimen/s16"/>
+                android:textSize="@dimen/s12"/>
         </RelativeLayout>
 
     </LinearLayout>

@@ -32,6 +32,9 @@ public class SetGesturePasswordActivity extends BaseActivity implements SetGestu
     private SetGesturePasswordPersenter mSetGesturePasswordPersenter;
 
     private String type;
+    private String checkCode;
+    private String uuid;
+    private String cellPhone;
     @Override
     public int bindLayout() {
         return R.layout.activity_set_gesture_password;
@@ -53,6 +56,9 @@ public class SetGesturePasswordActivity extends BaseActivity implements SetGestu
         Bundle bundle = getIntent().getExtras();
         if (bundle!=null){
             type= bundle.getString("type","");
+            checkCode = bundle.getString("checkCode","");
+            uuid = bundle.getString("uuid","");
+            cellPhone = bundle.getString("cellPhone","");
         }
 
         if (!StringUtils.isEmpty(type)&&type.equals("forget")){
@@ -100,7 +106,7 @@ public class SetGesturePasswordActivity extends BaseActivity implements SetGestu
                 }else if (setGesturePasswordOne.equals(result)) {
                     SPUtil.put(SetGesturePasswordActivity.this, "gesturePwd", result);
                     mGlvSetGesturePassword.clearView();
-                    mSetGesturePasswordPersenter.setGesturePassword(result);
+                    mSetGesturePasswordPersenter.setGesturePassword(cellPhone,checkCode,uuid,result);
                 } else if (!setGesturePasswordOne.equals(result)){
                     mTvSetGesturePasswordTitle.setText("设置手势密码");
                     SPUtil.remove(SetGesturePasswordActivity.this, "gesturePwd");

@@ -52,10 +52,15 @@ import java.util.ArrayList;
  * description：开通商户
  */
 public class OpenMerchantActivity extends BaseActivity implements OpenMerchantView ,MerchantinfoView ,UpLoadImgView {
-    private static final int PERMISSIONS_WRITE_CAMERA = 0;
+    //读写内存，相机权限
+    private static final int PERMISSIONS_READ_WRITE_CAMERA = 0;
+    //扫描银行卡请求码
     private static final int SCAN_BANKCARD_REQUEST_CODE = 1;
+    //上传营业场所照照片请求码
     private static final int UPLOAD_BUSINESS_REQUEST_CODE = 2;
+    //上传门店照照片
     private static final int UPLOAD_DOC_REQUEST_CODE = 3;
+    //上传营业执照请求码
     private static final int UPLOAD_BUSINESS_PIC_REQUEST_CODE = 4;
     private ImageView mImgActionbarBack;
     private TextView mTvActionbarTitle;
@@ -71,20 +76,22 @@ public class OpenMerchantActivity extends BaseActivity implements OpenMerchantVi
     private EditText mEtOpenMerchantTel;
     private Button mBtnOpenMerchantCommit;
     private Bitmap mBitmap;
-
+    //营业场所照路径
     private String mBusinessPath;
+    //门头照路径
     private String mDocPath;
+    //营业执照路径
     private String mBusinessPicPath;
-
+    //开通商户权限persenter
     private OpenMerchantPersenter mOpenMerchantPersenter;
+    //商户信息persenter
     private MerchantinfoPersenter mMerchantinfoPersenter;
+    //上传照片persenter
     private UploadImgPersenter mUploadImgPersenter;
-
+    //营业场所，门头照，营业执照上传照片返回UUID
     private String placeOfBusinessUUID;
     private String doorheadPhotoUUID;
     private String businessLicenseUUID;
-
-
     //省份集合
     private ArrayList<String> mProList;
     //城市集合
@@ -104,7 +111,6 @@ public class OpenMerchantActivity extends BaseActivity implements OpenMerchantVi
 
     @Override
     public void initView(View view) {
-
         mImgActionbarBack = findViewById(R.id.img_actionbar_back);
         mTvActionbarTitle = findViewById(R.id.tv_actionbar_title);
         mTvOpenMerchantRealname = findViewById(R.id.tv_open_merchant_realname);
@@ -257,7 +263,7 @@ public class OpenMerchantActivity extends BaseActivity implements OpenMerchantVi
                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.CAMERA
                     },
-                    PERMISSIONS_WRITE_CAMERA
+                    PERMISSIONS_READ_WRITE_CAMERA
             );
         }
 
@@ -388,7 +394,7 @@ public class OpenMerchantActivity extends BaseActivity implements OpenMerchantVi
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == PERMISSIONS_WRITE_CAMERA) {
+        if (requestCode == PERMISSIONS_READ_WRITE_CAMERA) {
             boolean isAllGranted = true;
 
             // 判断是否所有的权限都已经授予了
@@ -410,7 +416,7 @@ public class OpenMerchantActivity extends BaseActivity implements OpenMerchantVi
 
 
     @Override
-    public void skipActivity(String data) {
+    public void openMerchantSuccess(String data) {
         Bundle bundle = new Bundle();
         bundle.putString("url",data);
         startActivity(LoadWebActivity.class,bundle);
@@ -509,7 +515,7 @@ public class OpenMerchantActivity extends BaseActivity implements OpenMerchantVi
     }
 
     @Override
-    public void getMerchantInfo(MerchantInfoBean.DataBean dataBean) {
+    public void merchantInfoSuccess(MerchantInfoBean.DataBean dataBean) {
         mTvOpenMerchantRealname.setText(dataBean.getHolderName());
         mTvOpenMerchantIdcard.setText(dataBean.getIdCard());
     }

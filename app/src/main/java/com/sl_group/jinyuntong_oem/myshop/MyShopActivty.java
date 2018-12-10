@@ -8,11 +8,11 @@ import android.widget.TextView;
 
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
-import com.sl_group.jinyuntong_oem.my_team.MyTeamActivity;
-import com.sl_group.jinyuntong_oem.myshop.gather_bill.view.GatherBillActivity;
-import com.sl_group.jinyuntong_oem.myshop.gather_rate.GatherRateActivity;
-import com.sl_group.jinyuntong_oem.myshop.settle_info.view.SettleInfoActivity;
-import com.sl_group.jinyuntong_oem.myshop.shop_info.ShopInfoActivity;
+import com.sl_group.jinyuntong_oem.my_team.view.MyTeamActivity;
+import com.sl_group.jinyuntong_oem.gather_bill.view.GatherBillActivity;
+import com.sl_group.jinyuntong_oem.gather_rate.GatherRateActivity;
+import com.sl_group.jinyuntong_oem.settle_info.view.SettleInfoActivity;
+import com.sl_group.jinyuntong_oem.shop_info.ShopInfoActivity;
 
 /**
  * Created by 马天 on 2018/11/14.
@@ -26,8 +26,6 @@ public class MyShopActivty extends BaseActivity {
     private RelativeLayout mRlMyShopGatherBill;
     private RelativeLayout mRlMyShopGatherRate;
     private RelativeLayout mRlMyShopMyTeam;
-
-
 
     @Override
     public int bindLayout() {
@@ -62,23 +60,28 @@ public class MyShopActivty extends BaseActivity {
 
     @Override
     public void widgetClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.img_actionbar_back:
                 finish();
                 break;
             case R.id.rl_my_shop_shop_info:
+                //店铺信息
                 startActivity(ShopInfoActivity.class);
                 break;
             case R.id.rl_my_shop_settle_info:
+                //结算信息
                 startActivity(SettleInfoActivity.class);
                 break;
             case R.id.rl_my_shop_gather_bill:
+                //收款账单
                 startActivity(GatherBillActivity.class);
                 break;
             case R.id.rl_my_shop_gather_rate:
+                //收款费率
                 startActivity(GatherRateActivity.class);
                 break;
-                case R.id.rl_my_shop_my_team:
+            case R.id.rl_my_shop_my_team:
+                //我的团队
                 startActivity(MyTeamActivity.class);
                 break;
         }

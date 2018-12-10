@@ -38,6 +38,9 @@ public class ChangePayPasswordActivity extends BaseActivity implements ChangePay
     private ChangePayPasswordPersenter mChangePayPasswordPersenter;
     private SetPayPasswordPersenter mSetPayPasswordPersenter;
     private String type;
+    private String checkCode;
+    private String uuid;
+    private String cellPhone;
 
     @Override
     public int bindLayout() {
@@ -84,6 +87,9 @@ public class ChangePayPasswordActivity extends BaseActivity implements ChangePay
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             type = bundle.getString("type");
+            checkCode = bundle.getString("checkCode","");
+            uuid = bundle.getString("uuid","");
+            cellPhone = bundle.getString("cellPhone","");
         }
         if (StringUtils.isEmpty(type)) {
             finish();
@@ -155,9 +161,9 @@ public class ChangePayPasswordActivity extends BaseActivity implements ChangePay
             try {
                 if (gridSip_second.inputEqualsWith(gridSip_fisrt)) {
                     if (type.equals("change")) {
-                        mChangePayPasswordPersenter.changePayPassword(gridSipEditText.getEncryptData().getEncryptRandomNum() + "#" + gridSipEditText.getEncryptData().getEncryptInput());
+                        mChangePayPasswordPersenter.changePayPassword(cellPhone,checkCode,uuid,gridSipEditText.getEncryptData().getEncryptRandomNum() + "#" + gridSipEditText.getEncryptData().getEncryptInput());
                     } else if (type.equals("forget")) {
-                        mSetPayPasswordPersenter.setPayPassword(gridSipEditText.getEncryptData().getEncryptRandomNum() + "#" + gridSipEditText.getEncryptData().getEncryptInput());
+                        mSetPayPasswordPersenter.setPayPassword(cellPhone,checkCode,uuid,gridSipEditText.getEncryptData().getEncryptRandomNum() + "#" + gridSipEditText.getEncryptData().getEncryptInput());
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "输入不同请重新输入", Toast.LENGTH_SHORT).show();

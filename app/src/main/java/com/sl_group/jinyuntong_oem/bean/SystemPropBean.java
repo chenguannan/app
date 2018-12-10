@@ -8,7 +8,7 @@ public class SystemPropBean {
 
     /**
      * code : 000000
-     * data : {"kefu":"https://www.znyoo.com","xieyi":"https://www.znyoo.com","xinshou":"https://www.znyoo.com"}
+     * data : {"kefu":"https://yapp.jytpay.com/oss-app/contract2/contract.html","xieyi":"https://yapp.jytpay.com/oss-app/contract2/protocol.html","xinshou":"https://yapp.jytpay.com/oss-app/newGuide/newGuide.html","yaoqing":"https://yapp.jytpay.com/oss-app/contract/inviteId.html"}
      * message : 手势密码设置成功
      */
 
@@ -42,14 +42,16 @@ public class SystemPropBean {
 
     public static class DataBean {
         /**
-         * kefu : https://www.znyoo.com
-         * xieyi : https://www.znyoo.com
-         * xinshou : https://www.znyoo.com
+         * kefu : https://yapp.jytpay.com/oss-app/contract2/contract.html
+         * xieyi : https://yapp.jytpay.com/oss-app/contract2/protocol.html
+         * xinshou : https://yapp.jytpay.com/oss-app/newGuide/newGuide.html
+         * yaoqing : https://yapp.jytpay.com/oss-app/contract/inviteId.html
          */
 
         private String kefu;
         private String xieyi;
         private String xinshou;
+        private String yaoqing;
 
         public String getKefu() {
             return kefu;
@@ -73,6 +75,14 @@ public class SystemPropBean {
 
         public void setXinshou(String xinshou) {
             this.xinshou = xinshou;
+        }
+
+        public String getYaoqing() {
+            return yaoqing;
+        }
+
+        public void setYaoqing(String yaoqing) {
+            this.yaoqing = yaoqing;
         }
     }
 }

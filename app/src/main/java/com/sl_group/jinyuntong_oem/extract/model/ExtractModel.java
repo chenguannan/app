@@ -12,9 +12,9 @@ public interface ExtractModel {
      * @param holderName 持卡人姓名
      * @param accountNumber 卡号
      */
-    void extract(String extractMoney, String holderName, String accountNumber, ExtractModel.IApplyExtractCallBack applyExtractCallBack);
+    void extract(String extractMoney, String holderName, String accountNumber, IExtractCallBack extractCallBack);
 
-    interface IApplyExtractCallBack{
+    interface IExtractCallBack {
         void onSuccess(String data);
     }
 }

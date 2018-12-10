@@ -170,7 +170,6 @@ public class RealnameStates {
                     if (popupWindow.isShowing()) {
                         popupWindow.dismiss();
                     }
-                    searchMerchantInfoMethod();
                 }
 
             }

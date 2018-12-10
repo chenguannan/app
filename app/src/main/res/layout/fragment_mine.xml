@@ -141,6 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y10"
                 android:layout_marginBottom="@dimen/y10"
+                android:background="@color/whiteColor"
                 android:orientation="vertical">
 
                 <TextView

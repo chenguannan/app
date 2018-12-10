@@ -30,6 +30,7 @@ import com.sl_group.jinyuntong_oem.creditcard.view.CreditCardListActivity;
 import com.sl_group.jinyuntong_oem.merchant_info.persenter.MerchantinfoPersenter;
 import com.sl_group.jinyuntong_oem.merchant_info.view.MerchantinfoActivity;
 import com.sl_group.jinyuntong_oem.merchant_info.view.MerchantinfoView;
+import com.sl_group.jinyuntong_oem.notices.NoticesActivity;
 import com.sl_group.jinyuntong_oem.pay_bill.view.PayBillActivity;
 import com.sl_group.jinyuntong_oem.safe_set.SafeSetActivity;
 import com.sl_group.jinyuntong_oem.set_head.persenter.SetHeadPersenter;
@@ -58,8 +59,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * description：我的
  */
 public class MineFragment extends BaseFragment implements MerchantinfoView, UpLoadImgView, SetHeadView {
-    private static final int PERMISSIONS_WRITE_CAMERA = 1;
+    //读写内存，相机的权限，动态授权
+    private static final int PERMISSIONS_READ_WRITE_CAMERA = 1;
+    //拍照上传头像请求码
     private static final int UPLOAD_HEADIMG_REQUEST_CODE = 2;
+    //从相册获取头像请求码
     private static final int UPLOAD_HEADIMG_GET_PHONE_REQUEST_CODE = 3;
     private ImageView mImgMineMenu;
     private CircleImageView mImgMineHeadPortrait;
@@ -72,14 +76,15 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
     private TextView mTvMineSystemNotice;
     private TextView mTvMineMyService;
     private TextView mTvMineSaveSet;
-
+    //商户信息persenter
     private MerchantinfoPersenter mMerchantinfoPersenter;
-
-    private String mHeadImgPath;
-    private Bitmap mBitmap;
+    //上传照片persenter
     private UploadImgPersenter mUploadImgPersenter;
-    private SetHeadPersenter mSetHeadPersenter;
 
+    private SetHeadPersenter mSetHeadPersenter;
+    //头像图片路径
+    private String mHeadImgPath;
+    //商户的一些信息
     private String headPortraitDirectoryName;
     private String headPortraitFilePrefix;
     private String cellPhone;
@@ -89,17 +94,18 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
     private String holderName;
     private String idCard;
     private String tel;
+    //是否是查询实名信息
     private boolean isQueryRealname = false;
 
     @Override
     public void onStart() {
         super.onStart();
+        //刷新商户信息
         boolean isReflash = (boolean) SPUtil.get(getActivity(), "isReflash", false);
         if (isReflash) {
             mMerchantinfoPersenter.merchantInfo();
         }
     }
-
 
     @Override
     public int bindLayout() {
@@ -123,6 +129,7 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
 
     @Override
     public void initData() {
+        //初始化商户，上传照片，设置头像persenter
         mMerchantinfoPersenter = new MerchantinfoPersenter(getActivity(), this);
         mUploadImgPersenter = new UploadImgPersenter(getActivity(), this);
         mSetHeadPersenter = new SetHeadPersenter(getActivity(), this);
@@ -130,20 +137,7 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
         //初始化文件路径
         mHeadImgPath = Environment.getExternalStorageDirectory().getPath() + CommonSet.IMG_CACHE + "/IMG_" + System.currentTimeMillis() + RandomUtils.randomString(CommonSet.RANDOM_STR, 6) + ".png";
 
-        //创建图片文件夹
-        File sd = Environment.getExternalStorageDirectory();
-        String path = sd.getPath() + CommonSet.IMG_CACHE;
-        File file = new File(path);
-        if (!file.exists()) {
-            file.mkdir();
-        }
-
-        String sdStatus = Environment.getExternalStorageState();
-        if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
-            ToastUtils.showToast("检测sd是否可用");
-        }
-
-
+        //获取存储的商户信息，，，其实不建议保存
         headPortraitDirectoryName = (String) SPUtil.get(getActivity(), "headPortraitDirectoryName", "");
         headPortraitFilePrefix = (String) SPUtil.get(getActivity(), "headPortraitFilePrefix", "");
         cellPhone = (String) SPUtil.get(getActivity(), "cellPhone", "");
@@ -158,10 +152,22 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
                 || StringUtils.isEmpty(accountNumber) || StringUtils.isEmpty(holderName) || StringUtils.isEmpty(idCard)
                 || StringUtils.isEmpty(tel)) {
             mMerchantinfoPersenter.merchantInfo();
-            return;
+        }else {
+            displayMerchantInfo(headPortraitDirectoryName, headPortraitFilePrefix, cellPhone, vipLevel, qualifiedState, accountNumber);
         }
-        displayMerchantInfo(headPortraitDirectoryName, headPortraitFilePrefix, cellPhone, vipLevel, qualifiedState, accountNumber);
 
+        //创建图片文件夹
+        File sd = Environment.getExternalStorageDirectory();
+        String path = sd.getPath() + CommonSet.IMG_CACHE;
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdir();
+        }
+
+        String sdStatus = Environment.getExternalStorageState();
+        if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
+            ToastUtils.showToast("检测sd是否可用");
+        }
     }
 
     @Override
@@ -184,12 +190,14 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
                 startActivity(MerchantinfoActivity.class);
                 break;
             case R.id.img_mine_head_portrait:
-                checkPermission();
+                checkUploadHeadImgPermission();
                 break;
             case R.id.img_mine_realname_states:
+                //检查实名状态
                 if (!new RealnameStates(getActivity()).isRealname()) {
                     return;
                 }
+                //显示实名认证信息
                 if (StringUtils.isEmpty(accountNumber) || StringUtils.isEmpty(holderName) || StringUtils.isEmpty(idCard) || StringUtils.isEmpty(tel)) {
                     isQueryRealname = true;
                     mMerchantinfoPersenter.merchantInfo();
@@ -207,9 +215,11 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
                 break;
             case R.id.tv_mine_system_notice:
                 //系统公告
+                startActivity(NoticesActivity.class);
                 break;
             case R.id.tv_mine_my_service:
                 //我的客服
+
                 break;
             case R.id.tv_mine_save_set:
                 //安全设置
@@ -224,9 +234,12 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
 
     }
 
-
+    /**
+      *
+      * @param dataBean 商户信息对象
+      */
     @Override
-    public void getMerchantInfo(MerchantInfoBean.DataBean dataBean) {
+    public void merchantInfoSuccess(MerchantInfoBean.DataBean dataBean) {
         SPUtil.remove(getActivity(), "isReflash");
         headPortraitDirectoryName = dataBean.getHeadPortraitDirectoryName();
         headPortraitFilePrefix = dataBean.getHeadPortraitFilePrefix();
@@ -234,6 +247,9 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
         vipLevel = dataBean.getVipLevel();
         qualifiedState = dataBean.getQualifiedState();
         accountNumber = dataBean.getAccountNumber();
+        holderName = dataBean.getHolderName();
+        idCard = dataBean.getIdCard();
+        tel = dataBean.getTel();
         if (isQueryRealname) {
             popRealnameInfo();
         } else {
@@ -241,14 +257,43 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
 
         }
     }
+    /**
+      *
+      * @param data 上传照片返回UUID
+      * @param index 多张图片上传时用以区分
+      */
+    @Override
+    public void uploadImgSuccess(String data, int index) {
+        mSetHeadPersenter.setHeadImg(data);
 
+    }
+
+    /**
+      * 设置头像对象
+      * @param data 设置头像对象
+      */
+    @Override
+    public void setHeadImgSuccess(SetHeadImgBean.DataBean data) {
+        Picasso.with(getActivity()).load(CommonSet.PIC_START + data.getHeadPortraitDirectoryName() + CommonSet.PIC_END + data.getHeadPortraitFilePrefix()).into(mImgMineHeadPortrait);
+    }
+    /**
+      * 显示商户信息
+      * @param headPortraitDirectoryName 头像图片名
+      * @param headPortraitFilePrefix 文件名
+      * @param cellPhone 手机号
+      * @param vipLevel 等级
+      * @param qualifiedState 实名状态
+      * @param accountNumber 结算卡号
+      */
     private void displayMerchantInfo(String headPortraitDirectoryName, String headPortraitFilePrefix, String cellPhone, int vipLevel, String qualifiedState, String accountNumber) {
         if (!StringUtils.isEmpty(headPortraitDirectoryName) && !StringUtils.isEmpty(headPortraitFilePrefix)) {
-            Picasso.with(getActivity()).load("https://name.znyoo.cn/oss-transaction/general/reviewImg?fileName=" + headPortraitDirectoryName + "&filePrefix=" + headPortraitFilePrefix).into(mImgMineHeadPortrait);
+            Picasso.with(getActivity()).load(CommonSet.PIC_START + headPortraitDirectoryName + CommonSet.PIC_END + headPortraitFilePrefix).into(mImgMineHeadPortrait);
         } else {
             mImgMineHeadPortrait.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.my_head_portrait));
         }
+        //设置手机号
         mTvMineTel.setText(cellPhone);
+        //等级
         switch (vipLevel) {
             case 0:
                 mImgMineLevel.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.my_putong));
@@ -257,7 +302,7 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
                 mImgMineLevel.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.mipmap.my_vip));
                 break;
         }
-
+        //实名状态
         switch (qualifiedState) {
             case "Y":
                 mTvMineRealnameStates.setVisibility(View.GONE);
@@ -280,7 +325,7 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
                 }
         }
     }
-
+    //实名认证信息弹窗
     private void popRealnameInfo() {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.pop_realname_info, null);
 
@@ -322,7 +367,37 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
             }
         });
     }
+    /**
+     * 检查拍照所需要的相应权限
+     */
+    private void checkUploadHeadImgPermission() {
+        // 检查是否有相应的权限
+        boolean isAllGranted = PermissionSetDialogUtils.checkPermissionAllGranted(getActivity(),
+                new String[]{
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA
+                }
+        );
+        // 如果这权限全都拥有, 则直接执行更新
+        if (isAllGranted) {
+            popHeadImg();
+            return;
+        }
+        // 一次请求多个权限, 如果其他有权限是已经授予的将会自动忽略掉
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(
+                    new String[]{
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.CAMERA
+                    },
+                    PERMISSIONS_READ_WRITE_CAMERA
+            );
+        }
 
+    }
+    //设置头像方式弹窗
     private void popHeadImg() {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.pop_upload_headimg, null);
 
@@ -330,11 +405,10 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
         TextView tvUploadimgGetPhone = view.findViewById(R.id.tv_uploadimg_get_phone);
         TextView tvUploadimgCancel = view.findViewById(R.id.tv_uploadimg_cancel);
 
-
         final PopupWindow popupWindow = PopupWindowUtils.getPop(getActivity(), view, DisplayUtils.getScreenWidth(getActivity()) * 9 / 10, ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setAnimationStyle(R.style.PopupAnimationBottom);
         popupWindow.showAtLocation(getActivity().getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
-
+        //拍照获取
         tvUploadimgTakePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -344,7 +418,7 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
                 makeCamerMethod();
             }
         });
-
+        //从手机相册获取
         tvUploadimgGetPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -355,6 +429,7 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
 
             }
         });
+        //取消
         tvUploadimgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -384,37 +459,6 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
     }
 
     /**
-     * 检查拍照所需要的相应权限
-     */
-    private void checkPermission() {
-        // 检查是否有相应的权限
-        boolean isAllGranted = PermissionSetDialogUtils.checkPermissionAllGranted(getActivity(),
-                new String[]{
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.CAMERA
-                }
-        );
-        // 如果这权限全都拥有, 则直接执行更新
-        if (isAllGranted) {
-            popHeadImg();
-            return;
-        }
-        // 一次请求多个权限, 如果其他有权限是已经授予的将会自动忽略掉
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(
-                    new String[]{
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.CAMERA
-                    },
-                    PERMISSIONS_WRITE_CAMERA
-            );
-        }
-
-    }
-
-    /**
      * 拍照完成后，回调的方法
      */
     @Override
@@ -425,11 +469,11 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
         }
         switch (requestCode) {
             case UPLOAD_HEADIMG_REQUEST_CODE:
-                mBitmap = PhotoTakeUtils.decodeSampledBitmapFromFile(mHeadImgPath, 1200, 720);
-                if (mBitmap == null) {
+                Bitmap bitmap = PhotoTakeUtils.decodeSampledBitmapFromFile(mHeadImgPath, 1200, 720);
+                if (bitmap == null) {
                     return;
                 }
-                QRCodeUtil.saveQrCodePicture(getActivity(), mBitmap);
+                QRCodeUtil.saveQrCodePicture(getActivity(), bitmap);
                 mUploadImgPersenter.uploadImg(mHeadImgPath, UPLOAD_HEADIMG_REQUEST_CODE);
                 break;
             case UPLOAD_HEADIMG_GET_PHONE_REQUEST_CODE:
@@ -439,9 +483,8 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
                     return;
                 }
                 //显示选择的图片
-                mBitmap = PhotoTakeUtils.decodeSampledBitmapFromFile(photo_path, mImgMineHeadPortrait.getWidth(), mImgMineHeadPortrait.getHeight());
-
-                QRCodeUtil.saveQrCodePicture(getActivity(), mBitmap);
+                bitmap = PhotoTakeUtils.decodeSampledBitmapFromFile(photo_path, mImgMineHeadPortrait.getWidth(), mImgMineHeadPortrait.getHeight());
+                QRCodeUtil.saveQrCodePicture(getActivity(), bitmap);
                 mUploadImgPersenter.uploadImg(photo_path, UPLOAD_HEADIMG_GET_PHONE_REQUEST_CODE);
                 break;
 
@@ -457,7 +500,7 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == PERMISSIONS_WRITE_CAMERA) {
+        if (requestCode == PERMISSIONS_READ_WRITE_CAMERA) {
             boolean isAllGranted = true;
 
             // 判断是否所有的权限都已经授予了
@@ -477,14 +520,4 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
         }
     }
 
-    @Override
-    public void uploadImgSuccess(String data, int index) {
-        mSetHeadPersenter.setHeadImg(data);
-
-    }
-
-    @Override
-    public void setHeadImgSuccess(SetHeadImgBean.DataBean data) {
-        Picasso.with(getActivity()).load("https://name.znyoo.cn/oss-transaction/general/reviewImg?fileName=" + data.getHeadPortraitDirectoryName() + "&filePrefix=" + data.getHeadPortraitFilePrefix()).into(mImgMineHeadPortrait);
-    }
 }

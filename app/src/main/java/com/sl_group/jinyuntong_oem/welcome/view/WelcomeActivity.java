@@ -11,7 +11,7 @@ import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
 import com.sl_group.jinyuntong_oem.bean.UpDateBean;
 import com.sl_group.jinyuntong_oem.login.LoginActivity;
-import com.sl_group.jinyuntong_oem.login.gesture.GestureLoginActivity;
+import com.sl_group.jinyuntong_oem.login.GestureLoginActivity;
 import com.sl_group.jinyuntong_oem.utils.LogUtils;
 import com.sl_group.jinyuntong_oem.utils.SPUtil;
 import com.sl_group.jinyuntong_oem.utils.StringUtils;

@@ -57,7 +57,7 @@
         android:maxLines="1"
         android:drawablePadding="@dimen/x10"
         android:hint="@string/input_pay_money"
-        android:textSize="@dimen/s32"
+        android:textSize="@dimen/s24"
         android:textColorHint="@color/grayColor_9"
         tools:ignore="Autofill,TextFields"/>
 

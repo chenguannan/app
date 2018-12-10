@@ -23,13 +23,17 @@ public class GatherModelImpl implements GatherModel {
         mActivity = activity;
     }
 
+    /**
+      *
+      * @param gatherMoney 收款金额
+      */
     @Override
-    public void getPayCodeMoney(String money, final IPayCodeMoneyCallBack payCodeMoneyCallBack) {
+    public void gatherWithMoney(String gatherMoney, final IGatherWithMoneyCallBack gatherWithMoneyCallBack) {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);
         obj.put("method", URLConstants.PAY_QRCODE_MONEY);
         obj.put("agencyId",SPUtil.get(mActivity, "agencyId",CommonSet.AGENCY_ID));
         obj.put("mid",SPUtil.get(mActivity, "mid", ""));
-        obj.put("srcAmt",money);
+        obj.put("srcAmt", gatherMoney);
 
         HttpUtils.getInstance().postJson(
                 mActivity,
@@ -44,7 +48,7 @@ public class GatherModelImpl implements GatherModel {
                             ToastUtils.showToast("网络异常");
                             return;
                         }
-                        payCodeMoneyCallBack.onSuccess(paseData);
+                        gatherWithMoneyCallBack.onSuccess(paseData);
                     }
 
                 });

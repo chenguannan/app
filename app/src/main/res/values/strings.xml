@@ -32,6 +32,7 @@
     <string name="shop">店铺</string>
     <string name="recommend_card">推荐办卡</string>
     <string name="group_buy">拼团购</string>
+    <string name="merchant_policy">商家政策</string>
     <string name="service_center">客服中心</string>
     <string name="integral_shop">积分商城</string>
     <string name="vip_center">商家VIP中心</string>
@@ -189,7 +190,7 @@
     <string name="input_pay_money">请输入付款金额</string>
     <string name="pay_money">付款金额</string>
     <string name="merchant">商户名</string>
-    <string name="current_level">当前用户等级</string>
+    <string name="current_level">当前商户等级</string>
     <string name="vip_date">VIP有效期</string>
     <string name="my_extract_fee">我的提现手续费</string>
     <string name="my_gather_fee">我的收款手续费</string>

@@ -14,7 +14,7 @@ import com.sl_group.jinyuntong_oem.utils.ToastUtils;
 
 /**
  * Created by 马天 on 2018/11/25.
- * description：
+ * description：我的团队model实现类
  */
 public class MyTeamModelImpl implements MyTeamModel {
     private Activity mActivity;

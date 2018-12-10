@@ -110,15 +110,16 @@ public class RegisterModelImpl implements RegisterModel {
     }
 
     @Override
-    public void register(String inviteCode, String tel, String password, final RegisterModel.IRegisterCallBack registerCallBack) {
+    public void register(String inviteCode, String tel,String checkCode ,String uuid , String password, final RegisterModel.IRegisterCallBack registerCallBack) {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);
         obj.put("method", URLConstants.REGISTER);
-        obj.put("cellPhone", tel);
         obj.put("agencyId", CommonSet.AGENCY_ID);
-
+        obj.put("encryptId", CommonSet.ENCRYPT_ID);
+        obj.put("cellPhone", tel);
         obj.put("password", password);
         obj.put("inviteCode", inviteCode);
-        obj.put("encryptId", "merchantApp");
+        obj.put("checkCode", checkCode);
+        obj.put("uuid", uuid);
 
         HttpUtils.getInstance().postJson(
                 mActivity,

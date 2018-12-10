@@ -45,7 +45,7 @@ public class RegisterPersenter {
                 LogUtils.i("注册获取验证码：" + data);
                 RegisterSMSBean registerSmsBean = new Gson().fromJson(data, RegisterSMSBean.class);
                 if ("000000".equals(registerSmsBean.getCode())) {
-                    mRegisterView.startCountTime();
+                    mRegisterView.registSMSSuccess(registerSmsBean.getData());
                 } else if ("888888".equals(registerSmsBean.getCode())) {
                     new CompelLogin(mActivity).popExitLogin();
                 }
@@ -64,11 +64,11 @@ public class RegisterPersenter {
      * @param password       密码
      * @param passwordAgain  再次输入密码
      */
-    public void register(String inviteCode, String tel, String vificationCode, String password, String passwordAgain, boolean isSelected) {
+    public void register(String inviteCode, String tel, String vificationCode,String uuid ,String password, String passwordAgain  , boolean isSelected) {
         if (!mRegisterModel.checkRegisterParams(inviteCode, tel, vificationCode, password, passwordAgain, isSelected)) {
             return;
         }
-        mRegisterModel.register(inviteCode, tel, password, new RegisterModel.IRegisterCallBack() {
+        mRegisterModel.register(inviteCode, tel,vificationCode,uuid, password, new RegisterModel.IRegisterCallBack() {
             @Override
             public void onSuccess(String data) {
 

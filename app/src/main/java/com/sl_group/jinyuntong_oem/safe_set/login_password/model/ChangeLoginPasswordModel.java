@@ -8,7 +8,7 @@ public interface ChangeLoginPasswordModel {
 
     boolean checkForgetLoginPasswordParams(String tel,String password,String passwordAgain);
 
-    void forgetLoginPassword(String tel,String password,ChangeLoginPasswordModel.IForgetLoginPasswordCallBack forgetLoginPasswordCallBack);
+    void forgetLoginPassword(String cellPhone,String checkCode,String uuid,String password,ChangeLoginPasswordModel.IForgetLoginPasswordCallBack forgetLoginPasswordCallBack);
 
     interface IForgetLoginPasswordCallBack{
         void onSuccess(String data);

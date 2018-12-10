@@ -13,7 +13,7 @@ import com.sl_group.jinyuntong_oem.utils.ToastUtils;
 
 /**
  * Created by 马天 on 2018/11/25.
- * description：
+ * description：我的团队
  */
 public class MyTeamPersenter {
     private Activity mActivity;
@@ -25,16 +25,24 @@ public class MyTeamPersenter {
         mMyTeamView = myTeamView;
         mMyTeamModel = new MyTeamModelImpl(activity);
     }
-    public void myTeam(String intoType, boolean isShowProgress, int curPage, String pageSize){
+
+    /**
+     * 我的团队
+     * @param intoType       类型
+     * @param isShowProgress 是否显示进度条
+     * @param curPage        当前页码
+     * @param pageSize       每页条数
+     */
+    public void myTeam(String intoType, boolean isShowProgress, int curPage, String pageSize) {
         mMyTeamModel.myTeam(intoType, isShowProgress, curPage, pageSize, new MyTeamModel.IMyTeamCallBack() {
             @Override
             public void onSuccess(String data) {
-                LogUtils.i("我的团队："+data);
-                MyTeamBean myTeamBean = new Gson().fromJson(data,MyTeamBean.class);
-                if ("000000".equals(myTeamBean.getCode())){
-                    mMyTeamView.getMyTeam(myTeamBean.getData());
+                LogUtils.i("我的团队：" + data);
+                MyTeamBean myTeamBean = new Gson().fromJson(data, MyTeamBean.class);
+                if ("000000".equals(myTeamBean.getCode())) {
+                    mMyTeamView.myTeamSuccess(myTeamBean.getData());
                     return;
-                }else if ("888888".equals(myTeamBean.getCode())) {
+                } else if ("888888".equals(myTeamBean.getCode())) {
                     new CompelLogin(mActivity).popExitLogin();
                     return;
                 }

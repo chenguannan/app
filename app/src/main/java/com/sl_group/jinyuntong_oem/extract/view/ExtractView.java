@@ -7,5 +7,6 @@ import com.sl_group.jinyuntong_oem.bean.ExtractBean;
  * description：
  */
 public interface ExtractView {
+    //提现成功回调
     void extractSuccess(ExtractBean.DataBean data);
 }

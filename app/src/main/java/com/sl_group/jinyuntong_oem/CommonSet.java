@@ -15,12 +15,11 @@ public class CommonSet {
 
     //key
     public static final String KEY = "223cc0b16d858e67f9f83d71b745dae0";
-
     //encrypt id
     public static final String ENCRYPT_ID = "merchantApp";
     //agent id
     public static final String AGENCY_ID = "281";
-//        public static final String AGENCY_ID = "279";
+    //public static final String AGENCY_ID = "279";
     //api version
     public static final String API_VERSION = "1";
     //域名
@@ -70,6 +69,12 @@ public class CommonSet {
     public static final String INTOTYPE_UP_VIP = "12";
 
     public static final String SERVICE_RANDOM="MDEyMzQ1Njc4OWFiY2RlZg==";
+
+    //拼接显示图片
+    public static final String PIC_START ="https://name.znyoo.cn/oss-transaction/general/reviewImg?fileName=";
+    public static final String PIC_END ="&filePrefix=";
+
+    public static final String VIP_PRICE = "99.00";
 
 
 

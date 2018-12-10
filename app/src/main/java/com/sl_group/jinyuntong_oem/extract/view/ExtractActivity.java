@@ -1,5 +1,6 @@
 package com.sl_group.jinyuntong_oem.extract.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -12,12 +13,14 @@ import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
 import com.sl_group.jinyuntong_oem.bean.ExtractBean;
 import com.sl_group.jinyuntong_oem.bean.MerchantInfoBean;
-import com.sl_group.jinyuntong_oem.extract.ExtractResultActivity;
+import com.sl_group.jinyuntong_oem.extract_result.ExtractResultActivity;
 import com.sl_group.jinyuntong_oem.extract.persenter.ExtractPersenter;
 import com.sl_group.jinyuntong_oem.merchant_info.persenter.MerchantinfoPersenter;
 import com.sl_group.jinyuntong_oem.merchant_info.view.MerchantinfoView;
 import com.sl_group.jinyuntong_oem.utils.NumberUtils;
 import com.sl_group.jinyuntong_oem.utils.StringUtils;
+
+import java.util.Locale;
 
 /**
  * Created by 马天 on 2018/11/24.
@@ -26,10 +29,10 @@ import com.sl_group.jinyuntong_oem.utils.StringUtils;
 public class ExtractActivity extends BaseActivity implements MerchantinfoView,ExtractView {
     private ImageView mImgActionbarBack;
     private TextView mTvActionbarTitle;
-    private TextView mTvApplyExtractCanExtract;
-    private TextView mTvApplyExtractExtractCardnumber;
-    private EditText mEtApplyExtractExtractMoney;
-    private Button mBtnApplyExtractMakesure;
+    private TextView mTvExtractCanExtract;
+    private TextView mTvExtractAccountnumber;
+    private EditText mEtExtractMoney;
+    private Button mBtnExtractMakesure;
     //商户信息persenter
     private MerchantinfoPersenter mMerchantinfoPersenter;
     //提现persenter
@@ -51,32 +54,34 @@ public class ExtractActivity extends BaseActivity implements MerchantinfoView,Ex
     public void initView(View view) {
         mImgActionbarBack = findViewById(R.id.img_actionbar_back);
         mTvActionbarTitle = findViewById(R.id.tv_actionbar_title);
-        mTvApplyExtractCanExtract = findViewById(R.id.tv_apply_extract_can_extract);
-        mTvApplyExtractExtractCardnumber = findViewById(R.id.tv_apply_extract_extract_cardnumber);
-        mEtApplyExtractExtractMoney = findViewById(R.id.et_apply_extract_extract_money);
-        mBtnApplyExtractMakesure = findViewById(R.id.btn_apply_extract_makesure);
+        mTvExtractCanExtract = findViewById(R.id.tv_extract_can_extract);
+        mTvExtractAccountnumber = findViewById(R.id.tv_extract_accountnumber);
+        mEtExtractMoney = findViewById(R.id.et_extract_money);
+        mBtnExtractMakesure = findViewById(R.id.btn_extract_makesure);
     }
 
     @Override
     public void initData() {
         //设置标题
         mTvActionbarTitle.setText("申请提现");
-
+        //商户信息persenter
         mMerchantinfoPersenter = new MerchantinfoPersenter(this,this);
+        //提现persenter
         mExtractPersenter = new ExtractPersenter(this,this);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle!=null){
+            //可提现余额
             canExtractMoney = bundle.getDouble("canExtractMoney",0.00d);
         }
         //输入框设置只能输两位小数
-        NumberUtils.setPricePoint(mEtApplyExtractExtractMoney);
+        NumberUtils.setPricePoint(mEtExtractMoney);
     }
 
     @Override
     public void setListener() {
         mImgActionbarBack.setOnClickListener(this);
-        mBtnApplyExtractMakesure.setOnClickListener(this);
+        mBtnExtractMakesure.setOnClickListener(this);
     }
 
     @Override
@@ -85,9 +90,9 @@ public class ExtractActivity extends BaseActivity implements MerchantinfoView,Ex
             case R.id.img_actionbar_back:
                 finish();
                 break;
-            case R.id.btn_apply_extract_makesure:
+            case R.id.btn_extract_makesure:
                 //申请提现
-                String extractMoney = mEtApplyExtractExtractMoney.getText().toString().trim();
+                String extractMoney = mEtExtractMoney.getText().toString().trim();
                 mExtractPersenter.applyExtact(extractMoney, extractHolderName,extractAccountNumber);
                 break;
         }
@@ -98,19 +103,31 @@ public class ExtractActivity extends BaseActivity implements MerchantinfoView,Ex
         mMerchantinfoPersenter.merchantInfo();
     }
 
+    /**
+      * 获取商户信息
+      * @param dataBean 商户信息对象
+      */
+    @SuppressLint("SetTextI18n")
     @Override
-    public void getMerchantInfo(MerchantInfoBean.DataBean dataBean) {
-
-        mTvApplyExtractCanExtract.setText(String.format("%.2f",canExtractMoney)+"元");
+    public void merchantInfoSuccess(MerchantInfoBean.DataBean dataBean) {
+        //显示可提金额
+        mTvExtractCanExtract.setText(String.format(Locale.CHINA,"%.2f",canExtractMoney)+"元");
+        //持卡人姓名
         extractHolderName = dataBean.getHolderName();
+        //结算卡号
         extractAccountNumber = dataBean.getAccountNumber();
-        mTvApplyExtractExtractCardnumber.setText(StringUtils.getStarString(extractAccountNumber,4,extractAccountNumber.length()-4));
+        //显示前四后四，中间星号处理
+        mTvExtractAccountnumber.setText(StringUtils.getStarString(extractAccountNumber,4,extractAccountNumber.length()-4));
 
     }
 
+    /**
+      *
+      * @param data 提现成功回调
+      */
     @Override
     public void extractSuccess(ExtractBean.DataBean data) {
-        //提现成功
+        //提现成功，显示提现详情，传递参数
         Bundle bundle = new Bundle();
         bundle.putString("bizOrderNumber",data.getBizOrderNumber());
         bundle.putDouble("srcAmt",data.getSrcAmt());

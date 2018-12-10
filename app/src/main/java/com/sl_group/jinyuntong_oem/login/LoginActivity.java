@@ -4,28 +4,31 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
-import com.sl_group.jinyuntong_oem.login.login_password.view.LoginPasswordFragment;
-import com.sl_group.jinyuntong_oem.login.login_tel.view.LoginTelFragment;
+import com.sl_group.jinyuntong_oem.utils.SPUtil;
 
 
 /**
  * Created by 马天 on 2018/10/16.
- * description：
+ * description：登录
  */
 public class LoginActivity extends BaseActivity {
     private TextView mTvLoginPassword;
     private TextView mTvLoginTel;
 
-
     private Fragment mLoginPasswordFragment, mLoginTelFragment;
     private FragmentManager mFragmentManager;
-
+    //是否是强制退出登录
+    private boolean isCompelLogin = false;
+    private long exitTime = 0;
 
     @Override
     public int bindLayout() {
@@ -42,8 +45,6 @@ public class LoginActivity extends BaseActivity {
     public void initData() {
         //创建事务
         mFragmentManager = this.getFragmentManager();
-
-
     }
 
     @Override
@@ -56,21 +57,9 @@ public class LoginActivity extends BaseActivity {
     public void widgetClick(View v) {
         switch (v.getId()) {
             case R.id.tv_login_password:
-                mTvLoginPassword.setTextSize(20);
-                mTvLoginPassword.setTextColor(ContextCompat.getColor(LoginActivity.this,R.color.whiteColor));
-                mTvLoginPassword.setCompoundDrawablesWithIntrinsicBounds(null,null,null,getResources().getDrawable(R.drawable.v_underline));
-                mTvLoginTel.setTextSize(16);
-                mTvLoginTel.setTextColor(ContextCompat.getColor(LoginActivity.this,R.color.whiteColor_alpha_7));
-                mTvLoginTel.setCompoundDrawablesWithIntrinsicBounds(null,null,null,null);
                 selectFragment(1);
                 break;
             case R.id.tv_login_tel:
-                mTvLoginTel.setTextSize(20);
-                mTvLoginTel.setTextColor(ContextCompat.getColor(LoginActivity.this,R.color.whiteColor));
-                mTvLoginTel.setCompoundDrawablesWithIntrinsicBounds(null,null,null,getResources().getDrawable(R.drawable.v_underline));
-                mTvLoginPassword.setTextSize(16);
-                mTvLoginPassword.setTextColor(ContextCompat.getColor(LoginActivity.this,R.color.whiteColor_alpha_7));
-                mTvLoginPassword.setCompoundDrawablesWithIntrinsicBounds(null,null,null,null);
                 selectFragment(2);
                 break;
         }
@@ -78,7 +67,17 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void doBusiness(Context mContext) {
-        selectFragment(1);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            //如果是强制退出登录的话，传递该参数，选择手机号登录页面
+            isCompelLogin = bundle.getBoolean("isCompelLogin", false);
+        }
+        if (isCompelLogin) {
+            selectFragment(2);
+        } else {
+            selectFragment(1);
+        }
+
     }
 
     /**
@@ -86,7 +85,7 @@ public class LoginActivity extends BaseActivity {
      * param
      */
     private void selectFragment(int position) {
-        if (mFragmentManager==null){
+        if (mFragmentManager == null) {
             //创建事务
             mFragmentManager = this.getFragmentManager();
         }
@@ -95,6 +94,7 @@ public class LoginActivity extends BaseActivity {
         hideFragments(fragmentTransaction);
         switch (position) {
             case 1:
+                switchStyle(mTvLoginPassword, mTvLoginTel);
                 if (mLoginPasswordFragment == null) {
                     mLoginPasswordFragment = new LoginPasswordFragment();
                     fragmentTransaction.add(R.id.fl, mLoginPasswordFragment);
@@ -103,6 +103,7 @@ public class LoginActivity extends BaseActivity {
                 }
                 break;
             case 2:
+                switchStyle(mTvLoginTel, mTvLoginPassword);
                 if (mLoginTelFragment == null) {
                     mLoginTelFragment = new LoginTelFragment();
                     fragmentTransaction.add(R.id.fl, mLoginTelFragment);
@@ -114,6 +115,7 @@ public class LoginActivity extends BaseActivity {
         //事务提交
         fragmentTransaction.commit();
     }
+
 
     //隐藏所有Fragment
     private void hideFragments(FragmentTransaction ft) {
@@ -135,4 +137,46 @@ public class LoginActivity extends BaseActivity {
         }
 
     }
+
+    /**
+     * 切换选择风格
+     *
+     * @param tvSelected 选中的控件
+     * @param tvNormal   正常的控件
+     */
+    private void switchStyle(TextView tvSelected, TextView tvNormal) {
+        tvSelected.setTextSize(20);
+        tvSelected.setTextColor(ContextCompat.getColor(LoginActivity.this, R.color.whiteColor));
+        tvSelected.setCompoundDrawablesWithIntrinsicBounds(null, null, null, getResources().getDrawable(R.drawable.v_underline));
+        tvNormal.setTextSize(16);
+        tvNormal.setTextColor(ContextCompat.getColor(LoginActivity.this, R.color.whiteColor_alpha_7));
+        tvNormal.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //页面销毁的时候清除输入的手机号
+        SPUtil.remove(this, "inputTel");
+    }
+    /**
+     * 再按一次退出程序
+     * param 时间类型，事件
+     */
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sl_group.jinyuntong_oem.R;
-import com.sl_group.jinyuntong_oem.bean.NewsBean;
+import com.sl_group.jinyuntong_oem.bean.MessagesBean;
 import com.sl_group.jinyuntong_oem.new_details.NewDetailsActivity;
 
 import java.text.SimpleDateFormat;
@@ -20,13 +20,13 @@ import java.util.Locale;
 
 /**
  * Created by 马天 on 2018/11/15.
- * description：收款账单适配器
+ * description：消息适配器
  */
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
-    private List<NewsBean.DataBean.ResultListBean> mBeanList;
+    private List<MessagesBean.DataBean.ResultListBean> mBeanList;
     private Activity mActivity;
 
-    public NewsAdapter(List<NewsBean.DataBean.ResultListBean> beanList, Activity activity) {
+    public NewsAdapter(List<MessagesBean.DataBean.ResultListBean> beanList, Activity activity) {
         mBeanList = beanList;
         mActivity = activity;
     }
@@ -41,16 +41,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final NewsBean.DataBean.ResultListBean dataBean = mBeanList.get(position);
+        final MessagesBean.DataBean.ResultListBean dataBean = mBeanList.get(position);
         holder.tvNewsTitle.setText(dataBean.getTitle());
-        holder.tvNewsDate.setText(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss",Locale.getDefault()).format(dataBean.getCreateDate()));
+        holder.tvNewsDate.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.getDefault()).format(dataBean.getCreateDate()));
         holder.tvNewsContent.setText(dataBean.getContent());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("messageId",String.valueOf(dataBean.getMessageId()));
-                bundle.putString("isRead",dataBean.getIsReady());
+                bundle.putString("isReady",dataBean.getIsReady());
                 Intent intent = new Intent(mActivity,NewDetailsActivity.class);
                 intent.putExtras(bundle);
                 mActivity.startActivity(intent);

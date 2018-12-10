@@ -3,6 +3,7 @@ package com.sl_group.jinyuntong_oem.base;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -14,7 +15,9 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.sl_group.jinyuntong_oem.AdvanceLoadX5Service;
 import com.sl_group.jinyuntong_oem.CommonSet;
+import com.tencent.smtt.sdk.QbSdk;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -68,8 +71,16 @@ public class BaseApplication extends Application {
         UMShareAPI.get(this);
 
         UMConfigure.init(this,"5bfa300ff1f556c66e000a22","umeng",UMConfigure.DEVICE_TYPE_PHONE,"");
+        preinitX5WebCore();
+        //预加载x5内核
+        Intent intent = new Intent(this, AdvanceLoadX5Service.class);
+        startService(intent);
     }
-
+    private void preinitX5WebCore() {
+        if (!QbSdk.isTbsCoreInited()) {
+            QbSdk.preInit(getApplicationContext(), null);// 设置X5初始化完成的回调接口
+        }
+    }
     /**
      * 单例，返回一个实例
      */

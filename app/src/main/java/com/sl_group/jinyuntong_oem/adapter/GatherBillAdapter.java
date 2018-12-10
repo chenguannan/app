@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.bean.GatherBillBean;
-import com.sl_group.jinyuntong_oem.myshop.gather_bill.GatherBillDetailsActivity;
+import com.sl_group.jinyuntong_oem.gather_bill_details.GatherBillDetailsActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.List;

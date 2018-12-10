@@ -24,7 +24,7 @@ public class ExtractModelImpl implements ExtractModel {
     }
 
     @Override
-    public void extract(String extractMoney, String holderName, String accountNumber, final IApplyExtractCallBack applyExtractCallBack) {
+    public void extract(String extractMoney, String holderName, String accountNumber, final IExtractCallBack extractCallBack) {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);
         obj.put("method", URLConstants.APPLY_EXTRACT);
         obj.put("mid",SPUtil.get(mActivity, "mid", ""));
@@ -45,7 +45,7 @@ public class ExtractModelImpl implements ExtractModel {
                             ToastUtils.showToast("网络异常");
                             return;
                         }
-                        applyExtractCallBack.onSuccess(paseData);
+                        extractCallBack.onSuccess(paseData);
                     }
 
                 });

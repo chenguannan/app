@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
  * Created by MT on 2016-11-01.
  * MD5验签工具
  */
-class MD5Utils {
+public class MD5Utils {
     static String MD5(String s, String entype) {
         String result = "";
         char hexDigits[] =

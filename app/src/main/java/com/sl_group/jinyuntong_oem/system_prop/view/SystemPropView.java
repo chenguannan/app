@@ -10,4 +10,6 @@ public interface SystemPropView {
     void getXieYiURL(String xieyi);
 
     void getXinShouURL(String xinshou);
+
+    void getYaoQingMaURL(String yaoqing);
 }

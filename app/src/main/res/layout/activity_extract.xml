@@ -17,37 +17,37 @@
         android:padding="@dimen/x10">
 
         <TextView
-            android:id="@+id/tv_apply_extract_can_extract_hint"
+            android:id="@+id/tv_extract_can_extract_hint"
             style="@style/tv_left"
             android:layout_width="wrap_content"
             android:text="@string/can_extract_brokerage"
             android:textSize="@dimen/s16"/>
 
         <TextView
-            android:id="@+id/tv_apply_extract_can_extract"
+            android:id="@+id/tv_extract_can_extract"
             style="@style/tv_right"
-            android:layout_toEndOf="@+id/tv_apply_extract_can_extract_hint"/>
+            android:layout_toEndOf="@+id/tv_extract_can_extract_hint"/>
 
         <View
-            android:id="@+id/v_apply_extract_can_extract_underline"
+            android:id="@+id/v_extract_can_extract_underline"
             style="@style/v_underline"
-            android:layout_below="@+id/tv_apply_extract_can_extract_hint"/>
+            android:layout_below="@+id/tv_extract_can_extract_hint"/>
 
         <TextView
-            android:id="@+id/tv_apply_extract_extract_cardnumber_hint"
+            android:id="@+id/tv_extract_extract_cardnumber_hint"
             style="@style/tv_left"
             android:layout_width="wrap_content"
-            android:layout_below="@+id/v_apply_extract_can_extract_underline"
-            android:layout_alignStart="@+id/tv_apply_extract_can_extract_hint"
-            android:layout_alignEnd="@+id/tv_apply_extract_can_extract_hint"
+            android:layout_below="@+id/v_extract_can_extract_underline"
+            android:layout_alignStart="@+id/tv_extract_can_extract_hint"
+            android:layout_alignEnd="@+id/tv_extract_can_extract_hint"
             android:text="@string/extract_cardnumber"
             android:textSize="@dimen/s16"/>
 
         <TextView
-            android:id="@+id/tv_apply_extract_extract_cardnumber"
+            android:id="@+id/tv_extract_accountnumber"
             style="@style/tv_right"
-            android:layout_below="@+id/v_apply_extract_can_extract_underline"
-            android:layout_toEndOf="@+id/tv_apply_extract_extract_cardnumber_hint"/>
+            android:layout_below="@+id/v_extract_can_extract_underline"
+            android:layout_toEndOf="@+id/tv_extract_extract_cardnumber_hint"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -64,7 +64,7 @@
             android:text="@string/extract_money"/>
 
         <EditText
-            android:id="@+id/et_apply_extract_extract_money"
+            android:id="@+id/et_extract_money"
             style="@style/et_right"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
         android:textSize="@dimen/s14"/>
 
     <Button
-        android:id="@+id/btn_apply_extract_makesure"
+        android:id="@+id/btn_extract_makesure"
         style="@style/btn_common"
         android:layout_margin="@dimen/x50"
         android:text="@string/makesure_extract"/>

@@ -17,10 +17,9 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/y100"
             android:layout_margin="@dimen/x10"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/vip_bg"
+            android:src="@drawable/pt_bg"
             tools:ignore="ContentDescription"/>
 
         <TextView
@@ -77,9 +76,9 @@
             android:background="@color/grayColor_line_E5"/>
 
         <LinearLayout
-            android:layout_marginTop="@dimen/y10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y10"
             android:orientation="horizontal">
 
             <TextView

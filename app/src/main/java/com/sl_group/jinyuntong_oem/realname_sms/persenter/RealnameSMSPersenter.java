@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.google.gson.Gson;
 import com.sl_group.jinyuntong_oem.CompelLogin;
 import com.sl_group.jinyuntong_oem.bean.CommonSMSBean;
+import com.sl_group.jinyuntong_oem.bean.RealnameSMSBean;
 import com.sl_group.jinyuntong_oem.realname_sms.model.RealnameSMSModel;
 import com.sl_group.jinyuntong_oem.realname_sms.model.RealnameSMSModelImpl;
 import com.sl_group.jinyuntong_oem.realname_sms.view.RealnameSMSView;
@@ -35,15 +36,15 @@ public class RealnameSMSPersenter {
             @Override
             public void onSuccess(String data) {
                 LogUtils.i("实名验证码："+data);
-                CommonSMSBean commonSMSBean = new Gson().fromJson(data,CommonSMSBean.class);
-                if ("000000".equals(commonSMSBean.getCode())){
-                    mRealnameSMSView.getRealnameSMS(commonSMSBean.getData());
+                RealnameSMSBean realnameSMSBean = new Gson().fromJson(data,RealnameSMSBean.class);
+                if ("000000".equals(realnameSMSBean.getCode())){
+                    mRealnameSMSView.getRealnameSMS(realnameSMSBean.getData());
                     return;
-                }else if ("888888".equals(commonSMSBean.getCode())) {
+                }else if ("888888".equals(realnameSMSBean.getCode())) {
                     new CompelLogin(mActivity).popExitLogin();
                     return;
                 }
-                    ToastUtils.showToast(commonSMSBean.getMessage());
+                    ToastUtils.showToast(realnameSMSBean.getMessage());
 
             }
         });

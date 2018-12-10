@@ -4,13 +4,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.sl_group.jinyuntong_oem.login.LoginActivity;
 import com.sl_group.jinyuntong_oem.utils.SPUtil;
 
 /**
  * Created by 马天 on 2018/11/26.
- * description：
+ * description：强制退出登录
  */
 public class CompelLogin {
     private Activity mActivity;
@@ -26,10 +27,7 @@ public class CompelLogin {
                 .setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
-                        SPUtil.clear(mActivity);
-                        Intent intent = new Intent(mActivity, LoginActivity.class);
-                        mActivity.startActivity(intent);
-                        mActivity.finish();
+                        compelExitLogin();
                     }
                 })
                 .setTitle("温馨提示")
@@ -37,13 +35,24 @@ public class CompelLogin {
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SPUtil.clear(mActivity);
-                        Intent intent = new Intent(mActivity, LoginActivity.class);
-                        mActivity.startActivity(intent);
-                        mActivity.finish();
+
                     }
+
+
                 });
         builder.create().show();
 
+    }
+    private void compelExitLogin() {
+        String usertel = (String) SPUtil.get(mActivity, "usertel", "");
+        SPUtil.clear(mActivity);
+        SPUtil.put(mActivity, "usertel", usertel);
+        SPUtil.put(mActivity, "isCompelLogin", true);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("isCompelLogin", true);
+        Intent intent = new Intent(mActivity, LoginActivity.class);
+        intent.putExtras(bundle);
+        mActivity.startActivity(intent);
+        mActivity.finish();
     }
 }

@@ -1,6 +1,7 @@
 package com.sl_group.jinyuntong_oem.safe_set.login_password.view;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,7 +11,6 @@ import android.widget.TextView;
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
 import com.sl_group.jinyuntong_oem.safe_set.login_password.persenter.ChangeLoginPasswordPersenter;
-import com.sl_group.jinyuntong_oem.utils.SPUtil;
 
 /**
  * Created by 马天 on 2018/11/17.
@@ -25,7 +25,9 @@ public class ChangeLoginPasswordActivity extends BaseActivity implements ChangeL
 
 
     private ChangeLoginPasswordPersenter mChangeLoginPasswordPersenter;
-
+    private String checkCode;
+    private String uuid;
+    private String cellPhone;
     @Override
     public int bindLayout() {
         return R.layout.activity_change_login_password;
@@ -44,6 +46,12 @@ public class ChangeLoginPasswordActivity extends BaseActivity implements ChangeL
     public void initData() {
         mTvActionbarTitle.setText("登录密码");
         mChangeLoginPasswordPersenter = new ChangeLoginPasswordPersenter(this,this);
+        Bundle bundle =getIntent().getExtras();
+        if (bundle!=null){
+            checkCode = bundle.getString("checkCode","");
+            uuid = bundle.getString("uuid","");
+            cellPhone = bundle.getString("cellPhone","");
+        }
     }
 
     @Override
@@ -61,10 +69,9 @@ public class ChangeLoginPasswordActivity extends BaseActivity implements ChangeL
 
             case R.id.btn_forget_login_password_next:
 
-                String tel = getIntent().getExtras().getString("tel", (String) SPUtil.get(ChangeLoginPasswordActivity.this,"cellPhone",""));
                 String password = mEtForgetLoginPasswordNewPassword.getText().toString().trim();
                 String passwordAgain = mEtForgetLoginPasswordNewPasswordAgain.getText().toString().trim();
-                mChangeLoginPasswordPersenter.forgetLoginPassword(tel,password,passwordAgain);
+                mChangeLoginPasswordPersenter.forgetLoginPassword(cellPhone,checkCode,uuid,password,passwordAgain);
                 break;
         }
     }

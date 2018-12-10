@@ -6,14 +6,15 @@ package com.sl_group.jinyuntong_oem.bean;
  */
 public class CommonSMSBean {
 
+
     /**
      * code : 000000
-     * data : 748776
+     * data : {"code":"","uuid":"D9AE389B814747AFB0561A14EB1A7807"}
      * message : 发送验证码成功
      */
 
     private String code;
-    private String data;
+    private DataBean data;
     private String message;
 
     public String getCode() {
@@ -24,11 +25,11 @@ public class CommonSMSBean {
         this.code = code;
     }
 
-    public String getData() {
+    public DataBean getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(DataBean data) {
         this.data = data;
     }
 
@@ -38,5 +39,31 @@ public class CommonSMSBean {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public static class DataBean {
+        /**
+         * code :
+         * uuid : D9AE389B814747AFB0561A14EB1A7807
+         */
+
+        private String code;
+        private String uuid;
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
+
+        public String getUuid() {
+            return uuid;
+        }
+
+        public void setUuid(String uuid) {
+            this.uuid = uuid;
+        }
     }
 }

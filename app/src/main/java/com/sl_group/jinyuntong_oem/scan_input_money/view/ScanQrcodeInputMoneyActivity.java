@@ -45,7 +45,7 @@ import com.sl_group.jinyuntong_oem.utils.PopupWindowUtils;
 import com.sl_group.jinyuntong_oem.utils.SPUtil;
 import com.sl_group.jinyuntong_oem.utils.StringUtils;
 import com.sl_group.jinyuntong_oem.utils.ToastUtils;
-import com.sl_group.jinyuntong_oem.web.LoadWebActivity;
+import com.sl_group.jinyuntong_oem.web.X5WebViewActivity;
 import com.sl_group.jinyuntong_oem.youdun_uuid.persenter.YouDunUUIDPersenter;
 import com.sl_group.jinyuntong_oem.youdun_uuid.view.YouDunUUIDView;
 
@@ -314,12 +314,12 @@ public class ScanQrcodeInputMoneyActivity extends BaseActivity implements Credit
     public void placeOrderSuccess(String openUrl) {
         Bundle bundle = new Bundle();
         bundle.putString("url", openUrl);
-        startActivity(LoadWebActivity.class, bundle);
+        startActivity(X5WebViewActivity.class, bundle);
         finish();
     }
 
     @Override
-    public void getMerchantInfo(MerchantInfoBean.DataBean dataBean) {
+    public void merchantInfoSuccess(MerchantInfoBean.DataBean dataBean) {
         this.tradePassword = dataBean.getTradePassword();
         if (StringUtils.isEmpty(dataBean.getTradePassword())) {
             SPUtil.put(this, "tradePassword", "");

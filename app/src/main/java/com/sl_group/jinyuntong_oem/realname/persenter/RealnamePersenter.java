@@ -27,11 +27,11 @@ public class RealnamePersenter {
     }
 
 
-    public void realname(String idcard, String holderName, String accountNumber, String tel, String bizPlaceSnapshot1ImageId, String bizPlaceSnapshot2ImageId) {
+    public void realname(String idcard, String holderName, String accountNumber, String tel, String checkCode ,String uuid, String bizPlaceSnapshot1ImageId, String bizPlaceSnapshot2ImageId) {
         if (!mRealnameMode.checkRealNameParams(idcard, holderName, accountNumber, tel, bizPlaceSnapshot1ImageId, bizPlaceSnapshot2ImageId)) {
             return;
         }
-        mRealnameMode.realname(idcard, holderName, accountNumber, tel, bizPlaceSnapshot1ImageId, bizPlaceSnapshot2ImageId, new RealnameModel.IRealnameCallBack() {
+        mRealnameMode.realname(idcard, holderName, accountNumber, tel,checkCode,uuid, bizPlaceSnapshot1ImageId, bizPlaceSnapshot2ImageId, new RealnameModel.IRealnameCallBack() {
             @Override
             public void onSuccess(String data) {
                 LogUtils.i("实名认证：" + data);

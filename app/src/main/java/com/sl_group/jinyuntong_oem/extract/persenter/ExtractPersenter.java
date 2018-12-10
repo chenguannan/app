@@ -41,7 +41,7 @@ public class ExtractPersenter {
             ToastUtils.showToast("数据加载失败");
             return;
         }
-        mApplyExtractModel.extract(extractMoney, holderName, accountNumber, new ExtractModel.IApplyExtractCallBack() {
+        mApplyExtractModel.extract(extractMoney, holderName, accountNumber, new ExtractModel.IExtractCallBack() {
             @Override
             public void onSuccess(String data) {
                 LogUtils.i("提现：" + data);

@@ -76,7 +76,7 @@
                 android:id="@+id/et_register_sms_verfic_code"
                 style="@style/et_common"
                 android:hint="@string/input_sms_verfic_code"
-                android:inputType="text"
+                android:inputType="number"
                 android:maxLength="6"
                 tools:ignore="Autofill"/>
         </android.support.design.widget.TextInputLayout>

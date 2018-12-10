@@ -166,7 +166,6 @@ public class LoadWebActivity extends BaseActivity {
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                LogUtils.i("onPageStarted："+url);
                 super.onPageStarted(view, url, favicon);
                 mPb.setVisibility(View.VISIBLE);
             }
@@ -174,7 +173,6 @@ public class LoadWebActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                LogUtils.i("onPageFinished："+url);
                 mWvLoadweb.setLayerType(View.LAYER_TYPE_HARDWARE,null);
                 //pb进度条隐藏
                 mPb.setVisibility(View.GONE);
@@ -182,13 +180,11 @@ public class LoadWebActivity extends BaseActivity {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                LogUtils.i("shouldOverrideUrlLoading："+request.toString());
                 return super.shouldOverrideUrlLoading(view, request);
             }
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                LogUtils.i("shouldOverrideUrlLoading："+url);
                 view.loadUrl(url);
 //                //启动支付宝,并跳转到付款页面
 //                if (parseScheme(url)) {

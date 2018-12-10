@@ -6,5 +6,9 @@ package com.sl_group.jinyuntong_oem.gather.view;
  */
 public interface GatherView {
 
-    void getPayCodeMoney(String payCodeMoney);
+    /**
+      *
+      * @param gatherWithMoneyQrcode 带金额的二维码链接
+      */
+    void gatherWithMoneySuccess(String gatherWithMoneyQrcode);
 }

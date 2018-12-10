@@ -27,10 +27,13 @@ public class SetPayPasswordModelImpl implements SetPayPasswordModel {
 
 
     @Override
-    public void setPayPassword(String tradePassword, final ISetPayPasswordCallBack setPayPasswordCallBack) {
+    public void setPayPassword(String cellPhone,String checkCode,String uuid,String tradePassword, final ISetPayPasswordCallBack setPayPasswordCallBack) {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);
         obj.put("method", URLConstants.SET_PAY_PASSWORD);
         obj.put("mid", SPUtil.get(mActivity, "mid", ""));
+        obj.put("cellPhone",cellPhone);
+        obj.put("checkCode",checkCode);
+        obj.put("uuid",uuid);
         obj.put("tradePassword",tradePassword);
 
         HttpUtils.getInstance().postJson(

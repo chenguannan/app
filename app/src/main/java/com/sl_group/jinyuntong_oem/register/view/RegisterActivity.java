@@ -22,6 +22,7 @@ import com.sl_group.jinyuntong_oem.CommonSet;
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
 import com.sl_group.jinyuntong_oem.bean.AutoRealnameBean;
+import com.sl_group.jinyuntong_oem.bean.RegisterSMSBean;
 import com.sl_group.jinyuntong_oem.realname.view.RealnameActivity;
 import com.sl_group.jinyuntong_oem.register.persenter.RegisterPersenter;
 import com.sl_group.jinyuntong_oem.system_prop.persenter.SystemPropPersenter;
@@ -56,6 +57,8 @@ public class RegisterActivity extends BaseActivity implements RegisterView, Syst
 
     private RegisterPersenter mRegisterPersenter;
     private SystemPropPersenter mSystemPropPersenter;
+
+    private String mSMSUUID;
 
     @Override
     public int bindLayout() {
@@ -111,6 +114,9 @@ public class RegisterActivity extends BaseActivity implements RegisterView, Syst
             case R.id.tv_register_agreement:
                 mSystemPropPersenter.systemProp("xieyi");
                 break;
+            case R.id.tv_register_click_get_invitecode:
+                mSystemPropPersenter.systemProp("yaoqingma");
+                break;
         }
     }
 
@@ -135,6 +141,13 @@ public class RegisterActivity extends BaseActivity implements RegisterView, Syst
     @Override
     public void getXinShouURL(String xinshou) {
 
+    }
+
+    @Override
+    public void getYaoQingMaURL(String yaoqing) {
+        Bundle bundle = new Bundle();
+        bundle.putString("url", yaoqing);
+        startActivity(LoadWebActivity.class, bundle);
     }
 
     /**
@@ -165,8 +178,9 @@ public class RegisterActivity extends BaseActivity implements RegisterView, Syst
     }
 
     @Override
-    public void startCountTime() {
+    public void registSMSSuccess(RegisterSMSBean.DataBean data) {
         new TimeCount(120000, 1000).start();
+        mSMSUUID = data.getUuid();
     }
 
     private void getSMS() {
@@ -183,7 +197,7 @@ public class RegisterActivity extends BaseActivity implements RegisterView, Syst
         String password = mEtRegisterPassword.getText().toString().trim();
         String passwordAgain = mEtRegisterPasswordAgain.getText().toString().trim();
         boolean isSelected = mCbRegisterAgreement.isChecked();
-        mRegisterPersenter.register(invitecode, tel, smsVerficcode, password, passwordAgain, isSelected);
+        mRegisterPersenter.register(invitecode, tel, smsVerficcode, mSMSUUID, password, passwordAgain, isSelected);
     }
 
     private void popRegistSuccess() {

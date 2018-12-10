@@ -4,8 +4,12 @@ import com.sl_group.jinyuntong_oem.bean.MyTeamBean;
 
 /**
  * Created by 马天 on 2018/11/25.
- * description：
+ * description：我的团队
  */
 public interface MyTeamView {
-    void getMyTeam(MyTeamBean.DataBean data);
+    /**
+      * 我的团队请求成功回调
+      * @param data 我的团队对象
+      */
+    void myTeamSuccess(MyTeamBean.DataBean data);
 }

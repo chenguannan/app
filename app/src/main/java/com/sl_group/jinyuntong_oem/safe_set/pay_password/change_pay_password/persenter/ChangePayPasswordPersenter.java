@@ -25,11 +25,11 @@ public class ChangePayPasswordPersenter {
         mChangePayPasswordModel = new ChangePayPasswordModelImpl(activity);
     }
 
-    public void changePayPassword(String tradePassword) {
+    public void changePayPassword(String cellPhone,String checkCode,String uuid,String tradePassword) {
         if (!mChangePayPasswordModel.checkParams(tradePassword)) {
             return;
         }
-        mChangePayPasswordModel.changePayPassword(tradePassword, new ChangePayPasswordModel.IChangePayPasswordCallBack() {
+        mChangePayPasswordModel.changePayPassword( cellPhone, checkCode, uuid,tradePassword, new ChangePayPasswordModel.IChangePayPasswordCallBack() {
             @Override
             public void onSuccess(String data) {
                 LogUtils.i("修改支付密码：" + data);

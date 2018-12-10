@@ -1,6 +1,7 @@
 package com.sl_group.jinyuntong_oem.safe_set.gesture_password.change_gesture.view;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,6 +30,9 @@ public class ChangeGesturePasswordActivity extends BaseActivity implements Chang
     private String setGesturePasswordOne ;
 
     private ChangeGesturePasswordPersenter mChangeGesturePasswordPersenter;
+    private String checkCode;
+    private String uuid;
+    private String cellPhone;
     @Override
     public int bindLayout() {
         return R.layout.activity_change_gesture_password;
@@ -46,6 +50,12 @@ public class ChangeGesturePasswordActivity extends BaseActivity implements Chang
     public void initData() {
         mTvActionbarTitle.setText("修改手势密码");
         mChangeGesturePasswordPersenter = new ChangeGesturePasswordPersenter(this,this);
+        Bundle bundle =getIntent().getExtras();
+        if (bundle!=null){
+            checkCode = bundle.getString("checkCode","");
+            uuid = bundle.getString("uuid","");
+            cellPhone = bundle.getString("cellPhone","");
+        }
     }
 
     @Override
@@ -88,7 +98,7 @@ public class ChangeGesturePasswordActivity extends BaseActivity implements Chang
                 }else if (setGesturePasswordOne.equals(result)) {
                     SPUtil.put(ChangeGesturePasswordActivity.this, "gesturePwd", result);
                     mGlvChangeGesturePassword.clearView();
-                    mChangeGesturePasswordPersenter.setGesturePassword(result);
+                    mChangeGesturePasswordPersenter.setGesturePassword(cellPhone,checkCode,uuid,result);
                 } else if (!setGesturePasswordOne.equals(result)){
                     mTvChangeGesturePasswordTitle.setText("新手势密码");
                     SPUtil.remove(ChangeGesturePasswordActivity.this, "gesturePwd");

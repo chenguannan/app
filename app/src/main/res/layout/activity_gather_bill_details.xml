@@ -79,20 +79,24 @@
                     style="@style/tv_left"
                     android:layout_width="wrap_content"
                     android:layout_below="@+id/v_gather_bill_details_order_underline"
-                    android:text="@string/pay_cardnumber"/>
+                    android:text="@string/pay_cardnumber"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/tv_gather_bill_details_paycard"
                     style="@style/tv_right"
                     android:layout_below="@+id/v_gather_bill_details_order_underline"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    android:visibility="gone"/>
 
                 <View
                     android:id="@+id/v_gather_bill_details_paycard_underline"
                     style="@style/v_underline"
-                    android:layout_below="@+id/tv_gather_bill_details_paycard"/>
+                    android:layout_below="@+id/tv_gather_bill_details_paycard"
+                    android:visibility="gone"/>
 
                 <TextView
+                    android:id="@+id/tv_gather_bill_details_paypeople_hint"
                     style="@style/tv_left"
                     android:layout_width="wrap_content"
                     android:layout_below="@+id/v_gather_bill_details_paycard_underline"
@@ -102,7 +106,8 @@
                     android:id="@+id/tv_gather_bill_details_paypeople"
                     style="@style/tv_right"
                     android:layout_below="@+id/v_gather_bill_details_paycard_underline"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_alignParentEnd="true"
+                    android:layout_toEndOf="@+id/tv_gather_bill_details_paypeople_hint"/>
 
                 <View
                     android:id="@+id/v_gather_bill_details_paypeople_underline"

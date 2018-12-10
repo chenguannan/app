@@ -29,8 +29,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_gather_bill_order_hint"
-        android:layout_alignStart="@+id/tv_gather_bill_order_hint"
-        android:layout_alignEnd="@+id/tv_gather_bill_order_hint"
         android:layout_marginTop="@dimen/y5"
         android:gravity="end"
         android:text="@string/item_date"

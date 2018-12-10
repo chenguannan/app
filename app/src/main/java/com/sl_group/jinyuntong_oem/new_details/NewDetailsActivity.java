@@ -8,14 +8,15 @@ import android.widget.TextView;
 
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
-import com.sl_group.jinyuntong_oem.bean.NewDetailsBean;
-import com.sl_group.jinyuntong_oem.new_details.persenter.NewDetailsPersenter;
-import com.sl_group.jinyuntong_oem.new_details.view.NewDetailsView;
+import com.sl_group.jinyuntong_oem.bean.MessageDetailsBean;
+import com.sl_group.jinyuntong_oem.message_details.persenter.MessageDetailsPersenter;
+import com.sl_group.jinyuntong_oem.message_details.view.MessageDetailsView;
 import com.sl_group.jinyuntong_oem.utils.StringUtils;
 
 import org.json.JSONException;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -23,14 +24,12 @@ import cn.jpush.android.api.JPushInterface;
  * Created by 马天 on 2018/11/25.
  * description：消息详情
  */
-public class NewDetailsActivity extends BaseActivity implements NewDetailsView {
+public class NewDetailsActivity extends BaseActivity implements MessageDetailsView {
     private ImageView mImgActionbarBack;
     private TextView mTvActionbarTitle;
     private TextView mTvNewDetailsTitle;
     private TextView mTvNewDetailsDate;
     private TextView mTvNewDetailsContent;
-    private String messageId;
-    private NewDetailsPersenter mNewDetailsPersenter;
 
     @Override
     public int bindLayout() {
@@ -48,25 +47,19 @@ public class NewDetailsActivity extends BaseActivity implements NewDetailsView {
 
     @Override
     public void initData() {
+        //标题
         mTvActionbarTitle.setText("消息详情");
-
-        mNewDetailsPersenter = new NewDetailsPersenter(this, this);
+        //信息详情persenter
+        MessageDetailsPersenter messageDetailsPersenter = new MessageDetailsPersenter(this, this);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            messageId = bundle.getString("messageId", "");
+            //信息ID
+            String messageId = bundle.getString("messageId", "");
+            //是否已读
+            String isReady = bundle.getString("isReady", "");
             //如果消息ID是null，证明是直接通过推送点进来的
             if (StringUtils.isEmpty(messageId)) {
-                //this必须为点击消息要跳转到页面的上下文。
-                //            XGPushClickedResult clickedResult = XGPushManager.onActivityStarted(this);
-                //            String customContent = clickedResult.getCustomContent();
-                //            if (StringUtils.isEmpty(customContent)) {
-                //                ToastUtils.showToast("网络异常，通知打开失败");
-                //                finish();
-                //                return;
-                //            }
-                //           String extract = bundle.getString(JPushInterface.EXTRA_EXTRA);
-                //            PushNewsBean pushNewsBean = new Gson().fromJson(extract, PushNewsBean.class);
                 String extract = bundle.getString(JPushInterface.EXTRA_EXTRA);
                 try {
                     org.json.JSONObject j = new org.json.JSONObject(extract);
@@ -78,7 +71,8 @@ public class NewDetailsActivity extends BaseActivity implements NewDetailsView {
                 }
                 return;
             }
-            mNewDetailsPersenter.newDetails(messageId, bundle.getString("isRead", ""));
+            //查询信息详情
+            messageDetailsPersenter.newDetails(messageId, isReady, "");
         }
 
     }
@@ -103,9 +97,9 @@ public class NewDetailsActivity extends BaseActivity implements NewDetailsView {
     }
 
     @Override
-    public void getNewDetails(NewDetailsBean.DataBean data) {
+    public void messageDetailsSuccess(MessageDetailsBean.DataBean data) {
         mTvNewDetailsTitle.setText(data.getTitle());
-        mTvNewDetailsDate.setText(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(data.getCreateDate()));
+        mTvNewDetailsDate.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.getDefault()).format(data.getCreateDate()));
         mTvNewDetailsContent.setText(data.getContent());
     }
 }

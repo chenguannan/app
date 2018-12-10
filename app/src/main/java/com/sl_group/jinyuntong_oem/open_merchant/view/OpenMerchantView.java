@@ -5,5 +5,9 @@ package com.sl_group.jinyuntong_oem.open_merchant.view;
  * description：
  */
 public interface OpenMerchantView {
-    void skipActivity(String data);
+    /**
+      *
+      * @param data 开通商户后台请求成功，跳至开通H5
+      */
+    void openMerchantSuccess(String data);
 }

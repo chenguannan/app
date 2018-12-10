@@ -26,8 +26,8 @@ public class ChangeGesturePasswordPersenter {
         mChangeGesturePasswordModel = new ChangeGesturePasswordModelImpl(activity);
     }
 
-    public void setGesturePassword(String gesturePassword) {
-        mChangeGesturePasswordModel.changeGesturePassword(gesturePassword, new ChangeGesturePasswordModel.changeGesturePasswordCallBack() {
+    public void setGesturePassword(String cellPhone,String checkCode,String uuid,String gesturePassword) {
+        mChangeGesturePasswordModel.changeGesturePassword(cellPhone,checkCode,uuid,gesturePassword, new ChangeGesturePasswordModel.changeGesturePasswordCallBack() {
             @Override
             public void onSuccess(String data) {
                 LogUtils.i("修改手势密码：" + data);

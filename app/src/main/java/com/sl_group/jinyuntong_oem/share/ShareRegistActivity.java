@@ -68,10 +68,6 @@ public class ShareRegistActivity extends BaseActivity implements MerchantinfoVie
     public void initData() {
         mTvActionbarTitle.setText("分享注册");
         mMerchantinfoPersenter = new MerchantinfoPersenter(this, this);
-        title = (String) SPUtil.get(this, "title", "");
-        content = (String) SPUtil.get(this, "content", "");
-        url = (String) SPUtil.get(this, "url", "");
-
     }
 
     @Override
@@ -110,9 +106,9 @@ public class ShareRegistActivity extends BaseActivity implements MerchantinfoVie
 
     @Override
     public void doBusiness(Context mContext) {
-        if (StringUtils.isEmpty(url) || StringUtils.isEmpty(title) || StringUtils.isEmpty(content)) {
-            mMerchantinfoPersenter.merchantInfo();
-        }
+
+        mMerchantinfoPersenter.merchantInfo();
+
     }
 
     /**
@@ -205,7 +201,9 @@ public class ShareRegistActivity extends BaseActivity implements MerchantinfoVie
     }
 
     @Override
-    public void getMerchantInfo(MerchantInfoBean.DataBean dataBean) {
-
+    public void merchantInfoSuccess(MerchantInfoBean.DataBean dataBean) {
+        url = dataBean.getUrl();
+        title = dataBean.getTitle();
+        content = dataBean.getContent();
     }
 }

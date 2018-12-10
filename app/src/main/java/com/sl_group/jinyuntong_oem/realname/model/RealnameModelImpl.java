@@ -55,7 +55,7 @@ public class RealnameModelImpl implements RealnameModel {
 
 
     @Override
-    public void realname(String idcard, String holderName, String accountNumber, String tel, String bizPlaceSnapshot1ImageId, String bizPlaceSnapshot2ImageId, final IRealnameCallBack iRealnameCallBack) {
+    public void realname(String idcard, String holderName, String accountNumber, String tel,String checkCode ,String uuid, String bizPlaceSnapshot1ImageId, String bizPlaceSnapshot2ImageId, final IRealnameCallBack iRealnameCallBack) {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);
         obj.put("method", URLConstants.REALNAME);
         obj.put("participantId", SPUtil.get(mActivity,"participantId",""));
@@ -64,6 +64,8 @@ public class RealnameModelImpl implements RealnameModel {
         obj.put("holderName", holderName);
         obj.put("accountNumber", accountNumber);
         obj.put("tel", tel);
+        obj.put("checkCode", checkCode);
+        obj.put("uuid", uuid);
         obj.put("legalPersonID1ImageId", "");
         obj.put("legalPersonID2ImageId", "");
         obj.put("bizPlaceSnapshot1ImageId", bizPlaceSnapshot1ImageId);

@@ -9,7 +9,7 @@ public class RegisterSMSBean {
 
     /**
      * code : 000000
-     * data : {"code":"964213"}
+     * data : {"uuid":"ED8617ACDE1942548D6D6F8360BBCB8A"}
      * message : 发送验证码成功
      */
 
@@ -43,17 +43,17 @@ public class RegisterSMSBean {
 
     public static class DataBean {
         /**
-         * code : 964213
+         * uuid : ED8617ACDE1942548D6D6F8360BBCB8A
          */
 
-        private String code;
+        private String uuid;
 
-        public String getCode() {
-            return code;
+        public String getUuid() {
+            return uuid;
         }
 
-        public void setCode(String code) {
-            this.code = code;
+        public void setUuid(String uuid) {
+            this.uuid = uuid;
         }
     }
 }

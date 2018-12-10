@@ -68,9 +68,9 @@ public interface URLConstants {
     //  佣金详情
     String BROKERAGE_DETSILS = "searchRevenueDetail";
     //  消息列表
-    String NEWS = "searchMessageList";
+    String MESSAGES = "searchMessageList";
     //  消息详情
-    String NEWS_DETAILS = "searchMessageDetail";
+    String MESSAGE_DETAILS = "searchMessageDetail";
     //  我推荐的人查询
     String MY_TEAM = "searchSubordinates";
     //  各种连接

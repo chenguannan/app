@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
+import com.sl_group.jinyuntong_oem.bean.CommonSMSBean;
 import com.sl_group.jinyuntong_oem.safe_set.gesture_password.change_gesture.view.ChangeGesturePasswordActivity;
 import com.sl_group.jinyuntong_oem.safe_set.gesture_password.set_gesture.view.SetGesturePasswordActivity;
 import com.sl_group.jinyuntong_oem.safe_set.login_password.view.ChangeLoginPasswordActivity;
@@ -36,6 +37,7 @@ public class SMSActivity extends BaseActivity implements SMSView {
     private SMSPersenter mSMSPersenter;
 
     private String mSMSVerfic;
+    private String mSMSUUID;
 
     private String action;
     private String tel;
@@ -125,16 +127,23 @@ public class SMSActivity extends BaseActivity implements SMSView {
                 mSMSPersenter.getChangeGesturePsswordSMS(tel);
                 break;
             case R.id.btn_sms_next:
-                if (StringUtils.isEmpty(mSMSVerfic)) {
+                if (StringUtils.isEmpty(mSMSUUID)||StringUtils.isEmpty(mSMSVerfic)) {
                     ToastUtils.showToast("请获取验证码");
                     return;
                 }
                 String inputVerfic = mEtSmsVerficcode.getText().toString().trim();
+                if (StringUtils.isEmpty(inputVerfic)){
+                    ToastUtils.showToast("请输入验证码");
+                    return;
+                }
                 if (!mSMSVerfic.equals(inputVerfic)) {
                     ToastUtils.showToast("验证码错误");
                     return;
                 }
                 Bundle bundle = new Bundle();
+                bundle.putString("checkCode", mSMSVerfic);
+                bundle.putString("uuid", mSMSUUID);
+                bundle.putString("cellPhone", mEtSmsTel.getText().toString().trim());
                 switch (action) {
                     case "changeGesturePassword":
                         startActivity(ChangeGesturePasswordActivity.class);
@@ -157,13 +166,12 @@ public class SMSActivity extends BaseActivity implements SMSView {
                         break;
                     case "forgetLoginPassword":
                         bundle.putString("type", "forget");
-                        bundle.putString("tel", mEtSmsTel.getText().toString().trim());
+
                         startActivity(ChangeLoginPasswordActivity.class, bundle);
                         finish();
                         break;
                     case "changeLoginPassword":
                         bundle.putString("type", "change");
-                        bundle.putString("tel", mEtSmsTel.getText().toString().trim());
                         startActivity(ChangeLoginPasswordActivity.class, bundle);
                         finish();
                         break;
@@ -180,8 +188,9 @@ public class SMSActivity extends BaseActivity implements SMSView {
     }
 
     @Override
-    public void getSMS(String data) {
-        mSMSVerfic = data;
+    public void getSMS(CommonSMSBean.DataBean data) {
+        mSMSUUID = data.getUuid();
+        mSMSVerfic = data.getCode();
         new TimeCount(120000, 1000).start();
     }
 

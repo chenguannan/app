@@ -27,8 +27,8 @@ public class SetPayPasswordPersenter {
         mSetPayPasswordModel = new SetPayPasswordModelImpl(activity);
     }
 
-    public void setPayPassword(final String payPassword) {
-        mSetPayPasswordModel.setPayPassword(payPassword, new SetPayPasswordModel.ISetPayPasswordCallBack() {
+    public void setPayPassword(String cellPhone,String checkCode,String uuid,final String payPassword) {
+        mSetPayPasswordModel.setPayPassword( cellPhone, checkCode, uuid,payPassword, new SetPayPasswordModel.ISetPayPasswordCallBack() {
             @Override
             public void onSuccess(String data) {
                 LogUtils.i("设置支付密码："+data);

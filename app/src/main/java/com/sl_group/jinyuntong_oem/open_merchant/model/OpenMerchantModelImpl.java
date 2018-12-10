@@ -14,51 +14,13 @@ import com.sl_group.jinyuntong_oem.utils.ToastUtils;
 
 /**
  * Created by 马天 on 2018/11/17.
- * description：
+ * description：开通商户权限
  */
 public class OpenMerchantModelImpl implements OpenMerchantMedel {
     private Activity mActivity;
 
     public OpenMerchantModelImpl(Activity activity) {
         mActivity = activity;
-    }
-
-    @Override
-    public boolean checkOpenMerchantParams(String businessUUID, String docUUID, String businessPicUUID, String shopname, String shopaddress, String accountNumber, String tel) {
-        if (StringUtils.isEmpty(businessUUID)) {
-            ToastUtils.showToast("请上传营业场所照");
-            return false;
-        }
-        if (StringUtils.isEmpty(docUUID)) {
-            ToastUtils.showToast("请上传门头照");
-            return false;
-        }
-        if (StringUtils.isEmpty(businessPicUUID)) {
-            ToastUtils.showToast("请上传营业执照");
-            return false;
-        }
-        if (StringUtils.isEmpty(shopname)) {
-            ToastUtils.showToast("请输入店铺名称");
-            return false;
-        }
-        if (shopaddress.contains("选择")) {
-            ToastUtils.showToast("请选择店铺地址：省/市/区");
-            return false;
-        }
-        if (StringUtils.isEmpty(accountNumber)) {
-            ToastUtils.showToast("请输入储蓄卡号");
-            return false;
-        }
-        if (StringUtils.isEmpty(tel)) {
-            ToastUtils.showToast("请输入银行预留手机号");
-            return false;
-        }
-        if (tel.length() != 11) {
-            ToastUtils.showToast("请输入正确的银行预留手机号");
-            return false;
-        }
-
-        return true;
     }
 
     @Override

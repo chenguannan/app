@@ -71,7 +71,6 @@ public class HttpUtils {
 
         RequestBody body = RequestBody.create(JSON, param);
         Request request = new Request.Builder().url(url).post(body).build();
-
         onStart(activity,isShow,callback);
         call = client.newCall(request);
         call.enqueue(new Callback() {

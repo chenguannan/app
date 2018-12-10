@@ -31,11 +31,11 @@ public class MerchantinfoPersenter {
         mUserinfoModel.merchantInfo(new MerchantinfoModel.IMerchantInfoCallBack(){
             @Override
             public void onSuccess(String data) {
-                LogUtils.i("个人信息 信息查询："+data);
+                LogUtils.i("商户信息："+data);
                 MerchantInfoBean merchantInfoBean = new Gson().fromJson(data,MerchantInfoBean.class);
                 if ("000000".equals(merchantInfoBean.getCode())){
                     MerchantInfoBean.DataBean dataBean = merchantInfoBean.getData();
-                    mMerchantinfoView.getMerchantInfo(dataBean);
+                    mMerchantinfoView.merchantInfoSuccess(dataBean);
                     saveMerchantInfo(dataBean);
                     return;
                 }else if ("888888".equals(merchantInfoBean.getCode())) {
@@ -46,6 +46,10 @@ public class MerchantinfoPersenter {
             }
         });
     }
+    /**
+      * 保存商户信息
+      * @param dataBean 商户信息对象
+      */
     private void saveMerchantInfo(MerchantInfoBean.DataBean dataBean){
         SPUtil.put(mActivity,"shortName",dataBean.getShortName());
         SPUtil.put(mActivity,"shopAddress",dataBean.getShopAddress());
@@ -54,7 +58,6 @@ public class MerchantinfoPersenter {
         SPUtil.put(mActivity,"participantId",String.valueOf(dataBean.getParticipantId()));
         SPUtil.put(mActivity,"vipLevel",dataBean.getVipLevel());
         SPUtil.put(mActivity,"agentName",dataBean.getAgentName());
-
         SPUtil.put(mActivity,"cellPhone",dataBean.getCellPhone());
         SPUtil.put(mActivity,"firstName",dataBean.getFirstName());
         SPUtil.put(mActivity,"agencyId",String.valueOf(dataBean.getAgencyId()));
@@ -68,6 +71,7 @@ public class MerchantinfoPersenter {
         SPUtil.put(mActivity,"payCode",dataBean.getPayCode());
         SPUtil.put(mActivity,"gesturePassword",dataBean.getGesturePassword());
         SPUtil.put(mActivity,"tradePassword",dataBean.getTradePassword());
+        SPUtil.put(mActivity,"vipTime",dataBean.getVipTime());
         SPUtil.put(mActivity,"headPortraitDirectoryName",dataBean.getHeadPortraitDirectoryName());
         SPUtil.put(mActivity,"headPortraitFilePrefix",dataBean.getHeadPortraitFilePrefix());
     }

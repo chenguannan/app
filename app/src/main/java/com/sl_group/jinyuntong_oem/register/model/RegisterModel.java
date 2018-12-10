@@ -33,9 +33,11 @@ public interface RegisterModel {
      * @param inviteCode 邀请码
      * @param tel 手机号
      * @param password 密码
+     * @param checkCode 验证码
+     * @param uuid uuid
      * @param registerCallBack 注册回调接口
      */
-    void register(String inviteCode, String tel, String password,RegisterModel.IRegisterCallBack registerCallBack);
+    void register(String inviteCode, String tel,String checkCode ,String uuid, String password,RegisterModel.IRegisterCallBack registerCallBack);
     /**
      * 注册获取验证码回调接口及回调方法
      */
