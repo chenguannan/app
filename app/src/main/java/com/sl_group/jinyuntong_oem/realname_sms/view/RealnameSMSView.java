@@ -4,8 +4,8 @@ import com.sl_group.jinyuntong_oem.bean.RealnameSMSBean;
 
 /**
  * Created by 马天 on 2018/11/18.
- * description：
+ * description：实名短信
  */
 public interface RealnameSMSView {
-    void getRealnameSMS(RealnameSMSBean.DataBean data);
+    void realnameSMSSuccess(RealnameSMSBean.DataBean data);
 }

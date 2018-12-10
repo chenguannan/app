@@ -1,6 +1,7 @@
 package com.sl_group.jinyuntong_oem.realname.view;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -36,7 +37,6 @@ import com.sl_group.jinyuntong_oem.utils.PermissionSetDialogUtils;
 import com.sl_group.jinyuntong_oem.utils.PhotoTakeUtils;
 import com.sl_group.jinyuntong_oem.utils.RandomUtils;
 import com.sl_group.jinyuntong_oem.utils.SPUtil;
-import com.sl_group.jinyuntong_oem.utils.StringUtils;
 import com.sl_group.jinyuntong_oem.utils.ToastUtils;
 
 import java.io.File;
@@ -48,7 +48,14 @@ import java.io.IOException;
  * description：实名认证
  */
 public class RealnameActivity extends BaseActivity implements RealnameView, UpLoadImgView, RealnameSMSView {
-    private static final int PERMISSIONS_WRITE_CAMERA = 0;
+    //动态授权请求码  读写内存，相机权限
+    private static final int PERMISSIONS_READ_WRITE_CAMERA = 0;
+    //扫描银行卡获取卡号请求码
+    private final static int SCAN_BANKCARD_REQUEST_CODE = 1;
+    //拍摄身份证照片请求码
+    private final static int UPLOAD_IDCARD_REQUEST_CODE = 2;
+    //拍摄银行卡正面照
+    private final static int UPLOAD_BANKCARD_REQUEST_CODE = 3;
     private ImageView mImgActionbarBack;
     private TextView mTvActionbarTitle;
     private TextView mTvRealnameName;
@@ -68,18 +75,15 @@ public class RealnameActivity extends BaseActivity implements RealnameView, UpLo
     private String mIdcardPath;
     //拍照的图片保存sd地址
     private String mBankcardPath;
-
-    private final static int SCAN_BANKCARD_REQUEST_CODE = 1;
-    private final static int UPLOAD_IDCARD_REQUEST_CODE = 2;
-    private final static int UPLOAD_BANKCARD_REQUEST_CODE = 3;
-
+    //实名认证，上传照片，短信 persenter
     private RealnamePersenter mRealnamePersenter;
     private UploadImgPersenter mUploadImgPersenter;
     private RealnameSMSPersenter mRealnameSMSPersenter;
-
+    //拍照照片位图
     private Bitmap mBitmap;
     private String bizPlaceSnapshot1ImageId;
     private String bizPlaceSnapshot2ImageId;
+    //短信UUID
     private String mSMSUUID;
 
     @Override
@@ -107,29 +111,15 @@ public class RealnameActivity extends BaseActivity implements RealnameView, UpLo
 
     @Override
     public void initData() {
+        //设置标题
         mTvActionbarTitle.setText("实名认证");
-
+        //初始化persenter
         mRealnamePersenter = new RealnamePersenter(this, this);
         mUploadImgPersenter = new UploadImgPersenter(this, this);
         mRealnameSMSPersenter = new RealnameSMSPersenter(this, this);
         //初始化文件路径
         mIdcardPath = Environment.getExternalStorageDirectory().getPath() + CommonSet.IMG_CACHE + "/IMG_" + System.currentTimeMillis() + RandomUtils.randomString(CommonSet.RANDOM_STR, 6) + ".png";
         mBankcardPath = Environment.getExternalStorageDirectory().getPath() + CommonSet.IMG_CACHE + "/IMG_" + System.currentTimeMillis() + RandomUtils.randomString(CommonSet.RANDOM_STR, 6) + ".png";
-
-        //创建图片文件夹
-        File sd = Environment.getExternalStorageDirectory();
-        String path = sd.getPath() + CommonSet.IMG_CACHE;
-        File file = new File(path);
-        if (!file.exists()) {
-            file.mkdir();
-        }
-
-        String sdStatus = Environment.getExternalStorageState();
-        if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
-            ToastUtils.showToast("检测sd是否可用");
-            return;
-        }
-
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -142,7 +132,7 @@ public class RealnameActivity extends BaseActivity implements RealnameView, UpLo
             mTvRealnameIdcardLife.setText(start_card);
             mTvRealnameIdcardAddress.setText(addr_card);
         }
-
+        //获取控件的宽度
         int w = View.MeasureSpec.makeMeasureSpec(0,
                 View.MeasureSpec.UNSPECIFIED);
         int h = View.MeasureSpec.makeMeasureSpec(0,
@@ -151,9 +141,23 @@ public class RealnameActivity extends BaseActivity implements RealnameView, UpLo
         int width = mImgRealnameIdcard.getMeasuredWidth();
 
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mImgRealnameIdcard.getLayoutParams();
+        //设置高度和宽度一样
         layoutParams.height = width;
+        //ImageView 设置参数
         mImgRealnameIdcard.setLayoutParams(layoutParams);
         mImgRealnameBankcard.setLayoutParams(layoutParams);
+        //创建图片文件夹
+        File sd = Environment.getExternalStorageDirectory();
+        String path = sd.getPath() + CommonSet.IMG_CACHE;
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdir();
+        }
+
+        String sdStatus = Environment.getExternalStorageState();
+        if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
+            ToastUtils.showToast("检测sd是否可用");
+        }
 
     }
 
@@ -174,36 +178,35 @@ public class RealnameActivity extends BaseActivity implements RealnameView, UpLo
                 finish();
                 break;
             case R.id.img_realname_scan:
+                //扫描银行卡卡号
                 Intent scanIntent = new Intent(RealnameActivity.this, ScanCameraActivity.class);
                 startActivityForResult(scanIntent, SCAN_BANKCARD_REQUEST_CODE);
                 break;
             case R.id.tv_realname_get_verficcode:
                 String tel = mEtRealnameTel.getText().toString().trim();
-                mRealnameSMSPersenter.getRealnameSMS(tel);
+                mRealnameSMSPersenter.realnameSMS(tel);
                 break;
             case R.id.img_realname_idcard:
+                //身份证照片
                 Intent idcardIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 idcardIntent.putExtra(MediaStore.EXTRA_OUTPUT, CameraUtils.getUriForFile(this, new File(mIdcardPath)));
                 startActivityForResult(idcardIntent, UPLOAD_IDCARD_REQUEST_CODE);
                 break;
             case R.id.img_realname_bankcard:
+                //银行卡照片
                 Intent bankcardIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 bankcardIntent.putExtra(MediaStore.EXTRA_OUTPUT, CameraUtils.getUriForFile(this, new File(mBankcardPath)));
                 startActivityForResult(bankcardIntent, UPLOAD_BANKCARD_REQUEST_CODE);
                 break;
             case R.id.btn_realname_commit:
+                //提交资料
                 String idcard = mTvRealnameIdcard.getText().toString().trim();
                 String holdname = mTvRealnameName.getText().toString().trim();
                 String accountNumber = mEtRealnameCardnumber.getText().toString().trim();
                 String bankcardtel = mEtRealnameTel.getText().toString().trim();
                 String verficCode = mEtRealnameVerficcode.getText().toString().trim();
-                if (StringUtils.isEmpty(mSMSUUID)) {
-                    ToastUtils.showToast("请先获取验证码");
-                    return;
-                }
                 mRealnamePersenter.realname(idcard, holdname, accountNumber, bankcardtel, verficCode, mSMSUUID, bizPlaceSnapshot1ImageId, bizPlaceSnapshot2ImageId);
                 break;
-
         }
     }
 
@@ -212,6 +215,29 @@ public class RealnameActivity extends BaseActivity implements RealnameView, UpLo
         checkPermission();
     }
 
+
+    @Override
+    public void uploadImgSuccess(String data, int index) {
+        if (index == UPLOAD_IDCARD_REQUEST_CODE) {
+            bizPlaceSnapshot1ImageId = data;
+            mImgRealnameIdcard.setImageBitmap(mBitmap);
+        } else if (index == SCAN_BANKCARD_REQUEST_CODE || index == UPLOAD_BANKCARD_REQUEST_CODE) {
+            bizPlaceSnapshot2ImageId = data;
+            mImgRealnameBankcard.setImageBitmap(mBitmap);
+        }
+    }
+
+    @Override
+    public void realnameSMSSuccess(RealnameSMSBean.DataBean data) {
+        mSMSUUID = data.getUuid();
+        new TimeCount(120000, 1000).start();
+    }
+
+    @Override
+    public void realnameSuccess() {
+        SPUtil.put(this, "isReflash", true);
+        finish();
+    }
 
     /**
      * 检查拍照所需要的相应权限
@@ -239,7 +265,7 @@ public class RealnameActivity extends BaseActivity implements RealnameView, UpLo
                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.CAMERA
                     },
-                    PERMISSIONS_WRITE_CAMERA
+                    PERMISSIONS_READ_WRITE_CAMERA
             );
         }
 
@@ -293,7 +319,6 @@ public class RealnameActivity extends BaseActivity implements RealnameView, UpLo
                     return;
                 }
                 saveBitmap(mBitmap, mIdcardPath);
-                mImgRealnameIdcard.setImageBitmap(mBitmap);
                 mUploadImgPersenter.uploadImg(mIdcardPath, UPLOAD_IDCARD_REQUEST_CODE);
                 break;
             case UPLOAD_BANKCARD_REQUEST_CODE:
@@ -302,7 +327,6 @@ public class RealnameActivity extends BaseActivity implements RealnameView, UpLo
                     return;
                 }
                 saveBitmap(mBitmap, mBankcardPath);
-                mImgRealnameBankcard.setImageBitmap(mBitmap);
                 mUploadImgPersenter.uploadImg(mBankcardPath, UPLOAD_BANKCARD_REQUEST_CODE);
                 break;
 
@@ -362,7 +386,7 @@ public class RealnameActivity extends BaseActivity implements RealnameView, UpLo
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == PERMISSIONS_WRITE_CAMERA) {
+        if (requestCode == PERMISSIONS_READ_WRITE_CAMERA) {
             boolean isAllGranted = true;
 
             // 判断是否所有的权限都已经授予了
@@ -384,29 +408,6 @@ public class RealnameActivity extends BaseActivity implements RealnameView, UpLo
     }
 
 
-    @Override
-    public void uploadImgSuccess(String data, int index) {
-        if (index == UPLOAD_IDCARD_REQUEST_CODE) {
-            bizPlaceSnapshot1ImageId = data;
-            mImgRealnameIdcard.setImageBitmap(mBitmap);
-        } else if (index == SCAN_BANKCARD_REQUEST_CODE || index == UPLOAD_BANKCARD_REQUEST_CODE) {
-            bizPlaceSnapshot2ImageId = data;
-            mImgRealnameBankcard.setImageBitmap(mBitmap);
-        }
-    }
-
-    @Override
-    public void getRealnameSMS(RealnameSMSBean.DataBean data) {
-        mSMSUUID = data.getUuid();
-        new TimeCount(120000, 1000).start();
-    }
-
-    @Override
-    public void realnameSuccess() {
-        SPUtil.put(this, "isReflash", true);
-        finish();
-    }
-
     /**
      * 倒计时
      * param
@@ -417,6 +418,7 @@ public class RealnameActivity extends BaseActivity implements RealnameView, UpLo
             super(millisInFuture, countDownInterval);
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onTick(long millisUntilFinished) {
             mTvRealnameGetVerficcode.setText(millisUntilFinished / 1000 + getString(R.string.count_down));

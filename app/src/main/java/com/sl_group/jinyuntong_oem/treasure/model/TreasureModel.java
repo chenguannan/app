@@ -6,9 +6,9 @@ package com.sl_group.jinyuntong_oem.treasure.model;
  */
 public interface TreasureModel {
 
-    void queryTreasure(TreasureModel.IQueryTreasureCallBack iQueryTreasureCallBack);
+    void treasure(ITreasureCallBack iTreasureCallBack);
 
-    interface IQueryTreasureCallBack{
+    interface ITreasureCallBack {
         void onSuccess(String data);
     }
 }

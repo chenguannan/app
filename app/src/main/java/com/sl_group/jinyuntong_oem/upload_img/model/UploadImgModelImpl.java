@@ -14,7 +14,7 @@ import java.io.File;
  * Created by 马天 on 2018/11/22.
  * description：
  */
-public class UploadImgModelImpl implements UploadImgModel{
+public class UploadImgModelImpl implements UploadImgModel {
     private Activity mActivity;
 
     public UploadImgModelImpl(Activity activity) {

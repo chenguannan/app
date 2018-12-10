@@ -44,6 +44,9 @@ public class GestureLoginActivity extends BaseActivity{
         if (bundle != null) {
             //获取传递的手势密码
             gesturePassword = bundle.getString("gesturePassword");
+        }else {
+            startActivity(LoginActivity.class);
+            finish();
         }
         //手势监听
         mGlvLogin.setGestureLockListener(new OnGestureLockListener() {

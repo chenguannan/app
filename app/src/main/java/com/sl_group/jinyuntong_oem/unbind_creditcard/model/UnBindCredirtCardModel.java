@@ -2,12 +2,15 @@ package com.sl_group.jinyuntong_oem.unbind_creditcard.model;
 
 /**
  * Created by 马天 on 2018/11/29.
- * description：
+ * description：解绑信用卡
  */
 public interface UnBindCredirtCardModel {
-    void unBindCreditCard(String fastpayBankAccountInfoId,UnBindCredirtCardModel.IUnBindCreditCardCallBack unBindCreditCardCallBack);
+    /**
+     * @param fastpayBankAccountInfoId 银行卡ID
+     */
+    void unBindCreditCard(String fastpayBankAccountInfoId, UnBindCredirtCardModel.IUnBindCreditCardCallBack unBindCreditCardCallBack);
 
-    interface IUnBindCreditCardCallBack{
+    interface IUnBindCreditCardCallBack {
         void onSuccess(String data);
     }
 }

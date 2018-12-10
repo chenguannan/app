@@ -1,5 +1,6 @@
 package com.sl_group.jinyuntong_oem.sms.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -12,10 +13,12 @@ import android.widget.TextView;
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
 import com.sl_group.jinyuntong_oem.bean.CommonSMSBean;
-import com.sl_group.jinyuntong_oem.safe_set.gesture_password.change_gesture.view.ChangeGesturePasswordActivity;
-import com.sl_group.jinyuntong_oem.safe_set.gesture_password.set_gesture.view.SetGesturePasswordActivity;
-import com.sl_group.jinyuntong_oem.safe_set.login_password.view.ChangeLoginPasswordActivity;
-import com.sl_group.jinyuntong_oem.safe_set.pay_password.change_pay_password.view.ChangePayPasswordActivity;
+import com.sl_group.jinyuntong_oem.gesture_change.view.GesturePasswordChangeActivity;
+import com.sl_group.jinyuntong_oem.gesture_set.persenter.GesturePasswordSetPersenter;
+import com.sl_group.jinyuntong_oem.gesture_set.view.GesturePasswordSetActivity;
+import com.sl_group.jinyuntong_oem.gesture_set.view.GesturePasswordSetView;
+import com.sl_group.jinyuntong_oem.login_password.view.LoginPasswordActivity;
+import com.sl_group.jinyuntong_oem.pay_password_change.view.PayPasswordChangeActivity;
 import com.sl_group.jinyuntong_oem.sms.persenter.SMSPersenter;
 import com.sl_group.jinyuntong_oem.utils.SPUtil;
 import com.sl_group.jinyuntong_oem.utils.StringUtils;
@@ -25,7 +28,7 @@ import com.sl_group.jinyuntong_oem.utils.ToastUtils;
  * Created by 马天 on 2018/11/18.
  * description：短信验证
  */
-public class SMSActivity extends BaseActivity implements SMSView {
+public class SMSActivity extends BaseActivity implements SMSView,GesturePasswordSetView {
     private ImageView mImgActionbarBack;
     private TextView mTvActionbarTitle;
     private EditText mEtSmsTel;
@@ -33,7 +36,7 @@ public class SMSActivity extends BaseActivity implements SMSView {
     private EditText mEtSmsVerficcode;
     private Button mBtnSmsNext;
 
-
+    private GesturePasswordSetPersenter mGesturePasswordSetPersenter;
     private SMSPersenter mSMSPersenter;
 
     private String mSMSVerfic;
@@ -60,11 +63,11 @@ public class SMSActivity extends BaseActivity implements SMSView {
     @Override
     public void initData() {
 
-       String userTel = (String) SPUtil.get(this, "usertel", "");
-       if (!StringUtils.isEmpty(userTel)){
-           mEtSmsTel.setText(userTel);
-           mEtSmsTel.setEnabled(false);
-       }
+        String userTel = (String) SPUtil.get(this, "usertel", "");
+        if (!StringUtils.isEmpty(userTel)) {
+            mEtSmsTel.setText(userTel);
+            mEtSmsTel.setEnabled(false);
+        }
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -76,8 +79,14 @@ public class SMSActivity extends BaseActivity implements SMSView {
             return;
         }
         switch (action) {
+            case "clearGesturePassword":
+                mTvActionbarTitle.setText("关闭手势密码");
+                break;
             case "changeGesturePassword":
                 mTvActionbarTitle.setText("修改手势密码");
+                break;
+            case "setGesturePassword":
+                mTvActionbarTitle.setText("设置手势密码");
                 break;
             case "forgetGesturePassword":
                 mTvActionbarTitle.setText("忘记手势密码");
@@ -89,11 +98,11 @@ public class SMSActivity extends BaseActivity implements SMSView {
                 mTvActionbarTitle.setText("忘记支付密码");
                 break;
             case "forgetLoginPassword":
-                if (!StringUtils.isEmpty(tel)){
+                if (!StringUtils.isEmpty(tel)) {
                     mEtSmsTel.setText(tel);
-                }else {
+                } else {
                     tel = (String) SPUtil.get(SMSActivity.this, "usertel", "");
-                    if (!StringUtils.isEmpty(tel)){
+                    if (!StringUtils.isEmpty(tel)) {
                         mEtSmsTel.setText(tel);
                         mEtSmsTel.setEnabled(false);
                     }
@@ -105,7 +114,7 @@ public class SMSActivity extends BaseActivity implements SMSView {
                 break;
         }
         mSMSPersenter = new SMSPersenter(this, this);
-
+        mGesturePasswordSetPersenter = new GesturePasswordSetPersenter(this,this);
 
     }
 
@@ -127,12 +136,12 @@ public class SMSActivity extends BaseActivity implements SMSView {
                 mSMSPersenter.getChangeGesturePsswordSMS(tel);
                 break;
             case R.id.btn_sms_next:
-                if (StringUtils.isEmpty(mSMSUUID)||StringUtils.isEmpty(mSMSVerfic)) {
+                if (StringUtils.isEmpty(mSMSUUID) || StringUtils.isEmpty(mSMSVerfic)) {
                     ToastUtils.showToast("请获取验证码");
                     return;
                 }
                 String inputVerfic = mEtSmsVerficcode.getText().toString().trim();
-                if (StringUtils.isEmpty(inputVerfic)){
+                if (StringUtils.isEmpty(inputVerfic)) {
                     ToastUtils.showToast("请输入验证码");
                     return;
                 }
@@ -145,34 +154,41 @@ public class SMSActivity extends BaseActivity implements SMSView {
                 bundle.putString("uuid", mSMSUUID);
                 bundle.putString("cellPhone", mEtSmsTel.getText().toString().trim());
                 switch (action) {
+                    case "clearGesturePassword":
+                        mGesturePasswordSetPersenter.gesturePasswordSet(mEtSmsTel.getText().toString().trim(), mSMSVerfic, mSMSUUID, "");
+                        break;
                     case "changeGesturePassword":
-                        startActivity(ChangeGesturePasswordActivity.class);
+                        startActivity(GesturePasswordChangeActivity.class, bundle);
+                        finish();
+                        break;
+                    case "setGesturePassword":
+                        bundle.putString("type", "set");
+                        startActivity(GesturePasswordSetActivity.class, bundle);
                         finish();
                         break;
                     case "forgetGesturePassword":
                         bundle.putString("type", "forget");
-                        startActivity(SetGesturePasswordActivity.class, bundle);
+                        startActivity(GesturePasswordSetActivity.class, bundle);
                         finish();
                         break;
                     case "changePayPassword":
                         bundle.putString("type", "change");
-                        startActivity(ChangePayPasswordActivity.class, bundle);
+                        startActivity(PayPasswordChangeActivity.class, bundle);
                         finish();
                         break;
                     case "forgetPayPassword":
                         bundle.putString("type", "forget");
-                        startActivity(ChangePayPasswordActivity.class, bundle);
+                        startActivity(PayPasswordChangeActivity.class, bundle);
                         finish();
                         break;
                     case "forgetLoginPassword":
                         bundle.putString("type", "forget");
-
-                        startActivity(ChangeLoginPasswordActivity.class, bundle);
+                        startActivity(LoginPasswordActivity.class, bundle);
                         finish();
                         break;
                     case "changeLoginPassword":
                         bundle.putString("type", "change");
-                        startActivity(ChangeLoginPasswordActivity.class, bundle);
+                        startActivity(LoginPasswordActivity.class, bundle);
                         finish();
                         break;
                 }
@@ -194,6 +210,16 @@ public class SMSActivity extends BaseActivity implements SMSView {
         new TimeCount(120000, 1000).start();
     }
 
+    @Override
+    public void gesturePasswordSetSuccess() {
+        finish();
+    }
+
+    @Override
+    public void gesturePasswordSetFail() {
+        finish();
+    }
+
     /**
      * 倒计时
      */
@@ -203,6 +229,7 @@ public class SMSActivity extends BaseActivity implements SMSView {
             super(millisInFuture, countDownInterval);
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onTick(long millisUntilFinished) {
             mTvSmsGetVerficcode.setText(millisUntilFinished / 1000 + getString(R.string.count_down));

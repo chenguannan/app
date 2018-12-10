@@ -16,16 +16,17 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.sl_group.jinyuntong_oem.CommonSet;
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
+import com.sl_group.jinyuntong_oem.bean.MerchantInfoBean;
+import com.sl_group.jinyuntong_oem.merchant_info.persenter.MerchantinfoPersenter;
+import com.sl_group.jinyuntong_oem.merchant_info.view.MerchantinfoView;
 import com.sl_group.jinyuntong_oem.utils.DisplayUtils;
 import com.sl_group.jinyuntong_oem.utils.PermissionSetDialogUtils;
 import com.sl_group.jinyuntong_oem.utils.PopupWindowUtils;
@@ -46,7 +47,7 @@ import java.io.FileOutputStream;
  * Created by 马天 on 2018/11/25.
  * description：文案详情
  */
-public class OfficialDetailsActivity extends BaseActivity {
+public class OfficialDetailsActivity extends BaseActivity implements MerchantinfoView {
     private ImageView mImgActionbarBack;
     private TextView mTvActionbarTitle;
     private TextView mTvActionbarShare;
@@ -63,11 +64,19 @@ public class OfficialDetailsActivity extends BaseActivity {
     private String screenShotPic;
     //选择分享方式弹窗
     private PopupWindow popupWindow;
+    //上部图片高度
     private float topHeight;
+    //左部图片宽度
     private float leftWidth;
+    //左部位图
     private Bitmap leftBitmap;
+    //上部位图
     private Bitmap topBitmap;
+    //底部背景ID
     private int bottomImgId;
+
+    private MerchantinfoPersenter mMerchantinfoPersenter;
+
 
     @Override
     public int bindLayout() {
@@ -88,8 +97,10 @@ public class OfficialDetailsActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        //设置标题
         mTvActionbarTitle.setText("文案");
 
+        mMerchantinfoPersenter = new MerchantinfoPersenter(this, this);
         //初始化截屏文件名，时间戳，，，可以加随机数的。。。
         screenShotPic = "IMG_" + System.currentTimeMillis() + ".png";
         //以下数据为了更好地适配。。。。
@@ -128,8 +139,7 @@ public class OfficialDetailsActivity extends BaseActivity {
             }
         }
 
-
-        //上部权重  按720*407来的
+        //上部权重  按750*423来的
         float topWeight = topHeight / 423;
         //左部权重
         float leftWeight = leftWidth / 750;
@@ -154,11 +164,6 @@ public class OfficialDetailsActivity extends BaseActivity {
         //加载底部图片
         mRlBuisnessDetailsBottom.setBackgroundResource(bottomImgId);
 
-        //二维码宽度
-        int qrcodeWidth = DisplayUtils.getScreenWidth(this) / 4;
-        //注册生成二维码
-        mImgBuisnessDetailsQrcode.setImageBitmap(QRCodeUtil.createQRImage(CommonSet.REGIST + "?cellPhone=" + SPUtil.get(this, "inviteCode", ""), qrcodeWidth, qrcodeWidth, BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher)));
-
     }
 
     @Override
@@ -171,7 +176,7 @@ public class OfficialDetailsActivity extends BaseActivity {
     public void widgetClick(View v) {
         switch (v.getId()) {
             case R.id.img_actionbar_back:
-                finish();
+                onBackPressed();
                 break;
             case R.id.tv_actionbar_share:
                 shareCheckPermission();
@@ -181,6 +186,19 @@ public class OfficialDetailsActivity extends BaseActivity {
 
     @Override
     public void doBusiness(Context mContext) {
+        mMerchantinfoPersenter.merchantInfo();
+    }
+
+    /**
+     * @param dataBean 商户信息对象
+     */
+    @Override
+    public void merchantInfoSuccess(MerchantInfoBean.DataBean dataBean) {
+        //二维码宽度
+        int qrcodeWidth = DisplayUtils.getScreenWidth(this) / 4;
+        //注册生成二维码
+        mImgBuisnessDetailsQrcode.setImageBitmap(QRCodeUtil.createQRImage(dataBean.getUrl() + "?cellPhone=" + SPUtil.get(this, "inviteCode", ""), qrcodeWidth, qrcodeWidth, BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher)));
+
 
     }
 
@@ -236,6 +254,52 @@ public class OfficialDetailsActivity extends BaseActivity {
     }
 
     /**
+     * 申请权限结果返回处理
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PERMISSIONS_READ_WRITE) {
+            boolean isAllGranted = true;
+
+            // 判断是否所有的权限都已经授予了
+            for (int grant : grantResults) {
+                if (grant != PackageManager.PERMISSION_GRANTED) {
+                    isAllGranted = false;
+                    break;
+                }
+            }
+
+            if (isAllGranted) {
+                ProgressDialogUtils.showProgress(this);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SystemClock.sleep(100);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Bitmap bitmap = screenshot();
+                                if (bitmap == null) {
+                                    ToastUtils.showToast("截屏失败");
+                                    return;
+                                }
+                                ProgressDialogUtils.dismissProgress();
+
+                                showShareTypePop(bitmap);
+                            }
+                        });
+                    }
+                }).start();
+            } else {
+                // 弹出对话框告诉用户需要权限的原因, 并引导用户去应用权限管理中手动打开权限按钮
+                PermissionSetDialogUtils.showSetPermission(this);
+            }
+        }
+    }
+
+    /**
      * 显示分享类型
      *
      * @param bitmap 文案截图
@@ -251,7 +315,7 @@ public class OfficialDetailsActivity extends BaseActivity {
         popupWindow = PopupWindowUtils.getPop(this, view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setAnimationStyle(R.style.PopupAnimationBottom);
         popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
-
+        //微信分享
         tvPopShareWechat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -261,6 +325,7 @@ public class OfficialDetailsActivity extends BaseActivity {
                 shareTypeMethod(SHARE_MEDIA.WEIXIN, bitmap);
             }
         });
+        //朋友圈分享
         tvPopShareMoments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -270,6 +335,7 @@ public class OfficialDetailsActivity extends BaseActivity {
                 shareTypeMethod(SHARE_MEDIA.WEIXIN_CIRCLE, bitmap);
             }
         });
+        //QQ分享
         tvPopShareQq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -279,6 +345,7 @@ public class OfficialDetailsActivity extends BaseActivity {
                 shareTypeMethod(SHARE_MEDIA.QQ, bitmap);
             }
         });
+        //QQ空间分享
         tvPopShareQzone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -333,9 +400,8 @@ public class OfficialDetailsActivity extends BaseActivity {
                 os.flush();
                 os.close();
 
-                WindowManager wm = this.getWindowManager();
-                int width = wm.getDefaultDisplay().getWidth();
-                int height = wm.getDefaultDisplay().getHeight();
+                int width = DisplayUtils.getScreenWidth(this);
+                int height = DisplayUtils.getScreenHeight(this);
                 //截屏。。。。。。。。。。。。。。。。。。。。
                 bitmap = Bitmap.createBitmap(
                         BitmapFactory.decodeFile(filePath)
@@ -344,52 +410,6 @@ public class OfficialDetailsActivity extends BaseActivity {
             }
         }
         return bitmap;
-    }
-
-    /**
-     * 申请权限结果返回处理
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == PERMISSIONS_READ_WRITE) {
-            boolean isAllGranted = true;
-
-            // 判断是否所有的权限都已经授予了
-            for (int grant : grantResults) {
-                if (grant != PackageManager.PERMISSION_GRANTED) {
-                    isAllGranted = false;
-                    break;
-                }
-            }
-
-            if (isAllGranted) {
-                ProgressDialogUtils.showProgress(this);
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        SystemClock.sleep(100);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Bitmap bitmap = screenshot();
-                                if (bitmap == null) {
-                                    ToastUtils.showToast("截屏失败");
-                                    return;
-                                }
-                                ProgressDialogUtils.dismissProgress();
-
-                                showShareTypePop(bitmap);
-                            }
-                        });
-                    }
-                }).start();
-            } else {
-                // 弹出对话框告诉用户需要权限的原因, 并引导用户去应用权限管理中手动打开权限按钮
-                PermissionSetDialogUtils.showSetPermission(this);
-            }
-        }
     }
 
     @Override

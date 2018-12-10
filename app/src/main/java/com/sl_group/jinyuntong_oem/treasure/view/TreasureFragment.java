@@ -28,9 +28,11 @@ import com.sl_group.jinyuntong_oem.utils.StringUtils;
 import com.sl_group.jinyuntong_oem.utils.ToastUtils;
 import com.sl_group.jinyuntong_oem.web.LoadWebActivity;
 
+import java.util.Locale;
+
 /**
  * Created by 马天 on 2018/11/13.
- * description：首页
+ * description：财富
  */
 public class TreasureFragment extends BaseFragment implements TreasureView, MerchantinfoView {
     private TextView mTvTreasureCanExtractMoney;
@@ -47,9 +49,9 @@ public class TreasureFragment extends BaseFragment implements TreasureView, Merc
 
     private TrerasurePersenter mTrerasurePersenter;
     private MerchantinfoPersenter mMerchantinfoPersenter;
-
+    //可提金额
     private double canExtractMoney = 0.00d;
-
+    //政策链接
     private String ruleUrl;
 
 
@@ -95,6 +97,7 @@ public class TreasureFragment extends BaseFragment implements TreasureView, Merc
     public void widgetClick(View v) {
         switch (v.getId()) {
             case R.id.tv_treasure_apply_extract:
+                //申请提现
                 if (canExtractMoney < CommonSet.EXTRACT_LIMIT) {
                     ToastUtils.showToast("满" + CommonSet.EXTRACT_LIMIT + "元可提");
                     return;
@@ -129,7 +132,7 @@ public class TreasureFragment extends BaseFragment implements TreasureView, Merc
 
     @Override
     public void doBusiness(Context mContext) {
-        mTrerasurePersenter.queryTreasure();
+        mTrerasurePersenter.treasure();
 
         //注册广播，提现后刷新数据
         LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
@@ -140,7 +143,7 @@ public class TreasureFragment extends BaseFragment implements TreasureView, Merc
             public void onReceive(Context context, Intent intent) {
                 String msg = intent.getStringExtra("data");
                 if ("refresh".equals(msg)) {
-                    mTrerasurePersenter.queryTreasure();
+                    mTrerasurePersenter.treasure();
                 }
             }
         };
@@ -148,18 +151,18 @@ public class TreasureFragment extends BaseFragment implements TreasureView, Merc
     }
 
     @Override
-    public void getTreasure(TreasureBean.DataBean data) {
+    public void treasureSuccess(TreasureBean.DataBean data) {
         canExtractMoney = data.getBalance();
         //可提佣金
-        mTvTreasureCanExtractMoney.setText(String.format("%.2f", data.getBalance()));
+        mTvTreasureCanExtractMoney.setText(String.format(Locale.CHINA,"%.2f", data.getBalance()));
         //累计收入，可提加已提
-        mTvTreasureAllEraning.setText(String.format("%.2f", data.getEncAmt() + data.getBalance()));
+        mTvTreasureAllEraning.setText(String.format(Locale.CHINA,"%.2f", data.getEncAmt() + data.getBalance()));
         //累计提现
-        mTvTreasureAllExtract.setText(String.format("%.2f", data.getEncAmt()));
+        mTvTreasureAllExtract.setText(String.format(Locale.CHINA,"%.2f", data.getEncAmt()));
         //交易佣金
-        mTvTreasureDealBrokerage.setText(String.format("%.2f", data.getTxnAmt()));
+        mTvTreasureDealBrokerage.setText(String.format(Locale.CHINA,"%.2f", data.getTxnAmt()));
         //升级VIP奖励
-        mTvTreasureUpvipBrokerage.setText(String.format("%.2f", data.getDirectAmt() + data.getIndirectAmt()));
+        mTvTreasureUpvipBrokerage.setText(String.format(Locale.CHINA,"%.2f", data.getDirectAmt() + data.getIndirectAmt()));
 
     }
 

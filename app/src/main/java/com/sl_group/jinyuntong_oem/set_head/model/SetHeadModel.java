@@ -5,6 +5,10 @@ package com.sl_group.jinyuntong_oem.set_head.model;
  * description：
  */
 public interface SetHeadModel {
+    /**
+      *
+      * @param uuid 上传照片返回UUID
+      */
     void setHeadImg(String uuid,SetHeadModel.ISetHeadImgCallBack setHeadImgCallBack);
 
     interface ISetHeadImgCallBack{

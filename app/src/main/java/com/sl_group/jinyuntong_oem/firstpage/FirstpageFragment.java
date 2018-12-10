@@ -40,7 +40,7 @@ import com.sl_group.jinyuntong_oem.merchant_info.view.MerchantinfoView;
 import com.sl_group.jinyuntong_oem.myshop.MyShopActivty;
 import com.sl_group.jinyuntong_oem.news.NewsActivity;
 import com.sl_group.jinyuntong_oem.open_merchant.view.OpenMerchantActivity;
-import com.sl_group.jinyuntong_oem.scan_input_money.view.ScanQrcodeInputMoneyActivity;
+import com.sl_group.jinyuntong_oem.gather_input_money.GatherInputMoneyActivity;
 import com.sl_group.jinyuntong_oem.system_prop.persenter.SystemPropPersenter;
 import com.sl_group.jinyuntong_oem.system_prop.view.SystemPropView;
 import com.sl_group.jinyuntong_oem.utils.AppUtils;
@@ -49,7 +49,7 @@ import com.sl_group.jinyuntong_oem.utils.PermissionSetDialogUtils;
 import com.sl_group.jinyuntong_oem.utils.SPUtil;
 import com.sl_group.jinyuntong_oem.utils.StringUtils;
 import com.sl_group.jinyuntong_oem.utils.ToastUtils;
-import com.sl_group.jinyuntong_oem.vip.view.VipCenterActivity;
+import com.sl_group.jinyuntong_oem.vip_center.VipCenterActivity;
 import com.sl_group.jinyuntong_oem.web.LoadWebActivity;
 import com.yzq.zxinglibrary.android.CaptureActivity;
 import com.yzq.zxinglibrary.common.Constant;
@@ -154,17 +154,7 @@ public class FirstpageFragment extends BaseFragment implements AnalyzeQrcodeView
         mMerchantinfoPersenter = new MerchantinfoPersenter(getActivity(), this);
 
         mBundle = new Bundle();
-        //获取保存的版本号
-        String version = (String) SPUtil.get(getActivity(), "version", "");
-        changelog = (String) SPUtil.get(getActivity(), "changelog", "");
-        versionShort = (String) SPUtil.get(getActivity(), "versionShort", "");
-        install_url = (String) SPUtil.get(getActivity(), "install_url", "");
-        //如果需要更新的话，先检查权限
-        if (!StringUtils.isEmpty(version) && AppUtils.getVersionCode(getActivity()) < Integer.parseInt(version)) {
-            upDate();
-        }else {
-            mMerchantinfoPersenter.merchantInfo();
-        }
+
 
 
     }
@@ -229,7 +219,7 @@ public class FirstpageFragment extends BaseFragment implements AnalyzeQrcodeView
             case R.id.tv_firstpage_shop:
                 //商铺，如果开通商户权限，跳我的店铺，没开通跳开通
                 if (StringUtils.isEmpty(canReceived)) {
-                    ToastUtils.showToast("数据加载异常");
+                    mMerchantinfoPersenter.merchantInfo();
                     return;
                 }
                 if ("t".equals(canReceived)) {
@@ -255,7 +245,7 @@ public class FirstpageFragment extends BaseFragment implements AnalyzeQrcodeView
                 //vip中心
                 switch (vipLevel) {
                     case -1:
-                        ToastUtils.showToast("数据加载异常");
+                        mMerchantinfoPersenter.merchantInfo();
                         break;
                     case 0:
                         //普通商户  跳转到VIP中心
@@ -269,7 +259,7 @@ public class FirstpageFragment extends BaseFragment implements AnalyzeQrcodeView
             case R.id.tv_firstpage_myshop:
                 //商铺，如果开通商户权限，跳我的店铺，没开通跳开通
                 if (StringUtils.isEmpty(canReceived)) {
-                    ToastUtils.showToast("数据加载异常");
+                    mMerchantinfoPersenter.merchantInfo();
                     return;
                 }
                 if ("t".equals(canReceived)) {
@@ -326,7 +316,7 @@ public class FirstpageFragment extends BaseFragment implements AnalyzeQrcodeView
 
     @Override
     public void doBusiness(Context mContext) {
-
+        mMerchantinfoPersenter.merchantInfo();
         //注册广播，提现后刷新数据
         LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
         IntentFilter intentFilter = new IntentFilter();
@@ -350,7 +340,7 @@ public class FirstpageFragment extends BaseFragment implements AnalyzeQrcodeView
         bundle.putString("merchant", dataBean.getShortName());
         bundle.putString("receivedMid", dataBean.getReceivedMid());
         bundle.putString("qrCodeContent", qrCodeContent);
-        startActivity(ScanQrcodeInputMoneyActivity.class, bundle);
+        startActivity(GatherInputMoneyActivity.class, bundle);
     }
 
     @Override
@@ -385,6 +375,15 @@ public class FirstpageFragment extends BaseFragment implements AnalyzeQrcodeView
     public void merchantInfoSuccess(MerchantInfoBean.DataBean dataBean) {
         canReceived = dataBean.getCanReceived();
         vipLevel = dataBean.getVipLevel();
+        //获取保存的版本号
+        String version = (String) SPUtil.get(getActivity(), "version", "");
+        changelog = (String) SPUtil.get(getActivity(), "changelog", "");
+        versionShort = (String) SPUtil.get(getActivity(), "versionShort", "");
+        install_url = (String) SPUtil.get(getActivity(), "install_url", "");
+        //如果需要更新的话，先检查权限
+        if (!StringUtils.isEmpty(version) && AppUtils.getVersionCode(getActivity()) < Integer.parseInt(version)) {
+            upDate();
+        }
     }
 
     //打开相机

@@ -5,5 +5,6 @@ package com.sl_group.jinyuntong_oem.upload_img.view;
  * description：
  */
 public interface UpLoadImgView {
+
     void uploadImgSuccess(String data, int index);
 }

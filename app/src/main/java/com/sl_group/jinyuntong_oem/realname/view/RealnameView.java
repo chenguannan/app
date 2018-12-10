@@ -5,5 +5,8 @@ package com.sl_group.jinyuntong_oem.realname.view;
  * description：
  */
 public interface RealnameView {
+    /**
+      * 实名成功回调
+      */
     void realnameSuccess();
 }

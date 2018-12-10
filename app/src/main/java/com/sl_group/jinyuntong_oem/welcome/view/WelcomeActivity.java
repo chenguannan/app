@@ -10,8 +10,8 @@ import com.sl_group.jinyuntong_oem.MainActivity;
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
 import com.sl_group.jinyuntong_oem.bean.UpDateBean;
-import com.sl_group.jinyuntong_oem.login.LoginActivity;
 import com.sl_group.jinyuntong_oem.login.GestureLoginActivity;
+import com.sl_group.jinyuntong_oem.login.LoginActivity;
 import com.sl_group.jinyuntong_oem.utils.LogUtils;
 import com.sl_group.jinyuntong_oem.utils.SPUtil;
 import com.sl_group.jinyuntong_oem.utils.StringUtils;
@@ -30,8 +30,8 @@ import java.util.TimerTask;
  * description：启动页
  */
 public class WelcomeActivity extends BaseActivity implements WelcomeView {
+    //开始时间
     private long startTime;
-    private long endTime;
 
     @Override
     public int bindLayout() {
@@ -48,8 +48,8 @@ public class WelcomeActivity extends BaseActivity implements WelcomeView {
 
         startTime = System.currentTimeMillis();
 
-        String mid = (String) SPUtil.get(this,"mid","");
-        if (StringUtils.isEmpty(mid)){
+        String mid = (String) SPUtil.get(this, "mid", "");
+        if (StringUtils.isEmpty(mid)) {
             Timer timer = new Timer();
             TimerTask task = new TimerTask() {
                 @Override
@@ -82,10 +82,10 @@ public class WelcomeActivity extends BaseActivity implements WelcomeView {
 
     @Override
     public void getGesturePassword(final String gesturePassword) {
-        endTime = System.currentTimeMillis();
-        if (endTime-startTime>3000){
+        long endTime = System.currentTimeMillis();
+        if (endTime - startTime > 3000) {
             skipGestureLoginActivity(gesturePassword);
-        }else {
+        } else {
 
             Timer timer = new Timer();
             TimerTask task = new TimerTask() {
@@ -94,7 +94,7 @@ public class WelcomeActivity extends BaseActivity implements WelcomeView {
                     skipGestureLoginActivity(gesturePassword);
                 }
             };
-            timer.schedule(task, 3000-(endTime-startTime));
+            timer.schedule(task, 3000 - (endTime - startTime));
         }
 
     }
@@ -105,16 +105,20 @@ public class WelcomeActivity extends BaseActivity implements WelcomeView {
         finish();
     }
 
+    /**
+      *
+      * @param gesturePassword 手势密码
+      */
     private void skipGestureLoginActivity(String gesturePassword) {
-       boolean loginSuccess= (boolean) SPUtil.get(this,"loginSuccess",false);
-        if (StringUtils.isEmpty(gesturePassword)){
-            if (loginSuccess){
+        boolean loginSuccess = (boolean) SPUtil.get(this, "loginSuccess", false);
+        if (StringUtils.isEmpty(gesturePassword)) {
+            if (loginSuccess) {
                 startActivity(MainActivity.class);
-            }else {
+            } else {
                 startActivity(LoginActivity.class);
             }
             finish();
-        }else {
+        } else {
             Bundle bundle = new Bundle();
             bundle.putString("gesturePassword", gesturePassword);
             startActivity(GestureLoginActivity.class, bundle);
@@ -123,6 +127,9 @@ public class WelcomeActivity extends BaseActivity implements WelcomeView {
 
     }
 
+    /**
+      * 获取版本信息
+      */
     private void getUpdateInfo() {
         //在子线程中获取服务器的数据
         Thread thread = new Thread() {
@@ -165,7 +172,7 @@ public class WelcomeActivity extends BaseActivity implements WelcomeView {
                             e.printStackTrace();
                         }
                         LogUtils.i("更新txt读取结果：" + outputStream.toString());
-                        if (StringUtils.isEmpty(outputStream.toString())){
+                        if (StringUtils.isEmpty(outputStream.toString())) {
                             return;
                         }
                         UpDateBean upDateBean = new Gson().fromJson(outputStream.toString(), UpDateBean.class);

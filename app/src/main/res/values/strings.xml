@@ -254,6 +254,7 @@
     <string name="card_package">卡包</string>
     <string name="delete">删除</string>
     <string name="pop_forget_password">忘记密码？</string>
+    <string name="input_pay_password">请输入支付密码</string>
 
 
 </resources>

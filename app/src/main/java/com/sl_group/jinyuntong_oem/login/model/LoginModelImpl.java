@@ -26,14 +26,13 @@ public class LoginModelImpl implements LoginModel {
     public void getLoginSMS(String tel, final ILoginSMSCallBack loginSMSCallBack) {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);
         obj.put("method", URLConstants.LOGIN_SMS);
-        obj.put("cellPhone", tel);
         obj.put("agencyId", CommonSet.AGENCY_ID);
-
-        obj.put("encryptId", "merchantApp");
+        obj.put("encryptId", CommonSet.ENCRYPT_ID);
+        obj.put("cellPhone", tel);
         HttpUtils.getInstance().postJson(
                 mActivity,
                 true,
-                CommonSet.DOMAIN_URL +  URLConstants.LOGIN_SMS,
+                CommonSet.DOMAIN_URL + URLConstants.LOGIN_SMS,
                 com.alibaba.fastjson.JSON.toJSONString(ParamsFormatUtils.paramsMethod(obj, CommonSet.KEY))
                 , new HttpUtils.HttpCallback() {
                     @Override
@@ -52,23 +51,23 @@ public class LoginModelImpl implements LoginModel {
     }
 
     @Override
-    public void login(String loginType,String tel,String password, String smsCode,String uuid, final ILoginCallBack loginCallBack) {
+    public void login(String loginType, String tel, String password, String smsCode, String uuid, final ILoginCallBack loginCallBack) {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);
         obj.put("method", URLConstants.LOGIN);
         obj.put("agencyId", CommonSet.AGENCY_ID);
         obj.put("loginName", tel);
-        obj.put("encryptId",  CommonSet.ENCRYPT_ID);
-        obj.put("loginType",loginType);
-        if (StringUtils.isEmpty(loginType)){
+        obj.put("encryptId", CommonSet.ENCRYPT_ID);
+        obj.put("loginType", loginType);
+        if (StringUtils.isEmpty(loginType)) {
             obj.put("checkCode", smsCode);
-            obj.put("uuid",uuid);
-        }else {
+            obj.put("uuid", uuid);
+        } else {
             obj.put("password", password);
         }
         HttpUtils.getInstance().postJson(
                 mActivity,
                 true,
-                CommonSet.DOMAIN_URL +  URLConstants.LOGIN,
+                CommonSet.DOMAIN_URL + URLConstants.LOGIN,
                 com.alibaba.fastjson.JSON.toJSONString(ParamsFormatUtils.paramsMethod(obj, CommonSet.KEY))
                 , new HttpUtils.HttpCallback() {
                     @Override

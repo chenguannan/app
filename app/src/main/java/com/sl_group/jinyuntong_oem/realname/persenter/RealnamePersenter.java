@@ -9,11 +9,12 @@ import com.sl_group.jinyuntong_oem.realname.model.RealnameModel;
 import com.sl_group.jinyuntong_oem.realname.model.RealnameModelImpl;
 import com.sl_group.jinyuntong_oem.realname.view.RealnameView;
 import com.sl_group.jinyuntong_oem.utils.LogUtils;
+import com.sl_group.jinyuntong_oem.utils.StringUtils;
 import com.sl_group.jinyuntong_oem.utils.ToastUtils;
 
 /**
  * Created by 马天 on 2018/11/16.
- * description：
+ * description：实名认证
  */
 public class RealnamePersenter {
     private Activity mActivity;
@@ -26,10 +27,38 @@ public class RealnamePersenter {
         mRealnameMode = new RealnameModelImpl(activity);
     }
 
-
     public void realname(String idcard, String holderName, String accountNumber, String tel, String checkCode ,String uuid, String bizPlaceSnapshot1ImageId, String bizPlaceSnapshot2ImageId) {
-        if (!mRealnameMode.checkRealNameParams(idcard, holderName, accountNumber, tel, bizPlaceSnapshot1ImageId, bizPlaceSnapshot2ImageId)) {
+        if (StringUtils.isEmpty(idcard)||StringUtils.isEmpty(holderName)){
+            ToastUtils.showToast("人脸识别获取数据异常");
+            return ;
+        }
+        if (StringUtils.isEmpty(accountNumber)){
+            ToastUtils.showToast("请输入储蓄卡号");
+            return ;
+        }
+        if (StringUtils.isEmpty(tel)){
+            ToastUtils.showToast("请输入银行预留手机号");
+            return ;
+        }
+        if (tel.length()!=11){
+            ToastUtils.showToast("请输入正确的银行预留手机号");
+            return ;
+        }
+        if (StringUtils.isEmpty(uuid)) {
+            ToastUtils.showToast("请先获取验证码");
             return;
+        }
+        if (StringUtils.isEmpty(checkCode)||checkCode.length()!=6){
+            ToastUtils.showToast("请输入验证码");
+            return;
+        }
+        if (StringUtils.isEmpty(bizPlaceSnapshot1ImageId)){
+            ToastUtils.showToast("请上传手持身份证照片");
+            return ;
+        }
+        if (StringUtils.isEmpty(bizPlaceSnapshot2ImageId)){
+            ToastUtils.showToast("请上传银行卡正面照片");
+            return ;
         }
         mRealnameMode.realname(idcard, holderName, accountNumber, tel,checkCode,uuid, bizPlaceSnapshot1ImageId, bizPlaceSnapshot2ImageId, new RealnameModel.IRealnameCallBack() {
             @Override

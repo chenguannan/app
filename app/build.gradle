@@ -6,8 +6,8 @@ android {
         applicationId "com.sl_group.jinyuntong_oem"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 17
-        versionName "2.6"
+        versionCode 1
+        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk {

@@ -23,37 +23,6 @@ public class RealnameModelImpl implements RealnameModel {
         mActivity = activity;
     }
 
-
-    @Override
-    public boolean checkRealNameParams(String idcard, String holderName, String accountNumber, String tel, String bizPlaceSnapshot1ImageId, String bizPlaceSnapshot2ImageId) {
-        if (StringUtils.isEmpty(idcard)||StringUtils.isEmpty(holderName)){
-            ToastUtils.showToast("人脸识别获取数据异常");
-            return false;
-        }
-        if (StringUtils.isEmpty(accountNumber)){
-            ToastUtils.showToast("请输入储蓄卡号");
-            return false;
-        }
-        if (StringUtils.isEmpty(tel)){
-            ToastUtils.showToast("请输入银行预留手机号");
-            return false;
-        }
-        if (tel.length()!=11){
-            ToastUtils.showToast("请输入正确的银行预留手机号");
-            return false;
-        }
-        if (StringUtils.isEmpty(bizPlaceSnapshot1ImageId)){
-            ToastUtils.showToast("请上传手持身份证照片");
-            return false;
-        }
-        if (StringUtils.isEmpty(bizPlaceSnapshot2ImageId)){
-            ToastUtils.showToast("请上传银行卡正面照片");
-            return false;
-        }
-        return true;
-    }
-
-
     @Override
     public void realname(String idcard, String holderName, String accountNumber, String tel,String checkCode ,String uuid, String bizPlaceSnapshot1ImageId, String bizPlaceSnapshot2ImageId, final IRealnameCallBack iRealnameCallBack) {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);

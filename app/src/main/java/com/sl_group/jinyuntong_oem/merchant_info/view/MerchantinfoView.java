@@ -8,8 +8,9 @@ import com.sl_group.jinyuntong_oem.bean.MerchantInfoBean;
  */
 public interface MerchantinfoView {
     /**
-      * 商户信息查询成功
-      * @param dataBean 商户信息对象
-      */
+     * 商户信息查询成功
+     *
+     * @param dataBean 商户信息对象
+     */
     void merchantInfoSuccess(MerchantInfoBean.DataBean dataBean);
 }

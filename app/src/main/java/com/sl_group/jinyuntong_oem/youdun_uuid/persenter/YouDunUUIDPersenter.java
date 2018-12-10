@@ -26,16 +26,16 @@ public class YouDunUUIDPersenter {
         mYouDunModel = new YouDunUUIDModelImpl(activity);
     }
 
-    public void getYouDunUUID(){
+    public void getYouDunUUID() {
         mYouDunModel.getYouDunUUID(new YouDunUUIDModel.IYouDunUUIDCallBack() {
             @Override
             public void onSuccess(String data) {
-                LogUtils.i("有盾UUID："+data);
-                YouDunUUIDBean youDunUUIDBean = new Gson().fromJson(data,YouDunUUIDBean.class);
-                if ("000000".equals(youDunUUIDBean.getCode())){
+                LogUtils.i("有盾UUID：" + data);
+                YouDunUUIDBean youDunUUIDBean = new Gson().fromJson(data, YouDunUUIDBean.class);
+                if ("000000".equals(youDunUUIDBean.getCode())) {
                     mYouDunUUIDView.getYouDunUUIDSuccess(youDunUUIDBean.getData().getUuid());
                     return;
-                }else if ("888888".equals(youDunUUIDBean.getCode())) {
+                } else if ("888888".equals(youDunUUIDBean.getCode())) {
                     new CompelLogin(mActivity).popExitLogin();
                     return;
                 }

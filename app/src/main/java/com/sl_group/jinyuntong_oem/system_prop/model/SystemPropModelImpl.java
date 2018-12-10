@@ -27,7 +27,7 @@ public class SystemPropModelImpl implements SystemPropModel {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);
         obj.put("method", URLConstants.SYSTEMPROP);
         obj.put("agencyId", CommonSet.AGENCY_ID);
-        obj.put("encryptId","merchantApp");
+        obj.put("encryptId",CommonSet.ENCRYPT_ID);
         HttpUtils.getInstance().postJson(
                 mActivity,
                 true,

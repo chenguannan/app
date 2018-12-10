@@ -7,7 +7,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by 马天 on 2018/11/20.
@@ -39,15 +39,14 @@ public class PayBillActivity extends BaseActivity implements PayBillView {
     private TextView mTvPayBillEndDate;
     private SmartRefreshLayout mRefreshLayout;
     private RecyclerView mRecycleViewPayBill;
-
-
-
-
+    //付款账单persenter
     private PayBillPersenter mPayBillPersenter;
-
+    //付款账单集合
     private List<PayBillBean.DataBean.ResultListBean> mListBeans;
+    //付款账单适配器
     private PayBillAdapter mPayBillAdapter;
-    private int page = 0;
+    //当前页码
+    private int curPage = 0;
 
     @Override
     public int bindLayout() {
@@ -66,37 +65,38 @@ public class PayBillActivity extends BaseActivity implements PayBillView {
 
     @Override
     public void initData() {
+        //设置标题
         mTvActionbarTitle.setText("付款账单");
-
+        //初始化付款账单persenter
         mPayBillPersenter = new PayBillPersenter(this, this);
-
-//        long dateMillis = System.currentTimeMillis();
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//
-//        String currentDate = simpleDateFormat.format(dateMillis);
-//        mTvPayBillStartDate.setText(currentDate);
-//        mTvPayBillEndDate.setText(currentDate);
-
-
+        //初始化集合
         mListBeans = new ArrayList<>();
+        //初始化适配器
         mPayBillAdapter = new PayBillAdapter(mListBeans, this);
+        //初始化recycleview线性布局
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        //设置方向
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecycleViewPayBill.setAdapter(mPayBillAdapter);
+        //绑定manager
         mRecycleViewPayBill.setLayoutManager(linearLayoutManager);
+        //绑定适配器
+        mRecycleViewPayBill.setAdapter(mPayBillAdapter);
+        //刷新
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshlayout) {
-                page = 0;
+                //当前页置0，清空集合
+                curPage = 0;
                 mListBeans.clear();
-                mPayBillPersenter.getPayBill(false, page, "10", mTvPayBillStartDate.getText().toString().trim(), mTvPayBillEndDate.getText().toString().trim());
+                mPayBillPersenter.getPayBill(false, curPage, "10", mTvPayBillStartDate.getText().toString().trim(), mTvPayBillEndDate.getText().toString().trim());
             }
         });
         mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                page++;
-                mPayBillPersenter.getPayBill(false, page, "10", mTvPayBillStartDate.getText().toString().trim(), mTvPayBillEndDate.getText().toString().trim());
+                //页码自增
+                curPage++;
+                mPayBillPersenter.getPayBill(false, curPage, "10", mTvPayBillStartDate.getText().toString().trim(), mTvPayBillEndDate.getText().toString().trim());
 
             }
         });
@@ -129,9 +129,10 @@ public class PayBillActivity extends BaseActivity implements PayBillView {
 
     @Override
     public void doBusiness(Context mContext) {
-        page = 0;
+        //当前页码置0，清空集合
+        curPage = 0;
         mListBeans.clear();
-        mPayBillPersenter.getPayBill(true, page, "10", mTvPayBillStartDate.getText().toString().trim(), mTvPayBillEndDate.getText().toString().trim());
+        mPayBillPersenter.getPayBill(true, curPage, "10", mTvPayBillStartDate.getText().toString().trim(), mTvPayBillEndDate.getText().toString().trim());
     }
 
     /**
@@ -141,28 +142,17 @@ public class PayBillActivity extends BaseActivity implements PayBillView {
      */
     private void selectDate(final String title) {
 
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        // 获取软键盘的显示状态
-        boolean isOpen = imm.isActive();
-
-        // 隐藏软键盘
-        if (isOpen) {
-            imm.hideSoftInputFromWindow(mTvPayBillStartDate.getWindowToken(), 0);
-            imm.hideSoftInputFromWindow(mTvPayBillEndDate.getWindowToken(), 0);
-        }
-
         TimePickerView pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
             @Override
             public void onTimeSelect(Date date, View v) {
                 if (title.contains("开始")) {
                     //选中事件回调
-                    mTvPayBillStartDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(date));
+                    mTvPayBillStartDate.setText(new SimpleDateFormat("yyyy-MM-dd",Locale.getDefault()).format(date));
                 } else if (title.contains("结束")) {
                     //选中事件回调
-                    mTvPayBillEndDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(date));
+                    mTvPayBillEndDate.setText(new SimpleDateFormat("yyyy-MM-dd",Locale.getDefault()).format(date));
                 }
-                page = 0;
+                curPage = 0;
                 mListBeans.clear();
                 mPayBillPersenter.getPayBill(true, 0, "10", mTvPayBillStartDate.getText().toString().trim(), mTvPayBillEndDate.getText().toString().trim());
             }
@@ -184,11 +174,17 @@ public class PayBillActivity extends BaseActivity implements PayBillView {
         pvTime.show();
     }
 
-
+    /**
+      * 查询成功
+      * @param dataBean 付款账单对象
+      */
     @Override
-    public void getPayBillList(List<PayBillBean.DataBean.ResultListBean> resultList) {
-        mListBeans.addAll(resultList);
+    public void payBillSuccess(PayBillBean.DataBean dataBean) {
+        //添加集合
+        mListBeans.addAll(dataBean.getResultList());
+        //刷新适配器
         mPayBillAdapter.notifyDataSetChanged();
+        //结束刷新加载状态
         if (mRefreshLayout.isEnableRefresh()) {
             mRefreshLayout.finishRefresh();
         }

@@ -5,6 +5,7 @@ package com.sl_group.jinyuntong_oem.welcome.model;
  * description：
  */
 public interface WelcomeModel {
+
     void merchantInfo(WelcomeModel.IMerchantInfoCallBack merchantInfoCallBack);
 
     interface IMerchantInfoCallBack{

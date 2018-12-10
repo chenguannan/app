@@ -17,11 +17,15 @@ import android.widget.TextView;
 import com.sl_group.jinyuntong_oem.CommonSet;
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.adapter.GatherRateAdapter;
+import com.sl_group.jinyuntong_oem.bank_fee.persenter.BankFeePersenter;
+import com.sl_group.jinyuntong_oem.bank_fee.view.BankFeeView;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
 import com.sl_group.jinyuntong_oem.bean.BankFeeBean;
 import com.sl_group.jinyuntong_oem.bean.CreditCardBean;
 import com.sl_group.jinyuntong_oem.bean.MerchantInfoBean;
 import com.sl_group.jinyuntong_oem.bindcard.view.BindCreditCardActivity;
+import com.sl_group.jinyuntong_oem.buy_vip.persenter.BuyVipPersenter;
+import com.sl_group.jinyuntong_oem.buy_vip.view.BuyVipView;
 import com.sl_group.jinyuntong_oem.creditcard.persenter.CreditCardListPersenter;
 import com.sl_group.jinyuntong_oem.creditcard.view.CreditCardListActivity;
 import com.sl_group.jinyuntong_oem.creditcard.view.CreditCardListView;
@@ -31,8 +35,6 @@ import com.sl_group.jinyuntong_oem.utils.DisplayUtils;
 import com.sl_group.jinyuntong_oem.utils.PopupWindowUtils;
 import com.sl_group.jinyuntong_oem.utils.SPUtil;
 import com.sl_group.jinyuntong_oem.utils.ToastUtils;
-import com.sl_group.jinyuntong_oem.vip.persenter.VipCenterPersenter;
-import com.sl_group.jinyuntong_oem.vip.view.VipCenterView;
 import com.sl_group.jinyuntong_oem.web.X5WebViewActivity;
 
 import java.util.ArrayList;
@@ -43,7 +45,7 @@ import java.util.Locale;
  * Created by 马天 on 2018/11/21.
  * description：收款费率
  */
-public class GatherRateActivity extends BaseActivity implements VipCenterView, CreditCardListView,MerchantinfoView {
+public class GatherRateActivity extends BaseActivity implements BankFeeView, BuyVipView, CreditCardListView, MerchantinfoView {
     private ImageView mImgActionbarBack;
     private TextView mTvActionbarTitle;
     private TextView mTvGatherRateCurrentLevel;
@@ -58,7 +60,8 @@ public class GatherRateActivity extends BaseActivity implements VipCenterView, C
     private Button mBtnGatherRateUplevel;
 
 
-    private VipCenterPersenter mVipCenterPersenter;
+    private BankFeePersenter mBankFeePersenter;
+    private BuyVipPersenter mBuyVipPersenter;
     private MerchantinfoPersenter mMerchantinfoPersenter;
     private CreditCardListPersenter mCreditCardListPersenter;
     private GatherRateAdapter mGatherRateAdapter;
@@ -77,7 +80,7 @@ public class GatherRateActivity extends BaseActivity implements VipCenterView, C
         if (isPaySelectCard) {
             accountNumber = (String) SPUtil.get(GatherRateActivity.this, "payAccountNumber", "");
             bankName = (String) SPUtil.get(GatherRateActivity.this, "payBankName", "");
-            popBuyVip(bankName,accountNumber);
+            popBuyVip(bankName, accountNumber);
         }
 
     }
@@ -110,7 +113,8 @@ public class GatherRateActivity extends BaseActivity implements VipCenterView, C
         //设置标题
         mTvActionbarTitle.setText("收款费率");
         //vip中心  商户信息  信用卡列表persenter
-        mVipCenterPersenter = new VipCenterPersenter(this, this);
+        mBankFeePersenter = new BankFeePersenter(this, this);
+        mBuyVipPersenter = new BuyVipPersenter(this, this);
         mMerchantinfoPersenter = new MerchantinfoPersenter(this, this);
         mCreditCardListPersenter = new CreditCardListPersenter(this, this);
         //费率数据集合
@@ -153,7 +157,7 @@ public class GatherRateActivity extends BaseActivity implements VipCenterView, C
                 break;
             case 1:
                 displayInfo((String) SPUtil.get(this, "vipTime", ""));
-                mVipCenterPersenter.queryBankFee();
+                mBankFeePersenter.bankFee();
                 break;
 
         }
@@ -161,12 +165,13 @@ public class GatherRateActivity extends BaseActivity implements VipCenterView, C
     }
 
     /**
-      * 获取银行费率
-      * @param data 费率集合对象
-      */
+     * 获取银行费率
+     *
+     * @param data 费率集合对象
+     */
     @SuppressLint("SetTextI18n")
     @Override
-    public void getBankFeeList(List<BankFeeBean.DataBean> data) {
+    public void bankFeeSuccess(List<BankFeeBean.DataBean> data) {
         if (data == null) {
             return;
         }
@@ -174,16 +179,17 @@ public class GatherRateActivity extends BaseActivity implements VipCenterView, C
             BankFeeBean.DataBean dataBean = data.get(i);
             if (currentLevel == dataBean.getVipLevel()) {
                 mBeanList.add(dataBean);
-                mTvGatherRateExtractFee.setText(String.format(Locale.CHINA,"%.2f", dataBean.getExtraFee()) + "元/笔");
+                mTvGatherRateExtractFee.setText(String.format(Locale.CHINA, "%.2f", dataBean.getExtraFee()) + "元/笔");
             }
         }
         mGatherRateAdapter.notifyDataSetChanged();
     }
 
     /**
-      * 获取信用卡列表
-      * @param list 绑定信用卡列表
-      */
+     * 获取信用卡列表
+     *
+     * @param list 绑定信用卡列表
+     */
     @Override
     public void getCreditCardList(List<CreditCardBean.DataBean> list) {
         if (list.size() <= 0) {
@@ -198,33 +204,36 @@ public class GatherRateActivity extends BaseActivity implements VipCenterView, C
     }
 
     /**
-      * 购买VIP下单成功
-      * @param openUrl 购买VIP链接
-      */
+     * 购买VIP下单成功
+     *
+     * @param openUrl 购买VIP链接
+     */
     @Override
     public void buyVipSuccess(String openUrl) {
         Bundle bundle = new Bundle();
-        bundle.putString("url",openUrl);
-        startActivity(X5WebViewActivity.class,bundle);
+        bundle.putString("url", openUrl);
+        startActivity(X5WebViewActivity.class, bundle);
         finish();
     }
 
     /**
-      * 商户信息查询成功
-      * @param dataBean 商户信息对象
-      */
+     * 商户信息查询成功
+     *
+     * @param dataBean 商户信息对象
+     */
     @Override
     public void merchantInfoSuccess(MerchantInfoBean.DataBean dataBean) {
         //当前用户等级
         currentLevel = dataBean.getVipLevel();
         displayInfo(dataBean.getVipTime());
-        mVipCenterPersenter.queryBankFee();
+        mBankFeePersenter.bankFee();
     }
 
     /**
-      * 显示信息
-      * @param vipDate 开通VIP时间
-      */
+     * 显示信息
+     *
+     * @param vipDate 开通VIP时间
+     */
     private void displayInfo(String vipDate) {
         switch (currentLevel) {
             case 0:
@@ -255,10 +264,11 @@ public class GatherRateActivity extends BaseActivity implements VipCenterView, C
 
 
     /**
-      * 购买VIP弹窗
-      * @param bankName 银行名称
-      * @param accountNumber 结算卡账号
-      */
+     * 购买VIP弹窗
+     *
+     * @param bankName      银行名称
+     * @param accountNumber 结算卡账号
+     */
     @SuppressLint("SetTextI18n")
     private void popBuyVip(String bankName, final String accountNumber) {
         View view = LayoutInflater.from(this).inflate(R.layout.pop_buy_vip, null);
@@ -301,7 +311,7 @@ public class GatherRateActivity extends BaseActivity implements VipCenterView, C
                 if (popupWindow.isShowing()) {
                     popupWindow.dismiss();
                 }
-                mVipCenterPersenter.buyVip(accountNumber);
+                mBuyVipPersenter.buyVip(accountNumber);
             }
         });
     }
@@ -309,8 +319,9 @@ public class GatherRateActivity extends BaseActivity implements VipCenterView, C
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SPUtil.remove(this,"isPaySelectCard");
-        SPUtil.remove(this,"payAccountNumber");
-        SPUtil.remove(this,"payBankName");
+        SPUtil.remove(this, "isPaySelectCard");
+        SPUtil.remove(this, "payAccountNumber");
+        SPUtil.remove(this, "payBankName");
     }
+
 }

@@ -44,8 +44,11 @@ public class ShareRegistActivity extends BaseActivity implements MerchantinfoVie
     private SHARE_MEDIA shareType;
 
     private MerchantinfoPersenter mMerchantinfoPersenter;
+    //分享标题
     private String title;
+    //分享内容
     private String content;
+    //分享链接
     private String url;
 
 
@@ -66,6 +69,7 @@ public class ShareRegistActivity extends BaseActivity implements MerchantinfoVie
 
     @Override
     public void initData() {
+        //设置标题
         mTvActionbarTitle.setText("分享注册");
         mMerchantinfoPersenter = new MerchantinfoPersenter(this, this);
     }

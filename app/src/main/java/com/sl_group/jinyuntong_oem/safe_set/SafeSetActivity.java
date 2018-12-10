@@ -14,8 +14,8 @@ import android.widget.TextView;
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
 import com.sl_group.jinyuntong_oem.login.LoginActivity;
-import com.sl_group.jinyuntong_oem.safe_set.gesture_password.view.GesturePasswordActivity;
-import com.sl_group.jinyuntong_oem.safe_set.pay_password.PayPasswordActivity;
+import com.sl_group.jinyuntong_oem.gesture_password.GesturePasswordActivity;
+import com.sl_group.jinyuntong_oem.pay_password.PayPasswordActivity;
 import com.sl_group.jinyuntong_oem.sms.view.SMSActivity;
 import com.sl_group.jinyuntong_oem.utils.DisplayUtils;
 import com.sl_group.jinyuntong_oem.utils.PopupWindowUtils;
@@ -70,6 +70,7 @@ public class SafeSetActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_safe_set_login_password:
+                //修改登录密码
                 Bundle bundle = new Bundle();
                 bundle.putString("action","changeLoginPassword");
                 startActivity(SMSActivity.class,bundle);
@@ -83,6 +84,7 @@ public class SafeSetActivity extends BaseActivity {
                 startActivity(GesturePasswordActivity.class);
                 break;
             case R.id.btn_safe_set_exit_login:
+                //退出登录
                 popExitLogin();
                 break;
 
@@ -93,7 +95,9 @@ public class SafeSetActivity extends BaseActivity {
     public void doBusiness(Context mContext) {
 
     }
-
+    /**
+      * 退出登录弹窗
+      */
     private void popExitLogin(){
         View view = LayoutInflater.from(this).inflate(R.layout.pop_exit_login, null);
         Button cancel = view.findViewById(R.id.btn_pop_exit_login_cancel);

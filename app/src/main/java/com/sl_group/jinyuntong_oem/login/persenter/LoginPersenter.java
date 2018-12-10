@@ -46,7 +46,7 @@ public class LoginPersenter {
             @Override
             public void onSuccess(String data) {
 
-                LogUtils.i("ChangeLoginPasswordModelImpl--46--登录短信：\n" + data);
+                LogUtils.i("登录短信验证码：" + data);
                 LoginSMSBean loginSMSBean = new Gson().fromJson(data, LoginSMSBean.class);
                 if ("000000".equals(loginSMSBean.getCode())) {
                     mLoginTelView.loginSMSSuccess(loginSMSBean.getData());
@@ -79,9 +79,10 @@ public class LoginPersenter {
             ToastUtils.showToast("请输入8-14位登录密码");
         }
 
-        mLoginTelModel.login(loginType,tel,password, smsCode, uuid, new LoginModel.ILoginCallBack() {
+        mLoginTelModel.login(loginType, tel, password, smsCode, uuid, new LoginModel.ILoginCallBack() {
             @Override
             public void onSuccess(String data) {
+                LogUtils.i("登录：" + data);
                 LoginBean loginBean = new Gson().fromJson(data, LoginBean.class);
                 if ("000000".equals(loginBean.getCode())) {
                     LoginBean.DataBean dataBean = loginBean.getData();
@@ -104,8 +105,6 @@ public class LoginPersenter {
                 } else {
                     ToastUtils.showToast(loginBean.getMessage());
                 }
-
-                LogUtils.i("ChangeLoginPasswordModelImpl--46--登录：\n" + data);
             }
         });
     }

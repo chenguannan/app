@@ -1,5 +1,6 @@
 package com.sl_group.jinyuntong_oem.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +13,7 @@ import android.widget.TextView;
 
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.bean.PayBillBean;
-import com.sl_group.jinyuntong_oem.pay_bill.PayBillDetailsActivity;
+import com.sl_group.jinyuntong_oem.pay_bill_details.PayBillDetailsActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -39,11 +40,12 @@ public class PayBillAdapter extends RecyclerView.Adapter<PayBillAdapter.ViewHold
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final PayBillBean.DataBean.ResultListBean dataBean = mBeanList.get(position);
         final String bizOrderNumber = dataBean.getBizOrderNumber();
-        final String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(dataBean.getCreatedDate());
+        final String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.getDefault()).format(dataBean.getCreatedDate());
         final String state = dataBean.getState();
         final String payMoney = String.format(Locale.CHINA,"%.2f", dataBean.getSrcAmt());
         final String gatherMerchant = dataBean.getShortName();

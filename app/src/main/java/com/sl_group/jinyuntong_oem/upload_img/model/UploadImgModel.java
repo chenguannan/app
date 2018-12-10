@@ -9,7 +9,7 @@ public interface UploadImgModel {
      * @param file 文件名
      *             上传图片
      */
-    void uploadImage(String file,int index, UploadImgModel.IUpLoadImgCallBack upLoadImgCallBack);
+    void uploadImage(String file, int index, UploadImgModel.IUpLoadImgCallBack upLoadImgCallBack);
 
     /**
      * 实名上传照片回调接口及回调方法

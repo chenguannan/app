@@ -5,5 +5,6 @@ package com.sl_group.jinyuntong_oem.unbind_creditcard.view;
  * description：
  */
 public interface UnBindCreditCardView {
+
     void unBindCreditCardSuccess();
 }

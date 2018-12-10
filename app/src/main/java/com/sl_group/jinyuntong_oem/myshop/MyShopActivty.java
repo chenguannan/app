@@ -11,7 +11,7 @@ import com.sl_group.jinyuntong_oem.base.BaseActivity;
 import com.sl_group.jinyuntong_oem.my_team.view.MyTeamActivity;
 import com.sl_group.jinyuntong_oem.gather_bill.view.GatherBillActivity;
 import com.sl_group.jinyuntong_oem.gather_rate.GatherRateActivity;
-import com.sl_group.jinyuntong_oem.settle_info.view.SettleInfoActivity;
+import com.sl_group.jinyuntong_oem.settle_card_info.SettleCardInfoActivity;
 import com.sl_group.jinyuntong_oem.shop_info.ShopInfoActivity;
 
 /**
@@ -70,7 +70,7 @@ public class MyShopActivty extends BaseActivity {
                 break;
             case R.id.rl_my_shop_settle_info:
                 //结算信息
-                startActivity(SettleInfoActivity.class);
+                startActivity(SettleCardInfoActivity.class);
                 break;
             case R.id.rl_my_shop_gather_bill:
                 //收款账单

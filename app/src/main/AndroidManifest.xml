@@ -50,7 +50,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".register.view.RegisterActivity"
+            android:name=".regist.view.RegistActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name="com.sl_group.jinyuntong_oem.login.GestureLoginActivity"
@@ -68,7 +68,7 @@
             android:name=".gather.view.GatherActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".set_money.SetMoneyActivity"
+            android:name=".gather_set_money.GatherSetMoneyActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".creditcard.view.CreditCardListActivity"
@@ -83,7 +83,7 @@
             android:name=".ScanCameraActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".safe_set.login_password.view.ChangeLoginPasswordActivity"
+            android:name=".login_password.view.LoginPasswordActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".open_merchant.view.OpenMerchantActivity"
@@ -98,19 +98,19 @@
             android:name=".safe_set.SafeSetActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".safe_set.gesture_password.view.GesturePasswordActivity"
+            android:name=".gesture_password.GesturePasswordActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".safe_set.gesture_password.set_gesture.view.SetGesturePasswordActivity"
+            android:name=".gesture_set.view.GesturePasswordSetActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".safe_set.gesture_password.change_gesture.view.ChangeGesturePasswordActivity"
+            android:name=".gesture_change.view.GesturePasswordChangeActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".sms.view.SMSActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".vip.view.VipCenterActivity"
+            android:name=".vip_center.VipCenterActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".web.LoadWebActivity"
@@ -119,7 +119,7 @@
             android:name=".shop_info.ShopInfoActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".settle_info.view.SettleInfoActivity"
+            android:name=".settle_card_info.SettleCardInfoActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".gather_bill.view.GatherBillActivity"
@@ -131,19 +131,19 @@
             android:name=".pay_bill.view.PayBillActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".pay_bill.PayBillDetailsActivity"
+            android:name=".pay_bill_details.PayBillDetailsActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".scan_input_money.view.ScanQrcodeInputMoneyActivity"
+            android:name=".gather_input_money.GatherInputMoneyActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".gather_rate.GatherRateActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".safe_set.pay_password.change_pay_password.view.ChangePayPasswordActivity"
+            android:name=".pay_password_change.view.PayPasswordChangeActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".safe_set.pay_password.PayPasswordActivity"
+            android:name=".pay_password.PayPasswordActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".share.ShareFaceToFaceActivity"

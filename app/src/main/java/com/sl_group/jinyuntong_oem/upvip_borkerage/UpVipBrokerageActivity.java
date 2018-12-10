@@ -1,5 +1,6 @@
 package com.sl_group.jinyuntong_oem.upvip_borkerage;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.sl_group.jinyuntong_oem.CommonSet;
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.adapter.UpVipBrokerageAdapter;
 import com.sl_group.jinyuntong_oem.base.BaseActivity;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by 马天 on 2018/11/24.
@@ -41,16 +44,14 @@ public class UpVipBrokerageActivity extends BaseActivity implements BrokerageVie
     private TextView mTvSelectDate;
     private SmartRefreshLayout mRefreshLayout;
     private RecyclerView mRecycleViewUpvipBrokerage;
-
-
+    //佣金persenter
     private BrokeragePersenter mBrokeragePersenter;
-
-
-    private int curPage = 0;
-
-    private List<UpVipBrokerageBean.DataBean.ResultListBean> mListBeans;
-
+    //适配器
     private UpVipBrokerageAdapter mUpVipBrokerageAdapter;
+    //当前页码
+    private int curPage = 0;
+    //佣金对象集合
+    private List<UpVipBrokerageBean.DataBean.ResultListBean> mListBeans;
 
     @Override
     public int bindLayout() {
@@ -67,8 +68,10 @@ public class UpVipBrokerageActivity extends BaseActivity implements BrokerageVie
         mRecycleViewUpvipBrokerage = findViewById(R.id.recycleView_upvip_brokerage);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void initData() {
+        //设置标题
         mTvActionbarTitle.setText("升级VIP奖励");
 
         mBrokeragePersenter = new BrokeragePersenter(this, this);
@@ -80,19 +83,21 @@ public class UpVipBrokerageActivity extends BaseActivity implements BrokerageVie
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecycleViewUpvipBrokerage.setAdapter(mUpVipBrokerageAdapter);
         mRecycleViewUpvipBrokerage.setLayoutManager(linearLayoutManager);
+        //刷新
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshlayout) {
                 curPage = 0;
                 mListBeans.clear();
-                mBrokeragePersenter.brokerage("12", false, curPage, "10", mTvSelectDate.getText().toString().trim());
+                mBrokeragePersenter.brokerage(CommonSet.INTOTYPE_UP_VIP, false, curPage, "10", mTvSelectDate.getText().toString().trim());
             }
         });
+        //加载更多
         mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 curPage++;
-                mBrokeragePersenter.brokerage("12", false, curPage, "10", mTvSelectDate.getText().toString().trim());
+                mBrokeragePersenter.brokerage(CommonSet.INTOTYPE_UP_VIP, false, curPage, "10", mTvSelectDate.getText().toString().trim());
             }
         });
     }
@@ -117,7 +122,30 @@ public class UpVipBrokerageActivity extends BaseActivity implements BrokerageVie
 
     @Override
     public void doBusiness(Context mContext) {
-        mBrokeragePersenter.brokerage("12", true, curPage, "10", mTvSelectDate.getText().toString().trim());
+        mBrokeragePersenter.brokerage(CommonSet.INTOTYPE_UP_VIP, true, curPage, "10", mTvSelectDate.getText().toString().trim());
+    }
+
+    @Override
+    public void extractRecord(ExtractRecordBean.DataBean data) {
+
+    }
+
+    @Override
+    public void dealRecord(DealRecordBean.DataBean data) {
+
+    }
+
+    @Override
+    public void upVipBrokerage(UpVipBrokerageBean.DataBean data) {
+        mTvUpvipBrokerageMoney.setText(String.format(Locale.CHINA,"%.2f", data.getDirectAmt()));
+        mListBeans.addAll(data.getResultList());
+        mUpVipBrokerageAdapter.notifyDataSetChanged();
+        if (mRefreshLayout.isEnableRefresh()) {
+            mRefreshLayout.finishRefresh();
+        }
+        if (mRefreshLayout.isEnableLoadMore()) {
+            mRefreshLayout.finishLoadMore();
+        }
     }
 
 
@@ -130,10 +158,10 @@ public class UpVipBrokerageActivity extends BaseActivity implements BrokerageVie
             @Override
             public void onTimeSelect(Date date, View v) {
                 //选中事件回调
-                mTvSelectDate.setText(new SimpleDateFormat("yyyy-MM-dd").format(date));
+                mTvSelectDate.setText(new SimpleDateFormat("yyyy-MM-dd",Locale.getDefault()).format(date));
                 curPage = 0;
                 mListBeans.clear();
-                mBrokeragePersenter.brokerage("12", true, curPage, "10", mTvSelectDate.getText().toString().trim());
+                mBrokeragePersenter.brokerage(CommonSet.INTOTYPE_UP_VIP, true, curPage, "10", mTvSelectDate.getText().toString().trim());
             }
         })
                 .setType(new boolean[]{true, true, true, false, false, false})// 默认全部显示
@@ -152,29 +180,5 @@ public class UpVipBrokerageActivity extends BaseActivity implements BrokerageVie
         pvTime.setDate(Calendar.getInstance());//注：根据需求来决定是否使用该方法（一般是精确到秒的情况），此项可以在弹出选择器的时候重新设置当前时间，避免在初始化之后由于时间已经设定，导致选中时间与当前时间不匹配的问题。
         pvTime.show();
     }
-
-    @Override
-    public void extractRecord(ExtractRecordBean.DataBean data) {
-
-    }
-
-    @Override
-    public void dealRecord(DealRecordBean.DataBean data) {
-
-    }
-
-    @Override
-    public void upVipBrokerage(UpVipBrokerageBean.DataBean data) {
-        mTvUpvipBrokerageMoney.setText(String.format("%.2f", data.getDirectAmt()));
-        mListBeans.addAll(data.getResultList());
-        mUpVipBrokerageAdapter.notifyDataSetChanged();
-        if (mRefreshLayout.isEnableRefresh()) {
-            mRefreshLayout.finishRefresh();
-        }
-        if (mRefreshLayout.isEnableLoadMore()) {
-            mRefreshLayout.finishLoadMore();
-        }
-    }
-
 
 }

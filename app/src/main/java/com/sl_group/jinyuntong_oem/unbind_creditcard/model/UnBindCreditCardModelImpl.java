@@ -27,14 +27,14 @@ public class UnBindCreditCardModelImpl implements UnBindCredirtCardModel {
     public void unBindCreditCard(String fastpayBankAccountInfoId, final IUnBindCreditCardCallBack unBindCreditCardCallBack) {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);
         obj.put("method", URLConstants.UNBIND_CREDIT_CARD);
-        obj.put("mid",SPUtil.get(mActivity, "mid", ""));
-        obj.put("fastpayBankAccountInfoId",fastpayBankAccountInfoId);
+        obj.put("mid", SPUtil.get(mActivity, "mid", ""));
+        obj.put("fastpayBankAccountInfoId", fastpayBankAccountInfoId);
 
         HttpUtils.getInstance().postJson(
                 mActivity,
                 true,
                 CommonSet.DOMAIN_URL + URLConstants.UNBIND_CREDIT_CARD,
-                com.alibaba.fastjson.JSON.toJSONString(ParamsFormatUtils.paramsMethod(obj, (String) SPUtil.get(mActivity,"key","")))
+                com.alibaba.fastjson.JSON.toJSONString(ParamsFormatUtils.paramsMethod(obj, (String) SPUtil.get(mActivity, "key", "")))
                 , new HttpUtils.HttpCallback() {
                     @Override
                     public void onSuccess(String serviceData) {

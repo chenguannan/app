@@ -24,8 +24,8 @@ import com.sl_group.jinyuntong_oem.gather.persenter.GatherPersenter;
 import com.sl_group.jinyuntong_oem.merchant_info.persenter.MerchantinfoPersenter;
 import com.sl_group.jinyuntong_oem.merchant_info.view.MerchantinfoView;
 import com.sl_group.jinyuntong_oem.gather_bill.view.GatherBillActivity;
-import com.sl_group.jinyuntong_oem.scan_input_money.view.ScanQrcodeInputMoneyActivity;
-import com.sl_group.jinyuntong_oem.set_money.SetMoneyActivity;
+import com.sl_group.jinyuntong_oem.gather_input_money.GatherInputMoneyActivity;
+import com.sl_group.jinyuntong_oem.gather_set_money.GatherSetMoneyActivity;
 import com.sl_group.jinyuntong_oem.utils.DisplayUtils;
 import com.sl_group.jinyuntong_oem.utils.PermissionSetDialogUtils;
 import com.sl_group.jinyuntong_oem.utils.QRCodeUtil;
@@ -163,7 +163,7 @@ public class GatherActivity extends BaseActivity implements GatherView, Merchant
                 //设置金额或者清除金额，获取显示的内容
                 String tvDisPlay = mTvGatherSetMoney.getText().toString();
                 if (tvDisPlay.contains("设置")) {
-                    startActivity(SetMoneyActivity.class);
+                    startActivity(GatherSetMoneyActivity.class);
                 } else {
                     mTvGatherSetMoney.setText("设置金额");
                     mTvGatherMoney.setVisibility(View.GONE);
@@ -236,7 +236,7 @@ public class GatherActivity extends BaseActivity implements GatherView, Merchant
         bundle.putString("merchant", dataBean.getShortName());
         bundle.putString("receivedMid", dataBean.getReceivedMid());
         bundle.putString("qrCodeContent", payCode);
-        startActivity(ScanQrcodeInputMoneyActivity.class, bundle);
+        startActivity(GatherInputMoneyActivity.class, bundle);
     }
 
     //保存图片

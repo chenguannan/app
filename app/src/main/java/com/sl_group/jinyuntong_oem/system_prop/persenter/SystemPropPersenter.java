@@ -26,7 +26,7 @@ public class SystemPropPersenter {
     }
 
     public void systemProp(final String type) {
-        mSystemPropModel.systemProp(type,new SystemPropModel.ISystemPropCallBack() {
+        mSystemPropModel.systemProp(type, new SystemPropModel.ISystemPropCallBack() {
             @Override
             public void onSuccess(String data) {
                 LogUtils.i("系统连接：" + data);
@@ -42,7 +42,7 @@ public class SystemPropPersenter {
                         case "xinshou":
                             mSystemPropView.getXinShouURL(systemPropBean.getData().getXinshou());
                             break;
-                            case "yaoqingma":
+                        case "yaoqingma":
                             mSystemPropView.getYaoQingMaURL(systemPropBean.getData().getYaoqing());
                             break;
                     }

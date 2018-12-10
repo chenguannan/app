@@ -17,17 +17,20 @@ public class CommonSet {
     public static final String KEY = "223cc0b16d858e67f9f83d71b745dae0";
     //encrypt id
     public static final String ENCRYPT_ID = "merchantApp";
-    //agent id
-    public static final String AGENCY_ID = "281";
-    //public static final String AGENCY_ID = "279";
+    //测试
+//    public static final String AGENCY_ID = "281";
+    //生产
+    public static final String AGENCY_ID = "290";
     //api version
     public static final String API_VERSION = "1";
     //域名
-    public static final String DOMAIN_URL = "https://name.znyoo.cn/oss-transaction/merchantApp/";
+    public static final String DOMAIN_URL = "https://yapp.jytpay.com/oss-transaction/merchantApp/";
     //活体认证异步回调
-    public static final String urlNotify = "https://name.znyoo.cn/oss-transaction/youdun/orc/";
+    public static final String urlNotify = "https://yapp.jytpay.com/oss-transaction/youdun/orc/";
     //活体认证key
     public static final String authKey = "e6b9f92d-a9c9-4726-9887-da7e3352c63f";
+    //下单
+    public static final String PLACE_ORDER_URL = "https://yapp.jytpay.com/oss-transaction/gateway/";
 
 
     //sp
@@ -58,9 +61,6 @@ public class CommonSet {
     public static final String GAS = "http://mpay.unionpay.com/jiaofei/gas";
 
 
-    public static final String REGIST = "http://jyfapph5.huilianwifi.cn/index.html";
-
-
     //更新
     public static final String SERVICE_UPDATE = "http://jyfapp.huilianwifi.cn/JYT_Update.txt";
    //佣金intotype参数值
@@ -71,7 +71,7 @@ public class CommonSet {
     public static final String SERVICE_RANDOM="MDEyMzQ1Njc4OWFiY2RlZg==";
 
     //拼接显示图片
-    public static final String PIC_START ="https://name.znyoo.cn/oss-transaction/general/reviewImg?fileName=";
+    public static final String PIC_START ="https://yapp.jytpay.com/oss-transaction/general/reviewImg?fileName=";
     public static final String PIC_END ="&filePrefix=";
 
     public static final String VIP_PRICE = "99.00";

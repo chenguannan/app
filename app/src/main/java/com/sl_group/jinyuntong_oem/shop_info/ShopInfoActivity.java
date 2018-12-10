@@ -26,8 +26,6 @@ public class ShopInfoActivity extends BaseActivity implements MerchantinfoView {
     private TextView mTvShopInfoShopName;
     private TextView mTvShopInfoShopAddress;
 
-    private MerchantinfoPersenter mMerchantinfoPersenter;
-
     @Override
     public int bindLayout() {
         return R.layout.activity_shop_info;
@@ -46,8 +44,9 @@ public class ShopInfoActivity extends BaseActivity implements MerchantinfoView {
 
     @Override
     public void initData() {
+        //设置标题
         mTvActionbarTitle.setText("店铺信息");
-        mMerchantinfoPersenter = new MerchantinfoPersenter(this, this);
+        MerchantinfoPersenter merchantinfoPersenter = new MerchantinfoPersenter(this, this);
 
         String canReceived = (String) SPUtil.get(this, "canReceived", "f");
         String holderName = (String) SPUtil.get(this, "holderName", "");
@@ -56,11 +55,10 @@ public class ShopInfoActivity extends BaseActivity implements MerchantinfoView {
         String shopAddress = (String) SPUtil.get(this, "shopAddress", "");
         if (StringUtils.isEmpty(canReceived) || canReceived.equals("f") || StringUtils.isEmpty(holderName) || StringUtils.isEmpty(idCard) ||
                 StringUtils.isEmpty(shortName) || StringUtils.isEmpty(shopAddress)) {
-            mMerchantinfoPersenter.merchantInfo();
+            merchantinfoPersenter.merchantInfo();
         } else {
             displayInfo(canReceived, holderName, idCard, shortName, shopAddress);
         }
-
 
     }
 
@@ -89,6 +87,14 @@ public class ShopInfoActivity extends BaseActivity implements MerchantinfoView {
         displayInfo(dataBean.getCanReceived(), dataBean.getHolderName(), dataBean.getIdCard(), dataBean.getShortName(), dataBean.getShopAddress());
     }
 
+    /**
+      *
+      * @param canReceived 是否开通商户
+      * @param holderName 持卡人姓名
+      * @param idCard 身份证号
+      * @param shortName 店铺名称
+      * @param shopAddress 店铺地址
+      */
     private void displayInfo(String canReceived, String holderName, String idCard, String shortName, String shopAddress) {
         switch (canReceived) {
             case "t":

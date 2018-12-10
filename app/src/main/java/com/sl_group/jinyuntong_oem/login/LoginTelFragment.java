@@ -22,7 +22,7 @@ import com.sl_group.jinyuntong_oem.base.BaseFragment;
 import com.sl_group.jinyuntong_oem.bean.LoginSMSBean;
 import com.sl_group.jinyuntong_oem.login.persenter.LoginPersenter;
 import com.sl_group.jinyuntong_oem.login.view.LoginView;
-import com.sl_group.jinyuntong_oem.register.view.RegisterActivity;
+import com.sl_group.jinyuntong_oem.regist.view.RegistActivity;
 import com.sl_group.jinyuntong_oem.utils.CodeUtils;
 import com.sl_group.jinyuntong_oem.utils.DisplayUtils;
 import com.sl_group.jinyuntong_oem.utils.PopupWindowUtils;
@@ -142,7 +142,7 @@ public class LoginTelFragment extends BaseFragment implements LoginView {
                 break;
             case R.id.tv_tel_login_register:
                 //注册
-                startActivity(RegisterActivity.class);
+                startActivity(RegistActivity.class);
                 break;
             case R.id.tv_tel_login_service_tel:
                 //拨打电话

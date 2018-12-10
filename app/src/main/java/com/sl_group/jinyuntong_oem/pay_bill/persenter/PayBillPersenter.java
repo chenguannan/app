@@ -13,7 +13,7 @@ import com.sl_group.jinyuntong_oem.utils.ToastUtils;
 
 /**
  * Created by 马天 on 2018/11/20.
- * description：
+ * description：付款账单
  */
 public class PayBillPersenter {
     private Activity mActivity;
@@ -27,13 +27,13 @@ public class PayBillPersenter {
     }
 
     public void getPayBill(boolean isShowPeogress,int curPage, String pageSize, String beginDate, String endDate){
-        mPayBillModel.getPayBill(isShowPeogress,curPage, pageSize, beginDate, endDate, new PayBillModel.IPayBillCallBack() {
+        mPayBillModel.payBill(isShowPeogress,curPage, pageSize, beginDate, endDate, new PayBillModel.IPayBillCallBack() {
             @Override
             public void onSuccess(String data) {
                 LogUtils.i("付款账单："+data);
                 PayBillBean PayBillBean = new Gson().fromJson(data,PayBillBean.class);
                 if ("000000".equals(PayBillBean.getCode())){
-                    mPayBillView.getPayBillList(PayBillBean.getData().getResultList());
+                    mPayBillView.payBillSuccess(PayBillBean.getData());
                     return;
                 }else if ("888888".equals(PayBillBean.getCode())) {
                     new CompelLogin(mActivity).popExitLogin();

@@ -2,8 +2,8 @@
   "code": "000000",
   "data": {
     "version": "1",
-    "content": "APP测试",
-    "url": "http://jyfapp.huilianwifi.cn/jinyuntong.apk",
+    "content": "APP上线",
+    "url": "http://jyfapp.huilianwifi.cn/jinyuntong_V1.0_1.apk",
     "verName": "1.0"
   },
   "message": "查询成功"

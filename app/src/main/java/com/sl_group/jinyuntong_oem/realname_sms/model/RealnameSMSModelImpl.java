@@ -13,7 +13,7 @@ import com.sl_group.jinyuntong_oem.utils.ToastUtils;
 
 /**
  * Created by 马天 on 2018/11/18.
- * description：
+ * description：实名认证短信
  */
 public class RealnameSMSModelImpl implements RealnameSMSModel {
     private Activity mActivity;
@@ -23,25 +23,12 @@ public class RealnameSMSModelImpl implements RealnameSMSModel {
     }
 
     @Override
-    public boolean checkParams(String tel) {
-        if (StringUtils.isEmpty(tel)) {
-            ToastUtils.showToast("请输入您的手机号");
-            return false;
-        }
-        if (tel.length() != 11) {
-            ToastUtils.showToast("请输入正确的手机号");
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public void getRealnameSMS(String tel, final IRealnameSMSCallBack realnameSMSCallBack) {
+    public void realnameSMS(String tel, final IRealnameSMSCallBack realnameSMSCallBack) {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);
         obj.put("method", URLConstants.REALNAME_SMS);
-        obj.put("cellPhone", tel);
-        obj.put("encryptId", "merchantApp");
+        obj.put("encryptId", CommonSet.ENCRYPT_ID);
         obj.put("agencyId", CommonSet.AGENCY_ID);
+        obj.put("cellPhone", tel);
         HttpUtils.getInstance().postJson(
                 mActivity,
                 true,

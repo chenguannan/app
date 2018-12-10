@@ -25,16 +25,17 @@ public class SetHeadPersenter {
         mSetHeadView = setHeadView;
         mSetHeadModel = new SetHeadModelImpl(activity);
     }
-    public void setHeadImg(String uuid){
+
+    public void setHeadImg(String uuid) {
         mSetHeadModel.setHeadImg(uuid, new SetHeadModel.ISetHeadImgCallBack() {
             @Override
             public void onSuccess(String data) {
-                LogUtils.i("设置头像："+data);
-                SetHeadImgBean setHeadImgBean = new Gson().fromJson(data,SetHeadImgBean.class);
-                if ("000000".equals(setHeadImgBean.getCode())){
+                LogUtils.i("设置头像：" + data);
+                SetHeadImgBean setHeadImgBean = new Gson().fromJson(data, SetHeadImgBean.class);
+                if ("000000".equals(setHeadImgBean.getCode())) {
                     mSetHeadView.setHeadImgSuccess(setHeadImgBean.getData());
                     return;
-                }else if ("888888".equals(setHeadImgBean.getCode())) {
+                } else if ("888888".equals(setHeadImgBean.getCode())) {
                     new CompelLogin(mActivity).popExitLogin();
                     return;
                 }

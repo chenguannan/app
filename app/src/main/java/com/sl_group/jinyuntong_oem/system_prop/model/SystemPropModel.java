@@ -6,7 +6,11 @@ package com.sl_group.jinyuntong_oem.system_prop.model;
  */
 public interface SystemPropModel {
 
-
+    /**
+      * 系统链接
+      * @param type 链接类型
+      * @param systemPropCallBack 回调
+      */
     void systemProp( String type,SystemPropModel.ISystemPropCallBack systemPropCallBack);
 
     interface ISystemPropCallBack{

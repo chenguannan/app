@@ -24,7 +24,7 @@ public class PayBillModelImpl implements PayBillModel {
     }
 
     @Override
-    public void getPayBill(boolean isShowPeogress, int curPage, String pageSize, String beginDate, String endDate, final IPayBillCallBack payBillCallBack) {
+    public void payBill(boolean isShowPeogress, int curPage, String pageSize, String beginDate, String endDate, final IPayBillCallBack payBillCallBack) {
         JSONObject obj = CommonParamsUtils.commonParamsJSONObject(mActivity);
         obj.put("method", URLConstants.PAY_BILL);
         obj.put("mid", SPUtil.get(mActivity, "mid", ""));
@@ -32,6 +32,7 @@ public class PayBillModelImpl implements PayBillModel {
         obj.put("participantId", SPUtil.get(mActivity, "participantId", ""));
         obj.put("curPage", curPage);
         obj.put("pageSize", pageSize);
+        //默认查询全部
         if (beginDate.contains("年")){
             obj.put("beginDate", "");
         }else {

@@ -49,7 +49,7 @@ public class OfficialActivity extends BaseActivity {
         bitmapList.add(BitmapFactory.decodeResource(getResources(),R.mipmap.wenan3));
         bitmapList.add(BitmapFactory.decodeResource(getResources(),R.mipmap.wenan4));
 
-
+        //初始化适配器
         OfficialAdapter officialAdapter = new OfficialAdapter(this, bitmapList);
         gridviewOfficial.setAdapter(officialAdapter);
 

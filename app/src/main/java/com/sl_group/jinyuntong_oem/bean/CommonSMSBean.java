@@ -9,7 +9,7 @@ public class CommonSMSBean {
 
     /**
      * code : 000000
-     * data : {"code":"","uuid":"D9AE389B814747AFB0561A14EB1A7807"}
+     * data : {"code":"233288","uuid":"3A9D2305BD414B8083A87B6E25AFA862"}
      * message : 发送验证码成功
      */
 
@@ -43,8 +43,8 @@ public class CommonSMSBean {
 
     public static class DataBean {
         /**
-         * code :
-         * uuid : D9AE389B814747AFB0561A14EB1A7807
+         * code : 233288
+         * uuid : 3A9D2305BD414B8083A87B6E25AFA862
          */
 
         private String code;
