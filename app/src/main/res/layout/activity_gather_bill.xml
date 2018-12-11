@@ -40,34 +40,16 @@
 
             <TextView
                 android:id="@+id/tv_gather_bill_start_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/tv_select_date"
                 android:layout_toStartOf="@+id/tv_select_date_split"
-                android:drawableStart="@mipmap/calendar_icon"
-                android:drawableEnd="@mipmap/shop_small_arrows"
-                android:drawablePadding="@dimen/x10"
-                android:gravity="center"
-                android:paddingTop="@dimen/y10"
-                android:paddingBottom="@dimen/y10"
                 android:text="@string/date_hint"
-                android:textColor="@color/blackColor"
-                android:textSize="@dimen/s12"
                 tools:ignore="RelativeOverlap"/>
 
             <TextView
                 android:id="@+id/tv_gather_bill_end_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/tv_select_date"
                 android:layout_toEndOf="@+id/tv_select_date_split"
-                android:drawableStart="@mipmap/calendar_icon"
-                android:drawableEnd="@mipmap/shop_small_arrows"
-                android:drawablePadding="@dimen/x10"
-                android:gravity="center"
-                android:paddingTop="@dimen/y10"
-                android:paddingBottom="@dimen/y10"
-                android:text="@string/date_hint"
-                android:textColor="@color/blackColor"
-                android:textSize="@dimen/s12"/>
+                android:text="@string/date_hint"/>
         </RelativeLayout>
 
     </LinearLayout>

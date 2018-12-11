@@ -18,11 +18,12 @@
         <item name="colorControlHighlight">@color/mainColor</item>
     </style>
 
-    <style name="PopupAnimationCenter" parent="android:Animation" mce_bogus="1">
+    <style name="PopupAnimationCenter" mce_bogus="1" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/pop_center_in</item>
         <item name="android:windowExitAnimation">@anim/pop_center_out</item>
     </style>
-    <style name="PopupAnimationBottom" parent="android:Animation" mce_bogus="1">
+
+    <style name="PopupAnimationBottom" mce_bogus="1" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/pop_bottom_in</item>
         <item name="android:windowExitAnimation">@anim/pop_bottom_out</item>
     </style>
@@ -30,9 +31,8 @@
     <style name="et_common">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColorHint">@color/grayColor_A</item>
         <item name="android:maxLines">1</item>
-        <item name="android:textColor">@color/grayColor_6</item>
+        <item name="android:textColor">@color/blackColor</item>
         <item name="android:textSize">@dimen/s16</item>
     </style>
 
@@ -66,10 +66,13 @@
         <item name="android:textSize">@dimen/s16</item>
     </style>
 
-    <style name="v_underline">
+    <style name="v_underline_p">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/y1</item>
         <item name="android:background">@color/grayColor_line_E5</item>
+    </style>
+
+    <style name="v_underline" parent="v_underline_p">
         <item name="android:layout_marginTop">@dimen/y10</item>
         <item name="android:layout_marginBottom">@dimen/y10</item>
     </style>
@@ -88,11 +91,13 @@
         <item name="android:textColor">@color/grayColor_9</item>
         <item name="android:textSize">@dimen/s16</item>
     </style>
+
     <style name="et_right" parent="tv_right">
         <item name="android:background">@null</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:textColorHint">@color/grayColor_9</item>
         <item name="android:textColor">@color/grayColor_6</item>
+        <item name="android:maxLines">1</item>
     </style>
 
     <style name="btn_common">
@@ -163,15 +168,52 @@
         <item name="android:textSize">@dimen/s16</item>
         <item name="android:layout_marginTop">@dimen/y10</item>
     </style>
+
     <style name="tv_details__right_common" parent="tv_details_left_common">
-            <item name="android:layout_marginStart">@dimen/x20</item>
-        </style>
+        <item name="android:layout_marginStart">@dimen/x20</item>
+    </style>
 
     <style name="img_official">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">@dimen/y100</item>
         <item name="android:layout_weight">1</item>
         <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <style name="tv_brokerage_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/mainColor</item>
+        <item name="android:paddingStart">@dimen/x20</item>
+        <item name="android:paddingTop">@dimen/y20</item>
+        <item name="android:paddingEnd">@dimen/x20</item>
+        <item name="android:paddingBottom">@dimen/y20</item>
+        <item name="android:textColor">@color/whiteColor_alpha_7</item>
+        <item name="android:textSize">@dimen/s14</item>
+    </style>
+
+    <style name="tv_brokerage_content">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/mainColor</item>
+        <item name="android:paddingStart">@dimen/x20</item>
+        <item name="android:paddingEnd">@dimen/x20</item>
+        <item name="android:paddingBottom">@dimen/y20</item>
+        <item name="android:textColor">@color/whiteColor</item>
+        <item name="android:textSize">@dimen/s30</item>
+    </style>
+
+    <style name="tv_select_date">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableStart">@mipmap/calendar_icon</item>
+        <item name="android:drawableEnd">@mipmap/shop_small_arrows</item>
+        <item name="android:drawablePadding">@dimen/x10</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">@dimen/y10</item>
+        <item name="android:paddingBottom">@dimen/y10</item>
+        <item name="android:textColor">@color/blackColor</item>
+        <item name="android:textSize">@dimen/s12</item>
     </style>
 
 

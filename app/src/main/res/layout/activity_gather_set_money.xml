@@ -16,9 +16,7 @@
         android:background="@color/whiteColor"
         android:orientation="horizontal"
         android:paddingStart="@dimen/x20"
-        android:paddingTop="@dimen/y10"
-        android:paddingEnd="@dimen/x20"
-        android:paddingBottom="@dimen/y10">
+        android:paddingEnd="@dimen/x20">
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,21 +31,19 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/x20"
             android:background="@null"
-            android:maxLines="1"
             android:digits="1234567890."
             android:hint="@string/input_gather_money"
+            android:maxLines="1"
+            android:paddingTop="@dimen/y10"
+            android:paddingBottom="@dimen/y10"
             android:textColor="@color/blackColor"
             tools:ignore="Autofill,TextFields"/>
     </LinearLayout>
 
     <Button
         android:id="@+id/btn_gather_set_money_sure"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/btn_common"
         android:layout_margin="@dimen/x50"
         android:layout_marginEnd="@dimen/x50"
-        android:background="@drawable/btn_circle_radius"
-        android:text="@string/sure"
-        android:textColor="@color/whiteColor"
-        android:textSize="@dimen/s16"/>
+        android:text="@string/sure"/>
 </LinearLayout>

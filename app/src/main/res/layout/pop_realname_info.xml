@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/x10"
-        android:src="@mipmap/pop_close_icon"/>
+        android:src="@mipmap/pop_close_icon"
+        tools:ignore="ContentDescription"/>
 
     <LinearLayout
         android:id="@+id/ll_usercenter_realname_bg"

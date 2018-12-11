@@ -44,11 +44,11 @@ public class MyTeamAdapter extends RecyclerView.Adapter<MyTeamAdapter.ViewHolder
         final MyTeamBean.DataBean.ResultListBean dataBean = mBeanList.get(position);
         switch (dataBean.getVipLevel()){
             case 0:
-                holder.imgItemMyTeamIcon.setImageBitmap(BitmapFactory.decodeResource(mActivity.getResources(),R.mipmap.center_icon_vip));
+                holder.imgItemMyTeamIcon.setImageBitmap(BitmapFactory.decodeResource(mActivity.getResources(),R.mipmap.level_normal_icon));
                 holder.tvItemMyTeamLevel.setText(dataBean.getLevelName());
                 break;
             case 1:
-                holder.imgItemMyTeamIcon.setImageBitmap(BitmapFactory.decodeResource(mActivity.getResources(),R.mipmap.center_icon_ldz));
+                holder.imgItemMyTeamIcon.setImageBitmap(BitmapFactory.decodeResource(mActivity.getResources(),R.mipmap.level_vip_icon));
                 holder.tvItemMyTeamLevel.setText(dataBean.getLevelName());
                 break;
         }

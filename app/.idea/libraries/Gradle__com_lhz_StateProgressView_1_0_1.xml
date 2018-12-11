@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.lhz:StateProgressView-1.0.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/StateProgressView-1.0.1.aar/6cccd0afef4013881007c92b866ec31f/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/StateProgressView-1.0.1.aar/6cccd0afef4013881007c92b866ec31f/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.lhz/StateProgressView/1.0.1/5a9766d6938a8412dcf966d8c36d28fcb4a7e14d/StateProgressView-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

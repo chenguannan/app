@@ -140,12 +140,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/whiteColor"
-                android:padding="@dimen/x10">
+                android:paddingStart="@dimen/x10"
+                android:paddingEnd="@dimen/x10">
 
                 <TextView
                     android:id="@+id/tv_open_merchant_shopname_hint"
                     style="@style/tv_left"
                     android:layout_alignEnd="@+id/tv_open_merchant_tel_hint"
+                    android:paddingTop="@dimen/y10"
+                    android:paddingBottom="@dimen/y10"
                     android:text="@string/shopname"/>
 
                 <EditText
@@ -155,11 +158,13 @@
                     android:hint="@string/input_shopname"
                     android:inputType="text"
                     android:maxLines="1"
+                    android:paddingTop="@dimen/y10"
+                    android:paddingBottom="@dimen/y10"
                     tools:ignore="Autofill"/>
 
                 <View
                     android:id="@+id/v_open_merchant_stopname_underline"
-                    style="@style/v_underline"
+                    style="@style/v_underline_p"
                     android:layout_below="@+id/et_open_merchant_shopname"/>
 
                 <TextView
@@ -167,6 +172,8 @@
                     style="@style/tv_left"
                     android:layout_below="@+id/v_open_merchant_stopname_underline"
                     android:layout_alignEnd="@+id/tv_open_merchant_tel_hint"
+                    android:paddingTop="@dimen/y10"
+                    android:paddingBottom="@dimen/y10"
                     android:text="@string/shopaddress"/>
 
                 <TextView
@@ -175,12 +182,14 @@
                     android:layout_below="@+id/v_open_merchant_stopname_underline"
                     android:layout_toEndOf="@+id/tv_open_merchant_shopaddress_hint"
                     android:drawableEnd="@mipmap/big_arrow"
+                    android:paddingTop="@dimen/y10"
+                    android:paddingBottom="@dimen/y10"
                     android:text="@string/select_shopaddress"
                     tools:ignore="Autofill"/>
 
                 <View
                     android:id="@+id/v_open_merchant_stopaddress_underline"
-                    style="@style/v_underline"
+                    style="@style/v_underline_p"
                     android:layout_below="@+id/tv_open_merchant_shopaddress"/>
 
                 <TextView
@@ -188,6 +197,8 @@
                     style="@style/tv_left"
                     android:layout_below="@+id/v_open_merchant_stopaddress_underline"
                     android:layout_alignEnd="@+id/tv_open_merchant_tel_hint"
+                    android:paddingTop="@dimen/y10"
+                    android:paddingBottom="@dimen/y10"
                     android:text="@string/accountNumber"/>
 
                 <EditText
@@ -199,6 +210,8 @@
                     android:hint="@string/input_depositcard_number"
                     android:inputType="number"
                     android:maxLength="20"
+                    android:paddingTop="@dimen/y10"
+                    android:paddingBottom="@dimen/y10"
                     tools:ignore="Autofill"/>
 
                 <ImageView
@@ -215,7 +228,7 @@
 
                 <View
                     android:id="@+id/v_open_merchant_accountNumber_underline"
-                    style="@style/v_underline"
+                    style="@style/v_underline_p"
                     android:layout_below="@+id/et_open_merchant_accountNumber"/>
 
                 <TextView
@@ -223,6 +236,8 @@
                     style="@style/tv_left"
                     android:layout_width="wrap_content"
                     android:layout_below="@+id/v_open_merchant_accountNumber_underline"
+                    android:paddingTop="@dimen/y10"
+                    android:paddingBottom="@dimen/y10"
                     android:text="@string/bankcard_tel"/>
 
                 <EditText
@@ -233,6 +248,8 @@
                     android:hint="@string/input_bancard_tel"
                     android:inputType="phone"
                     android:maxLength="11"
+                    android:paddingTop="@dimen/y10"
+                    android:paddingBottom="@dimen/y10"
                     tools:ignore="Autofill"/>
 
             </RelativeLayout>

@@ -112,16 +112,12 @@
 
     <Button
         android:id="@+id/btn_tel_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/btn_common"
         android:layout_below="@+id/rl_login_verfic"
         android:layout_marginStart="@dimen/x40"
         android:layout_marginTop="@dimen/y50"
         android:layout_marginEnd="@dimen/x40"
-        android:background="@drawable/btn_circle_radius"
-        android:text="@string/immediately_login"
-        android:textColor="@color/whiteColor"
-        android:textSize="@dimen/s16"/>
+        android:text="@string/immediately_login"/>
 
     <TextView
         android:id="@+id/tv_tel_login_register"
@@ -141,8 +137,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:visibility="gone"
         android:layout_marginBottom="@dimen/y10"
-        android:text="@string/service_tel"/>
+        android:text="@string/service_tel"
+        android:visibility="gone"/>
 
 </RelativeLayout>

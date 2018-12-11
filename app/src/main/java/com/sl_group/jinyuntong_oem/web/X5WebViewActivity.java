@@ -128,10 +128,14 @@ public class X5WebViewActivity extends BaseActivity {
         //释放资源
         if (mX5WebView != null)
             mX5WebView.destroy();
-        if (!StringUtils.isEmpty(title)&&title.contains("升级")){
+        if (!StringUtils.isEmpty(title)){
             //提现成功后，发送广播，刷新财富页面数据
             Intent intent = new Intent("android.intent.action.CART_BROADCAST");
-            intent.putExtra("data","VIPrefresh");
+            if (title.contains("升级")){
+                intent.putExtra("data","VIPrefresh");
+            }else if (title.contains("开通")){
+                intent.putExtra("data","openMerchant");
+            }
             LocalBroadcastManager.getInstance(X5WebViewActivity.this).sendBroadcast(intent);
             sendBroadcast(intent);
         }

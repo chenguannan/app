@@ -1,10 +1,10 @@
 ﻿{
   "code": "000000",
   "data": {
-    "version": "1",
-    "content": "APP上线",
-    "url": "http://jyfapp.huilianwifi.cn/jinyuntong_V1.0_1.apk",
-    "verName": "1.0"
+    "version": "2",
+    "content": "修复注册勾选BUG，实名认证接口增加参数",
+    "url": "http://jyfapp.huilianwifi.cn/jinyuntong_V1.1_1.apk",
+    "verName": "1.1"
   },
   "message": "查询成功"
 }

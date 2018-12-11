@@ -100,12 +100,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/whiteColor"
-                android:padding="@dimen/x10">
+                android:paddingStart="@dimen/x10"
+                android:paddingEnd="@dimen/x10">
 
                 <TextView
                     android:id="@+id/tv_realname_cardnumber_hint"
                     style="@style/tv_left"
-                    android:layout_width="wrap_content"
+                    android:paddingTop="@dimen/y10"
+                    android:paddingBottom="@dimen/y10"
                     android:text="@string/depositcard_number"/>
 
                 <EditText
@@ -116,6 +118,8 @@
                     android:hint="@string/input_depositcard_number"
                     android:inputType="number"
                     android:maxLength="20"
+                    android:paddingTop="@dimen/y10"
+                    android:paddingBottom="@dimen/y10"
                     tools:ignore="Autofill"/>
 
                 <ImageView
@@ -132,7 +136,7 @@
 
                 <View
                     android:id="@+id/v_realname_cardnumber_underline"
-                    style="@style/v_underline"
+                    style="@style/v_underline_p"
                     android:layout_below="@+id/et_realname_cardnumber"/>
 
                 <TextView
@@ -140,6 +144,8 @@
                     style="@style/tv_left"
                     android:layout_below="@+id/v_realname_cardnumber_underline"
                     android:layout_alignEnd="@+id/tv_realname_cardnumber_hint"
+                    android:paddingTop="@dimen/y10"
+                    android:paddingBottom="@dimen/y10"
                     android:text="@string/tel"/>
 
                 <EditText
@@ -151,6 +157,8 @@
                     android:hint="@string/input_bancard_tel"
                     android:inputType="phone"
                     android:maxLength="11"
+                    android:paddingTop="@dimen/y10"
+                    android:paddingBottom="@dimen/y10"
                     tools:ignore="Autofill"/>
 
                 <TextView
@@ -158,12 +166,14 @@
                     style="@style/tv_right"
                     android:layout_below="@+id/v_realname_cardnumber_underline"
                     android:layout_alignParentEnd="true"
+                    android:paddingTop="@dimen/y10"
+                    android:paddingBottom="@dimen/y10"
                     android:text="@string/get_verfic_code"
                     android:textColor="@color/mainColor"/>
 
                 <View
                     android:id="@+id/v_realname_tel_underline"
-                    style="@style/v_underline"
+                    style="@style/v_underline_p"
                     android:layout_below="@+id/et_realname_tel"/>
 
                 <TextView
@@ -171,6 +181,8 @@
                     style="@style/tv_left"
                     android:layout_below="@+id/v_realname_tel_underline"
                     android:layout_alignEnd="@+id/tv_realname_cardnumber_hint"
+                    android:paddingTop="@dimen/y10"
+                    android:paddingBottom="@dimen/y10"
                     android:text="@string/verfic_code"/>
 
                 <EditText
@@ -181,6 +193,8 @@
                     android:hint="@string/input_verfic_code"
                     android:inputType="number"
                     android:maxLength="6"
+                    android:paddingTop="@dimen/y10"
+                    android:paddingBottom="@dimen/y10"
                     tools:ignore="Autofill"/>
             </RelativeLayout>
 
@@ -204,8 +218,8 @@
                 <ImageView
                     android:id="@+id/img_realname_bankcard"
                     android:layout_width="0dp"
-                    android:layout_gravity="end"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="end"
                     android:layout_marginStart="@dimen/x10"
                     android:layout_weight="1"
                     android:scaleType="centerCrop"

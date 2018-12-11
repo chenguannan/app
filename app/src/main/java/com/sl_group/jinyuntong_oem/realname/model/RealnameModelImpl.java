@@ -33,6 +33,7 @@ public class RealnameModelImpl implements RealnameModel {
         obj.put("holderName", holderName);
         obj.put("accountNumber", accountNumber);
         obj.put("tel", tel);
+        obj.put("cellPhone", tel);
         obj.put("checkCode", checkCode);
         obj.put("uuid", uuid);
         obj.put("legalPersonID1ImageId", "");

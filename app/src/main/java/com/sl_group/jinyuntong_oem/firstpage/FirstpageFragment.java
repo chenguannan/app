@@ -155,7 +155,7 @@ public class FirstpageFragment extends BaseFragment implements AnalyzeQrcodeView
 
         mBundle = new Bundle();
 
-
+        mMerchantinfoPersenter.merchantInfo();
 
     }
 
@@ -202,7 +202,7 @@ public class FirstpageFragment extends BaseFragment implements AnalyzeQrcodeView
                 //收款，如果没开通商户权限，先去开通商户权限
                 //是否开通商户权限
                 if (StringUtils.isEmpty(canReceived)) {
-                    ToastUtils.showToast("数据加载异常");
+                    mMerchantinfoPersenter.merchantInfo();
                     return;
                 }
                 if ("t".equals(canReceived)) {
@@ -316,7 +316,6 @@ public class FirstpageFragment extends BaseFragment implements AnalyzeQrcodeView
 
     @Override
     public void doBusiness(Context mContext) {
-        mMerchantinfoPersenter.merchantInfo();
         //注册广播，提现后刷新数据
         LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
         IntentFilter intentFilter = new IntentFilter();
@@ -325,7 +324,7 @@ public class FirstpageFragment extends BaseFragment implements AnalyzeQrcodeView
             @Override
             public void onReceive(Context context, Intent intent) {
                 String msg = intent.getStringExtra("data");
-                if ("VIPrefresh".equals(msg)) {
+                if ("VIPrefresh".equals(msg)||"openMerchant".equals(msg)) {
                     mMerchantinfoPersenter.merchantInfo();
                 }
             }

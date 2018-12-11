@@ -186,7 +186,7 @@
     <string name="gather_merchant">收款商户</string>
     <string name="item_pay_money">付款金额：</string>
     <string name="item_gather_merchant">收款商户：</string>
-    <string name="makesure_pay">确认付款</string>
+    <!--<string name="makesure_pay">确认付款</string>-->
     <string name="input_pay_money">请输入付款金额</string>
     <string name="pay_money">付款金额</string>
     <string name="merchant">商户名</string>
@@ -255,6 +255,10 @@
     <string name="delete">删除</string>
     <string name="pop_forget_password">忘记密码？</string>
     <string name="input_pay_password">请输入支付密码</string>
+    <string name="digits_limit">1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM</string>
+    <string name="makesure_pay">确认付款</string>
+    <string name="select_pay_card">选择付款卡</string>
+    <string name="immediately_pay">立即付款</string>
 
 
 </resources>

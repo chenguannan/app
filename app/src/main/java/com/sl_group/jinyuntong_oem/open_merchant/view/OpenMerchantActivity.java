@@ -1,6 +1,7 @@
 package com.sl_group.jinyuntong_oem.open_merchant.view;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -37,7 +38,7 @@ import com.sl_group.jinyuntong_oem.utils.PermissionSetDialogUtils;
 import com.sl_group.jinyuntong_oem.utils.PhotoTakeUtils;
 import com.sl_group.jinyuntong_oem.utils.RandomUtils;
 import com.sl_group.jinyuntong_oem.utils.ToastUtils;
-import com.sl_group.jinyuntong_oem.web.LoadWebActivity;
+import com.sl_group.jinyuntong_oem.web.X5WebViewActivity;
 
 import org.json.JSONArray;
 
@@ -419,7 +420,8 @@ public class OpenMerchantActivity extends BaseActivity implements OpenMerchantVi
     public void openMerchantSuccess(String data) {
         Bundle bundle = new Bundle();
         bundle.putString("url",data);
-        startActivity(LoadWebActivity.class,bundle);
+        bundle.putString("title","开通商户");
+        startActivity(X5WebViewActivity.class,bundle);
         finish();
     }
 
@@ -438,6 +440,7 @@ public class OpenMerchantActivity extends BaseActivity implements OpenMerchantVi
 
         //条件选择器
         OptionsPickerView pvOptions = new OptionsPickerView.Builder(OpenMerchantActivity.this, new OptionsPickerView.OnOptionsSelectListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onOptionsSelect(int options1, int option2, int options3, View v) {
                 //返回的分别是三个级别的选中位置

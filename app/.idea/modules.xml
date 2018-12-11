@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../JinYunTong.iml" filepath="$PROJECT_DIR$/../JinYunTong.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app.iml" filepath="$PROJECT_DIR$/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../udidsafe-V4.0.ll-2017_12_21/udidsafe-V4.0.ll-2017_12_21.iml" filepath="$PROJECT_DIR$/../udidsafe-V4.0.ll-2017_12_21/udidsafe-V4.0.ll-2017_12_21.iml" />
+    </modules>
+  </component>
+</project>
