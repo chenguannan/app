@@ -64,7 +64,8 @@ public class GatherBillDetailsActivity extends BaseActivity {
             mTvGatherBillDetailsDate.setText(bundle.getString("date"));
             mTvGatherBillDetailsOrder.setText(bundle.getString("bizOrderNumber"));
             mTvGatherBillDetailsPaycard.setText(bundle.getString("payAccount"));
-            mTvGatherBillDetailsPaypeople.setText(MD5Utils.shaEncrypt(bundle.getString("payAccountName")));
+            String mDetailsPaypeople = MD5Utils.shaEncrypt(bundle.getString("payAccountName")).substring(0,20);
+            mTvGatherBillDetailsPaypeople.setText(mDetailsPaypeople);
             mTvGatherBillDetailsGatherMoney.setText("¥"+bundle.getString("gatherMoney"));
             mTvGatherBillDetailsPayfee.setText("¥"+bundle.getString("dealfee"));
             mTvGatherBillDetailsExtractfee.setText("¥"+bundle.getString("extractfee"));

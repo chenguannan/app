@@ -34,6 +34,7 @@ import com.sl_group.jinyuntong_oem.bean.AnalyzeQrcodeBean;
 import com.sl_group.jinyuntong_oem.bean.MerchantInfoBean;
 import com.sl_group.jinyuntong_oem.creditcard.view.CreditCardListActivity;
 import com.sl_group.jinyuntong_oem.gather.view.GatherActivity;
+import com.sl_group.jinyuntong_oem.gather_bill.view.GatherBillActivity;
 import com.sl_group.jinyuntong_oem.gather_rate.GatherRateActivity;
 import com.sl_group.jinyuntong_oem.merchant_info.persenter.MerchantinfoPersenter;
 import com.sl_group.jinyuntong_oem.merchant_info.view.MerchantinfoView;
@@ -96,6 +97,7 @@ public class FirstpageFragment extends BaseFragment implements AnalyzeQrcodeView
     private TextView mTvFirstpageGongjijinQuery;
     private TextView mTvFirstpageExpressQuery;
     private TextView mTvFirstpageCompanyQuery;
+    private String inviteCode;
     //解析二维码persenter
     private AnalyzeQrcodePersenter mAnalyzeQrcodePersenter;
     //系统链接，协议，服务，指引等等
@@ -230,9 +232,14 @@ public class FirstpageFragment extends BaseFragment implements AnalyzeQrcodeView
                 break;
             case R.id.tv_firstpage_recommend_card:
                 //推荐办卡
+                inviteCode = (String) SPUtil.get(getActivity(), "inviteCode", "");
+                mBundle.putString("url", CommonSet.RDC+inviteCode);
+                startActivity(LoadWebActivity.class, mBundle);
+
                 break;
             case R.id.tv_firstpage_merchant_policy:
                 //商户政策
+                startActivity(GatherBillActivity.class);
                 break;
             case R.id.tv_firstpage_service_center:
                 //客服
@@ -275,6 +282,9 @@ public class FirstpageFragment extends BaseFragment implements AnalyzeQrcodeView
                 break;
             case R.id.rl_firstpage_shop_discount:
                 //商城优惠券
+               // ToastUtils.showToast("打開啥那過程");
+                mBundle.putString("url", CommonSet.CPN);
+                startActivity(LoadWebActivity.class, mBundle);
                 break;
             case R.id.tv_firstpage_water:
                 //水费

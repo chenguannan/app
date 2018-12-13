@@ -19,6 +19,7 @@ import com.sl_group.jinyuntong_oem.bean.TreasureBean;
 import com.sl_group.jinyuntong_oem.deal_record.DealRecordActivity;
 import com.sl_group.jinyuntong_oem.extract.view.ExtractActivity;
 import com.sl_group.jinyuntong_oem.extract_record.ExtractRecordActivity;
+import com.sl_group.jinyuntong_oem.gather_rate.GatherRateActivity;
 import com.sl_group.jinyuntong_oem.merchant_info.persenter.MerchantinfoPersenter;
 import com.sl_group.jinyuntong_oem.merchant_info.view.MerchantinfoView;
 import com.sl_group.jinyuntong_oem.treasure.persenter.TrerasurePersenter;
@@ -26,6 +27,7 @@ import com.sl_group.jinyuntong_oem.upvip_borkerage.UpVipBrokerageActivity;
 import com.sl_group.jinyuntong_oem.utils.SPUtil;
 import com.sl_group.jinyuntong_oem.utils.StringUtils;
 import com.sl_group.jinyuntong_oem.utils.ToastUtils;
+import com.sl_group.jinyuntong_oem.vip_center.VipCenterActivity;
 import com.sl_group.jinyuntong_oem.web.LoadWebActivity;
 
 import java.util.Locale;
@@ -47,6 +49,7 @@ public class TreasureFragment extends BaseFragment implements TreasureView, Merc
     private TextView mTvTreasureUpvipBrokerage;
     private ImageView mImgTreasurePolicyLook;
 
+    private int vipLevel = -1;
     private TrerasurePersenter mTrerasurePersenter;
     private MerchantinfoPersenter mMerchantinfoPersenter;
     //可提金额
@@ -93,6 +96,9 @@ public class TreasureFragment extends BaseFragment implements TreasureView, Merc
         mImgTreasurePolicyLook.setOnClickListener(this);
     }
 
+
+
+
     @Override
     public void widgetClick(View v) {
         switch (v.getId()) {
@@ -119,13 +125,27 @@ public class TreasureFragment extends BaseFragment implements TreasureView, Merc
                 startActivity(UpVipBrokerageActivity.class);
                 break;
             case R.id.img_treasure_policy_look:
-                if (StringUtils.isEmpty(ruleUrl)) {
-                    mMerchantinfoPersenter.merchantInfo();
-                } else {
-                    Bundle ruleUrlBundle = new Bundle();
-                    ruleUrlBundle.putString("url", ruleUrl);
-                    startActivity(LoadWebActivity.class, ruleUrlBundle);
+
+                switch (vipLevel) {
+                    case -1:
+                      //  ToastUtils.showToast("asdasdasdasdasdasdasd");
+                        mMerchantinfoPersenter.merchantInfo();
+                        break;
+                    case 0:
+                        //普通商户  跳转到VIP中心
+                        startActivity(VipCenterActivity.class);
+                        break;
+                    case 1:
+                        //VIP商户，跳转到收款费率
+                        startActivity(GatherRateActivity.class);
                 }
+//                if (StringUtils.isEmpty(ruleUrl)) {
+//                    mMerchantinfoPersenter.merchantInfo();
+//                } else {
+//                    Bundle ruleUrlBundle = new Bundle();
+//                    ruleUrlBundle.putString("url", ruleUrl);
+//                    startActivity(LoadWebActivity.class, ruleUrlBundle);
+//                }
                 break;
         }
     }
@@ -168,8 +188,22 @@ public class TreasureFragment extends BaseFragment implements TreasureView, Merc
 
     @Override
     public void merchantInfoSuccess(MerchantInfoBean.DataBean dataBean) {
-        Bundle bundle = new Bundle();
-        bundle.putString("url", dataBean.getRuleUrl());
-        startActivity(LoadWebActivity.class, bundle);
+        vipLevel = dataBean.getVipLevel();
+//        Bundle bundle = new Bundle();
+//        bundle.putString("url", dataBean.getRuleUrl());
+//        startActivity(LoadWebActivity.class, bundle);
+        switch (vipLevel) {
+            case -1:
+                //ToastUtils.showToast("asdasdasdasdasdasdasd");
+                //mMerchantinfoPersenter.merchantInfo();
+                break;
+            case 0:
+                //普通商户  跳转到VIP中心
+                startActivity(VipCenterActivity.class);
+                break;
+            case 1:
+                //VIP商户，跳转到收款费率
+                startActivity(GatherRateActivity.class);
+        }
     }
 }

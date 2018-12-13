@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -35,6 +36,9 @@ import com.sl_group.jinyuntong_oem.pay_bill.view.PayBillActivity;
 import com.sl_group.jinyuntong_oem.safe_set.SafeSetActivity;
 import com.sl_group.jinyuntong_oem.set_head.persenter.SetHeadPersenter;
 import com.sl_group.jinyuntong_oem.set_head.view.SetHeadView;
+
+import com.sl_group.jinyuntong_oem.system_prop.persenter.SystemPropPersenter;
+import com.sl_group.jinyuntong_oem.system_prop.view.SystemPropView;
 import com.sl_group.jinyuntong_oem.upload_img.persenter.UploadImgPersenter;
 import com.sl_group.jinyuntong_oem.upload_img.view.UpLoadImgView;
 import com.sl_group.jinyuntong_oem.utils.CameraUtils;
@@ -48,6 +52,7 @@ import com.sl_group.jinyuntong_oem.utils.SPUtil;
 import com.sl_group.jinyuntong_oem.utils.StringUtils;
 import com.sl_group.jinyuntong_oem.utils.ToastUtils;
 import com.sl_group.jinyuntong_oem.utils.UriPathHelper;
+import com.sl_group.jinyuntong_oem.web.LoadWebActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -58,7 +63,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by 马天 on 2018/11/13.
  * description：我的
  */
-public class MineFragment extends BaseFragment implements MerchantinfoView, UpLoadImgView, SetHeadView {
+public class MineFragment extends BaseFragment implements MerchantinfoView, UpLoadImgView, SetHeadView, SystemPropView {
     //读写内存，相机的权限，动态授权
     private static final int PERMISSIONS_READ_WRITE_CAMERA = 1;
     //拍照上传头像请求码
@@ -86,6 +91,9 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
     private String mHeadImgPath;
     //商户的一些信息
     private String headPortraitDirectoryName;
+    //系统链接，协议，服务，指引等等
+    private SystemPropPersenter mSystemPropPersenter;
+
     private String headPortraitFilePrefix;
     private String cellPhone;
     private int vipLevel;
@@ -130,6 +138,7 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
     @Override
     public void initData() {
         //初始化商户，上传照片，设置头像persenter
+        mSystemPropPersenter = new SystemPropPersenter(getActivity(),this);
         mMerchantinfoPersenter = new MerchantinfoPersenter(getActivity(), this);
         mUploadImgPersenter = new UploadImgPersenter(getActivity(), this);
         mSetHeadPersenter = new SetHeadPersenter(getActivity(), this);
@@ -207,10 +216,16 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
                 break;
             case R.id.tv_mine_pay_bill:
                 //付款账单
+                if (!new RealnameStates(getActivity()).isRealname()) {
+                    return;
+                }
                 startActivity(PayBillActivity.class);
                 break;
             case R.id.tv_mine_my_package:
                 //我的卡包
+                if (!new RealnameStates(getActivity()).isRealname()) {
+                    return;
+                }
                 startActivity(CreditCardListActivity.class);
                 break;
             case R.id.tv_mine_system_notice:
@@ -219,7 +234,7 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
                 break;
             case R.id.tv_mine_my_service:
                 //我的客服
-
+                mSystemPropPersenter.systemProp("kefu");
                 break;
             case R.id.tv_mine_save_set:
                 //安全设置
@@ -520,4 +535,25 @@ public class MineFragment extends BaseFragment implements MerchantinfoView, UpLo
         }
     }
 
+    @Override
+    public void getKeFuURL(String kefu) {
+        Bundle bundle = new Bundle();
+        bundle.putString("url", kefu);
+        startActivity(LoadWebActivity.class, bundle);
+    }
+
+    @Override
+    public void getXieYiURL(String xieyi) {
+
+    }
+
+    @Override
+    public void getXinShouURL(String xinshou) {
+
+    }
+
+    @Override
+    public void getYaoQingMaURL(String yaoqing) {
+
+    }
 }

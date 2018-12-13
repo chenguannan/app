@@ -21,7 +21,10 @@ import com.sl_group.jinyuntong_oem.base.BaseActivity;
 import com.sl_group.jinyuntong_oem.bean.MerchantInfoBean;
 import com.sl_group.jinyuntong_oem.merchant_info.persenter.MerchantinfoPersenter;
 import com.sl_group.jinyuntong_oem.merchant_info.view.MerchantinfoView;
+import com.sl_group.jinyuntong_oem.utils.BankCardTextWatcherUtils;
 import com.sl_group.jinyuntong_oem.utils.PermissionSetDialogUtils;
+import com.sl_group.jinyuntong_oem.utils.SPUtil;
+import com.sl_group.jinyuntong_oem.utils.StringUtils;
 import com.sl_group.jinyuntong_oem.utils.ToastUtils;
 import com.sl_group.jinyuntong_oem.web.LoadWebActivity;
 
@@ -62,8 +65,9 @@ public class BindCreditCardActivity extends BaseActivity implements BindCreditCa
         mTvBindCredirCardIdcard = findViewById(R.id.tv_bind_creditcard_idcard);
         mEtBindCredirCardCardnumber = findViewById(R.id.et_bind_creditcard_cardnumber);
         mImgBindCredirCardScan = findViewById(R.id.img_bind_creditcard_scan);
-        mEtBindCredirCardCardtel = findViewById(R.id.et_bind_creditcard_cardtel);
+       // mEtBindCredirCardCardtel = findViewById(R.id.et_bind_creditcard_cardtel);
         mBtnBindCredirCard = findViewById(R.id.btn_bind_creditcard);
+        BankCardTextWatcherUtils.bind(mEtBindCredirCardCardnumber);
     }
 
     @Override
@@ -72,6 +76,7 @@ public class BindCreditCardActivity extends BaseActivity implements BindCreditCa
         //初始化
         mBindCreditCardPersenter = new BindCreditCardPersenter(this,this);
         mMerchantinfoPersenter = new MerchantinfoPersenter(this,this);
+
     }
 
     @Override
@@ -93,9 +98,10 @@ public class BindCreditCardActivity extends BaseActivity implements BindCreditCa
                 break;
             case R.id.btn_bind_creditcard:
                 //卡号
-                String accountNumber = mEtBindCredirCardCardnumber.getText().toString().trim();
+                String accountNumber = mEtBindCredirCardCardnumber.getText().toString().replaceAll(" ","");
                 //手机号
-                String bankcardTel = mEtBindCredirCardCardtel.getText().toString().trim();
+                String bankcardTel = (String) SPUtil.get(this,"cellPhone","");
+
                 //绑卡
                 mBindCreditCardPersenter.bindBankcard(accountNumber,bankcardTel);
                 break;
@@ -127,7 +133,7 @@ public class BindCreditCardActivity extends BaseActivity implements BindCreditCa
     @Override
     public void merchantInfoSuccess(MerchantInfoBean.DataBean dataBean) {
         mTvBindCredirCardUsername.setText(dataBean.getHolderName());
-        mTvBindCredirCardIdcard.setText(dataBean.getIdCard());
+        mTvBindCredirCardIdcard.setText(StringUtils.getStarString(dataBean.getIdCard(),1,dataBean.getIdCard().length()-1));
     }
 
     /**

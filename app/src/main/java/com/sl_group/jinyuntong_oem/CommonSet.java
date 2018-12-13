@@ -59,6 +59,13 @@ public class CommonSet {
     public static final String ELE = "http://mpay.unionpay.com/jiaofei/electric";
     //燃气费
     public static final String GAS = "http://mpay.unionpay.com/jiaofei/gas";
+   //商城優惠卷
+    public static final String CPN = "http://favourcard.deepli.com/wechat/#/coupon";
+
+
+    //推薦辦卡
+    public static final String RDC = "http://jyfapph5.huilianwifi.cn/bankreg.html?cellPhone=";
+
 
 
     //更新

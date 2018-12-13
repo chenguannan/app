@@ -144,7 +144,7 @@ public class RegistActivity extends BaseActivity implements RegistSMSView, Regis
     @Override
     public void registSMSSuccess(RegisterSMSBean.DataBean data) {
         mSMSUUID = data.getUuid();
-        new TimeCount(120000, 1000).start();
+        new TimeCount(60000, 1000).start();
     }
 
     @Override

@@ -1,13 +1,16 @@
 package com.sl_group.jinyuntong_oem.bindcard.persenter;
 
 import android.app.Activity;
+import android.content.Intent;
 
 import com.google.gson.Gson;
 import com.sl_group.jinyuntong_oem.CompelLogin;
 import com.sl_group.jinyuntong_oem.bean.BindCreditCardBean;
 import com.sl_group.jinyuntong_oem.bindcard.model.BindCreditCardModel;
 import com.sl_group.jinyuntong_oem.bindcard.model.BindCreditCardModelImpl;
+import com.sl_group.jinyuntong_oem.bindcard.view.BindCreditCardActivity;
 import com.sl_group.jinyuntong_oem.bindcard.view.BindCreditCardView;
+import com.sl_group.jinyuntong_oem.creditcard.view.CreditCardListActivity;
 import com.sl_group.jinyuntong_oem.utils.LogUtils;
 import com.sl_group.jinyuntong_oem.utils.StringUtils;
 import com.sl_group.jinyuntong_oem.utils.ToastUtils;
@@ -20,7 +23,7 @@ public class BindCreditCardPersenter {
     private Activity mActivity;
     private BindCreditCardModelImpl mAddBankcardModel;
     private BindCreditCardView mBindCreditCardView;
-
+    private String phone;
     public BindCreditCardPersenter(Activity activity, BindCreditCardView bindCreditCardView) {
         mActivity = activity;
         mBindCreditCardView = bindCreditCardView;
@@ -52,7 +55,10 @@ public class BindCreditCardPersenter {
                 LogUtils.i("绑定银行卡："+data);
                 BindCreditCardBean bindCreditCardBean = new Gson().fromJson(data,BindCreditCardBean.class);
                 if ("000000".equals(bindCreditCardBean.getCode())){
-                    mBindCreditCardView.openUnionpay(bindCreditCardBean.getData());
+                 //   mBindCreditCardView.openUnionpay(bindCreditCardBean.getData());
+                    Intent intent = new Intent(mActivity, CreditCardListActivity.class);
+                    mActivity.startActivity(intent);
+                    mActivity.finish();
                     return;
                 }else if ("888888".equals(bindCreditCardBean.getCode())) {
                     new CompelLogin(mActivity).popExitLogin();

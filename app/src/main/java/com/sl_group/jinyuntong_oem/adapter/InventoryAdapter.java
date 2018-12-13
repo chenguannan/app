@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.sl_group.jinyuntong_oem.R;
 import com.sl_group.jinyuntong_oem.bean.CreditCardBean;
+import com.sl_group.jinyuntong_oem.utils.StringUtils;
 
 import java.util.List;
 
@@ -45,7 +46,8 @@ public class InventoryAdapter extends BaseRecyclerViewAdapter<CreditCardBean.Dat
             }
         });
         ((TextView) holder.getView(R.id.tv_bankcard_name)).setText(bean.getBankName());
-        ((TextView) holder.getView(R.id.tv_bankcard_cardnumber)).setText(bean.getAccountNumber());
+        ((TextView) holder.getView(R.id.tv_bankcard_cardnumber)).setText(StringUtils.getStarString(bean.getAccountNumber(),6,bean.getAccountNumber().length()-4));
+
         ((TextView) holder.getView(R.id.tv_bankcard_banktype)).setText(bean.getCardType());
     }
 

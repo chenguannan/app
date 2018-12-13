@@ -97,31 +97,31 @@
             android:layout_below="@+id/tv_bind_creditcard_cardnumber_hint"/>
 
 
-        <TextView
-            android:id="@+id/v_bind_creditcard_cardtel_hint"
-            style="@style/tv_left"
-            android:layout_below="@+id/v_bind_creditcard_cardnumber_underline"
-            android:paddingTop="@dimen/x10"
-            android:paddingBottom="@dimen/x10"
-            android:text="@string/bankcard_tel"/>
+        <!--<TextView-->
+            <!--android:id="@+id/v_bind_creditcard_cardtel_hint"-->
+            <!--style="@style/tv_left"-->
+            <!--android:layout_below="@+id/v_bind_creditcard_cardnumber_underline"-->
+            <!--android:paddingTop="@dimen/x10"-->
+            <!--android:paddingBottom="@dimen/x10"-->
+            <!--android:text="@string/bankcard_tel"/>-->
 
-        <EditText
-            android:id="@+id/et_bind_creditcard_cardtel"
-            style="@style/et_right"
-            android:layout_below="@+id/v_bind_creditcard_cardnumber_underline"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/v_bind_creditcard_cardtel_hint"
-            android:hint="@string/input_add_bankcard_tel"
-            android:inputType="phone"
-            android:maxLength="11"
-            android:paddingTop="@dimen/y10"
-            android:paddingBottom="@dimen/y10"
-            tools:ignore="Autofill,LabelFor"/>
+        <!--<EditText-->
+            <!--android:id="@+id/et_bind_creditcard_cardtel"-->
+            <!--style="@style/et_right"-->
+            <!--android:layout_below="@+id/v_bind_creditcard_cardnumber_underline"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_toEndOf="@+id/v_bind_creditcard_cardtel_hint"-->
+            <!--android:hint="@string/input_add_bankcard_tel"-->
+            <!--android:inputType="phone"-->
+            <!--android:maxLength="11"-->
+            <!--android:paddingTop="@dimen/y10"-->
+            <!--android:paddingBottom="@dimen/y10"-->
+            <!--tools:ignore="Autofill,LabelFor"/>-->
     </RelativeLayout>
 
     <Button
         android:id="@+id/btn_bind_creditcard"
         style="@style/btn_common"
         android:layout_margin="@dimen/x50"
-        android:text="@string/makesure_bindcard"/>
+        android:text="@string/next_setp"/>
 </LinearLayout>

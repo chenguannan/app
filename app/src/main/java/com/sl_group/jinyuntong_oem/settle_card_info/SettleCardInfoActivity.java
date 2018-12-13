@@ -169,8 +169,8 @@ public class SettleCardInfoActivity extends BaseActivity implements SettleCardSe
       */
     private void displayInfo(String holderName, String idCard, String accountNumber, String cellPhone, String depositBank) {
         mTvSettleInfoName.setText(holderName);
-        mTvSettleInfoIdcard.setText(idCard);
-        mTvSettleInfoCardnumber.setText(accountNumber);
+        mTvSettleInfoIdcard.setText(StringUtils.getStarString(idCard,1,idCard.length()-1));
+        mTvSettleInfoCardnumber.setText(StringUtils.getStarString(accountNumber,6,accountNumber.length()-4));
         mTvSettleInfoTel.setText(cellPhone);
         mTvSettleInfoBankname.setText(depositBank);
     }

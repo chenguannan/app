@@ -131,6 +131,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
                 break;
             case 3:
+//                if (!new RealnameStates(this).isRealname()) {
+//                    return;
+//                }
                 mRbMainMine.setTextColor(ContextCompat.getColor(this, R.color.mainColor));
                 if (mMineFragment == null) {
                     mMineFragment = new MineFragment();

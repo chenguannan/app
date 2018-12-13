@@ -207,7 +207,7 @@ public class SMSActivity extends BaseActivity implements SMSView,GesturePassword
     public void getSMS(CommonSMSBean.DataBean data) {
         mSMSUUID = data.getUuid();
         mSMSVerfic = data.getCode();
-        new TimeCount(120000, 1000).start();
+        new TimeCount(60000, 1000).start();
     }
 
     @Override

@@ -73,7 +73,7 @@ public class LoginTelFragment extends BaseFragment implements LoginView {
 
     @Override
     public void initData() {
-        mTimeCount = new TimeCount(120000,1000);
+        mTimeCount = new TimeCount(60000,1000);
         //初始化登录persenter
         mLoginPersenter = new LoginPersenter(getActivity(), this);
         //图片验证码工具

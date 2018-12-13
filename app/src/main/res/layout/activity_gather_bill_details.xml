@@ -103,6 +103,7 @@
                     android:text="@string/pay_people"/>
 
                 <TextView
+                    android:gravity="right"
                     android:id="@+id/tv_gather_bill_details_paypeople"
                     style="@style/tv_right"
                     android:layout_below="@+id/v_gather_bill_details_paycard_underline"

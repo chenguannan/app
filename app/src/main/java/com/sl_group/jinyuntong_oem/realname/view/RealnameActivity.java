@@ -230,7 +230,7 @@ public class RealnameActivity extends BaseActivity implements RealnameView, UpLo
     @Override
     public void realnameSMSSuccess(RealnameSMSBean.DataBean data) {
         mSMSUUID = data.getUuid();
-        new TimeCount(120000, 1000).start();
+        new TimeCount(60000, 1000).start();
     }
 
     @Override

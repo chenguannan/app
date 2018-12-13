@@ -105,7 +105,7 @@ public class ShopInfoActivity extends BaseActivity implements MerchantinfoView {
                 break;
         }
         mTvShopInfoName.setText(holderName);
-        mTvShopInfoIdcard.setText(idCard);
+        mTvShopInfoIdcard.setText(StringUtils.getStarString(idCard,1,idCard.length()-1));
         mTvShopInfoShopName.setText(shortName);
         mTvShopInfoShopAddress.setText(shopAddress);
     }

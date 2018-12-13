@@ -46,6 +46,7 @@ public class OpenMerchantModelImpl implements OpenMerchantMedel {
                     @Override
                     public void onSuccess(String serviceData) {
                         String paseData = CommonParamsUtils.commonPaseParams(serviceData);
+                        ToastUtils.showToast(paseData);
                         if (StringUtils.isEmpty(paseData)) {
                             ToastUtils.showToast("网络异常");
                             return;
