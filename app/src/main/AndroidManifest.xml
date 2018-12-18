@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.sl_group.jinyuntong_oem">
+          package="com.xinyilian.text">
 
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -32,17 +32,17 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <application
 
-        android:name=".base.BaseApplication"
-        android:icon="@mipmap/ic_launcher"
+        android:name="com.xinyilian.text.base.BaseApplication"
+        android:icon="@mipmap/icon_xyl"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon_xyl"
         android:supportsRtl="true"
         android:theme="@style/MyTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".welcome.view.WelcomeActivity"
+            android:name="com.xinyilian.text.welcome.view.WelcomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -51,147 +51,147 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".regist.view.RegistActivity"
+            android:name="com.xinyilian.text.regist.view.RegistActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.sl_group.jinyuntong_oem.login.GestureLoginActivity"
+            android:name="com.xinyilian.text.login.GestureLoginActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".MainActivity"
+            android:name="com.xinyilian.text.MainActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".myshop.MyShopActivty"
+            android:name="com.xinyilian.text.myshop.MyShopActivty"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".login.LoginActivity"
+            android:name="com.xinyilian.text.login.LoginActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".gather.view.GatherActivity"
+            android:name="com.xinyilian.text.gather.view.GatherActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".gather_set_money.GatherSetMoneyActivity"
+            android:name="com.xinyilian.text.gather_set_money.GatherSetMoneyActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".creditcard.view.CreditCardListActivity"
+            android:name="com.xinyilian.text.creditcard.view.CreditCardListActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".bindcard.view.BindCreditCardActivity"
+            android:name="com.xinyilian.text.bindcard.view.BindCreditCardActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".realname.view.RealnameActivity"
+            android:name="com.xinyilian.text.realname.view.RealnameActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ScanCameraActivity"
+            android:name="com.xinyilian.text.ScanCameraActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".login_password.view.LoginPasswordActivity"
+            android:name="com.xinyilian.text.login_password.view.LoginPasswordActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".open_merchant.view.OpenMerchantActivity"
+            android:name="com.xinyilian.text.open_merchant.view.OpenMerchantActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".open_merchant.OpenMerchantSuccessActivity"
+            android:name="com.xinyilian.text.open_merchant.OpenMerchantSuccessActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".merchant_info.view.MerchantinfoActivity"
+            android:name="com.xinyilian.text.merchant_info.view.MerchantinfoActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".safe_set.SafeSetActivity"
+            android:name="com.xinyilian.text.safe_set.SafeSetActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".gesture_password.GesturePasswordActivity"
+            android:name="com.xinyilian.text.gesture_password.GesturePasswordActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".gesture_set.view.GesturePasswordSetActivity"
+            android:name="com.xinyilian.text.gesture_set.view.GesturePasswordSetActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".gesture_change.view.GesturePasswordChangeActivity"
+            android:name="com.xinyilian.text.gesture_change.view.GesturePasswordChangeActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".sms.view.SMSActivity"
+            android:name="com.xinyilian.text.sms.view.SMSActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".vip_center.VipCenterActivity"
+            android:name="com.xinyilian.text.vip_center.VipCenterActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".web.LoadWebActivity"
+            android:name="com.xinyilian.text.web.LoadWebActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".shop_info.ShopInfoActivity"
+            android:name="com.xinyilian.text.shop_info.ShopInfoActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".settle_card_info.SettleCardInfoActivity"
+            android:name="com.xinyilian.text.settle_card_info.SettleCardInfoActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".gather_bill.view.GatherBillActivity"
+            android:name="com.xinyilian.text.gather_bill.view.GatherBillActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".gather_bill_details.GatherBillDetailsActivity"
+            android:name="com.xinyilian.text.gather_bill_details.GatherBillDetailsActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".pay_bill.view.PayBillActivity"
+            android:name="com.xinyilian.text.pay_bill.view.PayBillActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".pay_bill_details.PayBillDetailsActivity"
+            android:name="com.xinyilian.text.pay_bill_details.PayBillDetailsActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".gather_input_money.GatherInputMoneyActivity"
+            android:name="com.xinyilian.text.gather_input_money.GatherInputMoneyActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".gather_rate.GatherRateActivity"
+            android:name="com.xinyilian.text.gather_rate.GatherRateActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".pay_password_change.view.PayPasswordChangeActivity"
+            android:name="com.xinyilian.text.pay_password_change.view.PayPasswordChangeActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".pay_password.PayPasswordActivity"
+            android:name="com.xinyilian.text.pay_password.PayPasswordActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".share.ShareFaceToFaceActivity"
+            android:name="com.xinyilian.text.share.ShareFaceToFaceActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".share.OfficialActivity"
+            android:name="com.xinyilian.text.share.OfficialActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".share.ShareRegistActivity"
+            android:name="com.xinyilian.text.share.ShareRegistActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".extract.view.ExtractActivity"
+            android:name="com.xinyilian.text.extract.view.ExtractActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".extract_result.ExtractResultActivity"
+            android:name="com.xinyilian.text.extract_result.ExtractResultActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".extract_record.ExtractRecordActivity"
+            android:name="com.xinyilian.text.extract_record.ExtractRecordActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".extract_record_details.ExtractRecordDetailsActivity"
+            android:name="com.xinyilian.text.extract_record_details.ExtractRecordDetailsActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".deal_record.DealRecordActivity"
+            android:name="com.xinyilian.text.deal_record.DealRecordActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".deal_record_details.DealRecordDetailsActivity"
+            android:name="com.xinyilian.text.deal_record_details.DealRecordDetailsActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".upvip_borkerage.UpVipBrokerageActivity"
+            android:name="com.xinyilian.text.upvip_borkerage.UpVipBrokerageActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".share.OfficialDetailsActivity"
+            android:name="com.xinyilian.text.share.OfficialDetailsActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".new_details.NewDetailsActivity"
+            android:name="com.xinyilian.text.new_details.NewDetailsActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".news.NewsActivity"
+            android:name="com.xinyilian.text.news.NewsActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".my_team.view.MyTeamActivity"
+            android:name="com.xinyilian.text.my_team.view.MyTeamActivity"
             android:screenOrientation="portrait"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.sl_group.jinyuntong_oem.fileprovider"
+            android:authorities="com.xinyilian.text.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -209,7 +209,7 @@
 
 
         <activity
-            android:name=".wxapi.WXEntryActivity"
+            android:name="com.xinyilian.text.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
@@ -231,9 +231,9 @@
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
-        <activity android:name=".web.X5WebViewActivity"/>
-        <activity android:name=".notices.NoticesActivity"/>
-        <activity android:name=".notice_details.NoticeDetailsActivity"/>
+        <activity android:name="com.xinyilian.text.web.X5WebViewActivity"/>
+        <activity android:name="com.xinyilian.text.notices.NoticesActivity"/>
+        <activity android:name="com.xinyilian.text.notice_details.NoticeDetailsActivity"/>
         <!-- umengAppKey -->
         <meta-data
             android:name="UMENG_APPKEY"
@@ -248,7 +248,7 @@
 
         <!-- User defined.  For test only  用户自定义的广播接收器-->
         <receiver
-            android:name=".MyReceiver"
+            android:name="com.xinyilian.text.MyReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>

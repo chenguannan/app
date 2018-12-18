@@ -50,7 +50,7 @@
             tools:ignore="RelativeOverlap"/>
     </RelativeLayout>
 
-    <com.sl_group.jinyuntong_oem.X5WebView
+    <com.xinyilian.text.X5WebView
         android:id="@+id/x5_webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -65,7 +65,7 @@
             style="@style/tv_left"
             android:paddingTop="@dimen/x10"
             android:paddingBottom="@dimen/x10"
-            android:text="@string/bankcard_cardnumber"/>
+            android:text="@string/input_cardnumber"/>
 
         <EditText
             android:id="@+id/et_bind_creditcard_cardnumber"
@@ -74,9 +74,10 @@
             android:layout_toEndOf="@+id/tv_bind_creditcard_cardnumber_hint"
             android:hint="@string/input_bankcard_cardnumber"
             android:inputType="number"
-            android:maxLength="20"
+            android:maxLength="23"
             android:paddingTop="@dimen/y10"
             android:paddingBottom="@dimen/y10"
+            android:background="@color/white_color"
             tools:ignore="Autofill"/>
 
         <ImageView

@@ -6,7 +6,7 @@
               android:background="@color/bgColor"
               android:orientation="vertical">
 
-    <include layout="@layout/actionbar_layout"/>
+    <include layout="@layout/actionbar_layout" />
 
     <RelativeLayout
         android:layout_width="match_parent"

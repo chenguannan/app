@@ -115,8 +115,8 @@
             <TextView
                 android:id="@+id/tv_firstpage_merchant_policy"
                 style="@style/tv_firstpage_top_pic"
-                android:drawableTop="@mipmap/zhengce"
-                android:text="@string/merchant_policy"/>
+                android:drawableTop="@mipmap/skzd"
+                android:text="@string/collection_bill"/>
 
             <TextView
                 android:id="@+id/tv_firstpage_service_center"

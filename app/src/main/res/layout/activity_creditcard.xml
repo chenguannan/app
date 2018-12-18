@@ -42,14 +42,14 @@
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.sl_group.recycleviewdemo.MainActivity">
+        tools:context="com.xinyilian.recycleviewdemo.MainActivity">
 
-        <com.sl_group.jinyuntong_oem.SlideRecyclerView
+        <com.xinyilian.text.SlideRecyclerView
             android:id="@+id/recycleView_creditcard"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </com.sl_group.jinyuntong_oem.SlideRecyclerView>
+        </com.xinyilian.text.SlideRecyclerView>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

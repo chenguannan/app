@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">金运通</string>
+    <string name="app_name">信易联</string>
     <string name="close">关闭</string>
     <string name="password_login">密码登录</string>
     <string name="tel_login">手机号登录</string>
@@ -33,6 +33,7 @@
     <string name="recommend_card">推荐办卡</string>
     <string name="group_buy">拼团购</string>
     <string name="merchant_policy">商家政策</string>
+    <string name="collection_bill">收款账单</string>
     <string name="service_center">客服中心</string>
     <string name="integral_shop">积分商城</string>
     <string name="vip_center">商家VIP中心</string>
@@ -84,6 +85,7 @@
     <string name="add_bankcard_hint">请务必确认信息准确无误，否则将影响到账</string>
     <string name="bankcard_cardnumber">银行卡卡号</string>
     <string name="input_bankcard_cardnumber">请输入银行卡卡号</string>
+    <string name="input_cardnumber">卡号</string>
     <string name="bankcard_tel">预留手机号</string>
     <string name="input_add_bankcard_tel">请输入银行预留手机号</string>
     <string name="makesure_bindcard">确认绑卡</string>
