@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/mainColor">
+    android:background="@color/greenback">
 
     <ImageView
         android:id="@+id/img_actionbar_back"

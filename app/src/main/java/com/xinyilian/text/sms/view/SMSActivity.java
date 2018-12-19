@@ -174,7 +174,9 @@ public class SMSActivity extends BaseActivity implements SMSView,GesturePassword
                     case "changePayPassword":
                         bundle.putString("type", "change");
                         startActivity(PayPasswordChangeActivity.class, bundle);
+
                         finish();
+// startActivity(PayPasswordChangeActivity.class);
                         break;
                     case "forgetPayPassword":
                         bundle.putString("type", "forget");

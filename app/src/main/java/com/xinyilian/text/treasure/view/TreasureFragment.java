@@ -45,7 +45,7 @@ public class TreasureFragment extends BaseFragment implements TreasureView, Merc
     private TextView mTvTreasureAllExtract;
     private TextView mTvTreasureDealBrokerage;
     private TextView mTvTreasureUpvipBrokerage;
-    private ImageView mImgTreasurePolicyLook;
+    private ImageView mImgTreasurePolicyleft;
 
     private int vipLevel = -1;
     private TrerasurePersenter mTrerasurePersenter;
@@ -73,7 +73,8 @@ public class TreasureFragment extends BaseFragment implements TreasureView, Merc
         mTvTreasureAllExtract = view.findViewById(R.id.tv_treasure_all_extract);
         mTvTreasureDealBrokerage = view.findViewById(R.id.tv_treasure_deal_brokerage);
         mTvTreasureUpvipBrokerage = view.findViewById(R.id.tv_treasure_upvip_brokerage);
-        mImgTreasurePolicyLook = view.findViewById(R.id.img_treasure_policy_look);
+        //mImgTreasurePolicyLook = view.findViewById(R.id.img_treasure_policy_look);
+        mImgTreasurePolicyleft = view.findViewById(R.id.img_treasure_policy_left);
     }
 
     @Override
@@ -91,7 +92,7 @@ public class TreasureFragment extends BaseFragment implements TreasureView, Merc
         mLlTreasureAllExtract.setOnClickListener(this);
         mLlTreasureDealBrokerage.setOnClickListener(this);
         mLlTreasureUpvipBrokerage.setOnClickListener(this);
-        mImgTreasurePolicyLook.setOnClickListener(this);
+        mImgTreasurePolicyleft.setOnClickListener(this);
     }
 
 
@@ -122,7 +123,7 @@ public class TreasureFragment extends BaseFragment implements TreasureView, Merc
             case R.id.ll_treasure_upvip_brokerage:
                 startActivity(UpVipBrokerageActivity.class);
                 break;
-            case R.id.img_treasure_policy_look:
+            case R.id.img_treasure_policy_left:
 
                 switch (vipLevel) {
                     case -1:

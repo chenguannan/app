@@ -217,4 +217,10 @@
     </style>
 
 
+    <style name="CustomAppTheme_textinputLayout" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorAccent">#02B997</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
 </resources>

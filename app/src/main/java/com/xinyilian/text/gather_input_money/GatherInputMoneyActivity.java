@@ -90,8 +90,8 @@ public class GatherInputMoneyActivity extends BaseActivity implements CreditCard
     //支付密码
     private String payPassword;
     //第一次设置支付密码键盘
-    private GridSipEditText gridSip_fisrt;
-    private GridSipEditText gridSip_second;
+//    private GridSipEditText gridSip_fisrt;
+//    private GridSipEditText gridSip_second;
     //支付密码弹窗标题
     private String title = "请设置支付密码";
     //支付密码弹窗
@@ -343,31 +343,31 @@ public class GatherInputMoneyActivity extends BaseActivity implements CreditCard
             tvPopPasswordForget.setVisibility(View.VISIBLE);
         }
 
-        gridSip_fisrt = view.findViewById(R.id.gridSip_first);
-        gridSip_second = view.findViewById(R.id.gridSip_second);
-        gridSip_fisrt.setGridColor(ContextCompat.getColor(this, R.color.blackColor));
-        gridSip_fisrt.setSipKeyBoardType(SIPKeyboardType.NUMBER_KEYBOARD);
-        gridSip_fisrt.setStorkeWidth(1);
-        gridSip_fisrt.setCirdNumber(6);
-        gridSip_fisrt.setNodeColor(Color.BLACK);
-        gridSip_fisrt.setEncryptState(true);
-        gridSip_fisrt.setServerRandom(SERVICE_RANDOM);
-        gridSip_fisrt.setCipherType(SipEditText.Algorithm_RSA1024);
-        gridSip_fisrt.setOutputValueType(2);
-
-
-        gridSip_second.setGridColor(ContextCompat.getColor(this, R.color.blackColor));
-        gridSip_second.setSipKeyBoardType(SIPKeyboardType.NUMBER_KEYBOARD);
-        gridSip_second.setStorkeWidth(1);
-        gridSip_second.setCirdNumber(6);
-        gridSip_second.setNodeColor(Color.BLACK);
-        gridSip_second.setEncryptState(true);
-        gridSip_second.setServerRandom(SERVICE_RANDOM);
-        gridSip_second.setCipherType(SipEditText.Algorithm_RSA1024);
-        gridSip_second.setOutputValueType(2);
-
-        gridSip_fisrt.setGridSipEditTextDelegator(this);
-        gridSip_second.setGridSipEditTextDelegator(this);
+//        gridSip_fisrt = view.findViewById(R.id.gridSip_first);
+//        gridSip_second = view.findViewById(R.id.gridSip_second);
+//        gridSip_fisrt.setGridColor(ContextCompat.getColor(this, R.color.blackColor));
+//        gridSip_fisrt.setSipKeyBoardType(SIPKeyboardType.NUMBER_KEYBOARD);
+//        gridSip_fisrt.setStorkeWidth(1);
+//        gridSip_fisrt.setCirdNumber(6);
+//        gridSip_fisrt.setNodeColor(Color.BLACK);
+//        gridSip_fisrt.setEncryptState(true);
+//        gridSip_fisrt.setServerRandom(SERVICE_RANDOM);
+//        gridSip_fisrt.setCipherType(SipEditText.Algorithm_RSA1024);
+//        gridSip_fisrt.setOutputValueType(2);
+//
+//
+//        gridSip_second.setGridColor(ContextCompat.getColor(this, R.color.blackColor));
+//        gridSip_second.setSipKeyBoardType(SIPKeyboardType.NUMBER_KEYBOARD);
+//        gridSip_second.setStorkeWidth(1);
+//        gridSip_second.setCirdNumber(6);
+//        gridSip_second.setNodeColor(Color.BLACK);
+//        gridSip_second.setEncryptState(true);
+//        gridSip_second.setServerRandom(SERVICE_RANDOM);
+//        gridSip_second.setCipherType(SipEditText.Algorithm_RSA1024);
+//        gridSip_second.setOutputValueType(2);
+//
+//        gridSip_fisrt.setGridSipEditTextDelegator(this);
+//        gridSip_second.setGridSipEditTextDelegator(this);
 
 
         tvPopPasswordTitle.setText(title);
@@ -383,7 +383,7 @@ public class GatherInputMoneyActivity extends BaseActivity implements CreditCard
         popupWindow = PopupWindowUtils.getPop(this, view, DisplayUtils.getScreenWidth(this), DisplayUtils.getScreenHeight(this) *2/ 3);
         popupWindow.setAnimationStyle(R.style.PopupAnimationBottom);
         popupWindow.showAtLocation(getWindow().getDecorView(), Gravity.BOTTOM, 0, 0);
-        gridSip_fisrt.showSecurityKeyBoard();
+      //  gridSip_fisrt.showSecurityKeyBoard();
     }
 
     //验证是否为同一人交易
@@ -414,35 +414,35 @@ public class GatherInputMoneyActivity extends BaseActivity implements CreditCard
 
     @Override
     public void onInputComplete(GridSipEditText gridSipEditText) {
-        try {
-            payPassword = gridSipEditText.getEncryptData().getEncryptRandomNum() + "#" + gridSipEditText.getEncryptData().getEncryptInput();
-
-            if (title.contains("设置")) {
-                if (gridSipEditText == gridSip_fisrt) {
-                    gridSip_fisrt.setVisibility(View.GONE);
-                    gridSip_second.setVisibility(View.VISIBLE);
-                    gridSip_second.showSecurityKeyBoard();
-                } else {
-                    if (gridSip_second.inputEqualsWith(gridSip_fisrt)) {
-                        if (popupWindow.isShowing()) {
-                            popupWindow.dismiss();
-                        }
-                        peopleVerfic(payPassword);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "输入不一致请重新输入", Toast.LENGTH_SHORT).show();
-                        gridSip_fisrt.clear();
-                        gridSip_second.clear();
-                        gridSip_fisrt.setVisibility(View.VISIBLE);
-                        gridSip_second.setVisibility(View.GONE);
-                    }
-
-                }
-            } else {
-                peopleVerfic(payPassword);
-            }
-        } catch (CodeException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            payPassword = gridSipEditText.getEncryptData().getEncryptRandomNum() + "#" + gridSipEditText.getEncryptData().getEncryptInput();
+//
+//            if (title.contains("设置")) {
+//                if (gridSipEditText == gridSip_fisrt) {
+//                    gridSip_fisrt.setVisibility(View.GONE);
+//                    gridSip_second.setVisibility(View.VISIBLE);
+//                    gridSip_second.showSecurityKeyBoard();
+//                } else {
+//                    if (gridSip_second.inputEqualsWith(gridSip_fisrt)) {
+//                        if (popupWindow.isShowing()) {
+//                            popupWindow.dismiss();
+//                        }
+//                        peopleVerfic(payPassword);
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "输入不一致请重新输入", Toast.LENGTH_SHORT).show();
+//                        gridSip_fisrt.clear();
+//                        gridSip_second.clear();
+//                        gridSip_fisrt.setVisibility(View.VISIBLE);
+//                        gridSip_second.setVisibility(View.GONE);
+//                    }
+//
+//                }
+//            } else {
+//                peopleVerfic(payPassword);
+//            }
+//        } catch (CodeException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override

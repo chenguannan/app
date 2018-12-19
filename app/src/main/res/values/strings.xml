@@ -45,6 +45,7 @@
     <string name="water">水费</string>
     <string name="ele">电费</string>
     <string name="gas">燃气费</string>
+    <string name="egs">e高速</string>
     <string name="information_query">信息查询</string>
     <string name="shebao_query">社保查询</string>
     <string name="gongjijin_query">公积金查询</string>

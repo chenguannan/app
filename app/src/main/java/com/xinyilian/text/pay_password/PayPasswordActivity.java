@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.xinyilian.text.R;
 import com.xinyilian.text.base.BaseActivity;
+import com.xinyilian.text.pay_password_change.view.PayPasswordChangeActivity;
 import com.xinyilian.text.sms.view.SMSActivity;
 
 /**
@@ -54,9 +55,9 @@ public class PayPasswordActivity extends BaseActivity {
                 break;
             case R.id.tv_pay_password_change:
                 //修改
-                Bundle bundle = new Bundle();
-                bundle.putString("action","changePayPassword");
-                startActivity(SMSActivity.class,bundle);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("action","changePayPassword");
+                startActivity(PayPasswordChangeActivity.class);
                 break;
             case R.id.tv_pay_password_forget:
                 Bundle forgetBundle = new Bundle();

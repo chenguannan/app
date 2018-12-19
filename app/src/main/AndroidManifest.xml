@@ -28,6 +28,7 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
+
     <!-- 硬件加速对X5视频播放非常重要，建议开启 -->
     <uses-permission android:name="android.permission.GET_TASKS" />
     <application
@@ -42,11 +43,10 @@
         android:theme="@style/MyTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="com.xinyilian.text.welcome.view.WelcomeActivity"
+            android:name=".welcome.view.WelcomeActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -227,6 +227,16 @@
                 <data android:scheme="tencent101528316"/>
             </intent-filter>
         </activity>
+       <!-- 云核支付jar包内Activity-->
+        <activity
+            android:name="cn.cloudcore.iprotect.plugin.CKbdActivity"
+            android:launchMode="singleTask"
+            android:configChanges="orientation"
+            android:theme="@android:style/Theme.Translucent"
+            >
+        </activity>
+
+
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -260,6 +270,8 @@
                 <category android:name="com.sl_group.jinyuntong_oem"/>
             </intent-filter>
         </receiver>
+         <!--云核安全键盘-->
+        <service       android:name="cn.cloudcore.iprotect.service.CKeyBoardService"     android:exported="false" />
     </application>
 
 

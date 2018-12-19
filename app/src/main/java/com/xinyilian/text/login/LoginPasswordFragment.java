@@ -48,7 +48,6 @@ public class LoginPasswordFragment extends BaseFragment implements LoginView {
     private Button mBtnPasswordLogin;
     private TextView mTvPasswordLoginRegister;
     private TextView mTvPasswordLoginServiceTel;
-     CEditTextView oldEditTextView = null;
     //登录persenter
     private LoginPersenter mLoginPersenter;
     //图片验证码
@@ -71,126 +70,14 @@ public class LoginPasswordFragment extends BaseFragment implements LoginView {
 
     @Override
     public void initView(View view) {
-        CEditTextAttrSet attrSet = new CEditTextAttrSet();
-        //信易联密码输入控件
-        oldEditTextView = view.findViewById(R.id.oldpassword);
-        attrSet.maskChar = '#';
-        attrSet.textColor = Color.WHITE;
-        attrSet.kbdRandom = true;
-        attrSet.kbdVibrator = true;
-        attrSet.outsideClose= true;
-//		attrSet.softkbdType = CEditTextAttrSet.SOFT_KBD_NUM_ONLY;
-        //attrSet.softkbdType = CEditTextAttrSet.SOFT_KBD_NUM_SPEC;
-        //attrSet.softkbdType = CEditTextAttrSet.SOFT_KBD_QWERTY;
-        attrSet.softkbdMode = CEditTextAttrSet.SOFT_KBD_MODE_KDOWN_NOPOP;
-        oldEditTextView.initialize(attrSet);
-
-        CEditTextAttrSet attrSet2 = new CEditTextAttrSet();
-        attrSet2.maskChar = '*';
-        attrSet2.textColor = Color.WHITE;
-        attrSet2.kbdRandom = false;
-        attrSet2.kbdVibrator = false;
-        attrSet2.outsideClose = true;
-        attrSet2.softkbdType = CEditTextAttrSet.SOFT_KBD_QWERTY;
-
-        attrSet2.softkbdStype= CEditTextAttrSet.SOFT_KBD_QWERTY_SYMBOL_1;
-        attrSet2.softkbdView = CEditTextAttrSet.SOFT_KBD_WITH_EDITTEXT;
-        //attrSet2.softkbdMode = CEditTextAttrSet.SOFT_KBD_MODE_KDOWN_CHANGE;
-        attrSet.softkbdMode = CEditTextAttrSet.SOFT_KBD_MODE_KDOWN_NOPOP;
-
-
-//		newEditTextView.initialize(attrSet);
-
-
-//		oldEditTextView.clear();
-//		newEditTextView.clear();
-
-        //newEditTextView.requestFocus();
-
-
-
-
-//		SecKeyUtils skUtils = new SecKeyUtils(this);
-//
-//		Log.e("SecKeyUtils", "number:" + skUtils.getSecKeyNumber() );
-//		Log.e("SecKeyUtils", "all alias:" + skUtils.getAllSecKeyAlias().toString() );
-//
-//		String alias1 = "CloudCore 1";
-//		String alias2 = "CloudCore 2";
-//		Log.e("SecKeyUtils", "all alias:" + skUtils.generateSecKey(alias1));
-//		Log.e("SecKeyUtils", "all alias:" + skUtils.generateSecKey(alias2));
-//		Log.e("SecKeyUtils", "number:" + skUtils.getSecKeyNumber() );
-//		Log.e("SecKeyUtils", "all alias:" + skUtils.getAllSecKeyAlias().toString());
-//
-//		skUtils.removeSecKey(alias2);
-//		Log.e("SecKeyUtils", "remove:");
-//		Log.e("SecKeyUtils", "number:" + skUtils.getSecKeyNumber() );
-//		Log.e("SecKeyUtils", "all alias:" + skUtils.getAllSecKeyAlias().toString());
-//
-//		skUtils.setPublicModulus(modulus2, "e927adde2cb3f79027d7312194e2a51da17ed953");
-//		Log.e("SecKeyUtils", "SecKey 1:" +  skUtils.getCipheredSecKey(alias1, null, "1234567890123"));
-//
-//		Log.e("SecKeyUtils", "SecKey 2:" +  skUtils.getCipheredSecKey(alias1, "3132333435", "1234567890123"));
-//
-//		Log.e("SecKeyUtils", "SHA1:" +  skUtils.SHA1(alias1, null, "3132333435"));
-//		Log.e("SecKeyUtils", "SHA1:" +  skUtils.SHA1(alias1, "3233343536", "3132333435"));
-//
-//		Log.e("SecKeyUtils", "SHA1WithCiphered 1:" +  skUtils.SHA1WithCiphered(alias1, "", "3132333435", "1234567890123"));
-//		Log.e("SecKeyUtils", "SHA1WithCiphered 2:" +  skUtils.SHA1WithCiphered(alias1, "3233343536", "3132333435", "1234567890123"));
-//
-//		Log.e("CommonUtils", "DeviceID:" + CommonUtils.deviceID(this));
-
-//		SecKeyUtils skUtils = new SecKeyUtils(this);
-//		skUtils.setPublicModulus(modulus2,  "e927adde2cb3f79027d7312194e2a51da17ed953");
-//		skUtils.generateSecKey("CCFingerPrint");
-//		String encrtyptedKey = skUtils.getCipheredSecKey("CCFingerPrint", null, "12313123123");
-//		Log.e("SecKeyUtils", "encrtyptedKey:" + encrtyptedKey);
-
-        String hexStr = "3031323334353600373839";
-        byte[] bStr = HexString2Bytes(hexStr);
-
-        String nStr = new String(bStr);
-        Log.e("11111", "1 - " + nStr);
-
-        Log.e("11111", "2 - " + toHexString(nStr));
-
-//		nStr = bStr.toString();
-
         mEtPasswordLoginTel = view.findViewById(R.id.et_password_login_tel);
-     //   mEtPasswordLoginPassword = view.findViewById(R.id.et_password_login_password);
+        mEtPasswordLoginPassword = view.findViewById(R.id.et_password_login_password);
         mBtnPasswordLoginForgetPwd = view.findViewById(R.id.btn_password_login_forget_pwd);
         mEtPasswordLoginPicVerficCode = view.findViewById(R.id.et_password_login_pic_verfic_code);
         mImgPicVerfic = view.findViewById(R.id.img_pic_verfic);
         mBtnPasswordLogin = view.findViewById(R.id.btn_password_login);
         mTvPasswordLoginRegister = view.findViewById(R.id.tv_password_login_register);
         mTvPasswordLoginServiceTel = view.findViewById(R.id.tv_password_login_service_tel);
-
-
-
-
-    }
-
-
-    public static byte uniteBytes(byte src0, byte src1) {
-        byte _b0 = Byte.decode("0x" + new String(new byte[]{src0})).byteValue();
-        _b0 = (byte)(_b0 << 4);
-
-        byte _b1 = Byte.decode("0x" + new String(new byte[]{src1})).byteValue();
-        byte ret = (byte)(_b0 ^ _b1);
-
-        return ret;
-    }
-
-
-
-    public static byte[] HexString2Bytes(String src){
-        byte[] ret = new byte[src.length()/2];
-        byte[] tmp = src.getBytes();
-        for(int i=0; i<ret.length; i++){
-            ret[i] = uniteBytes(tmp[i*2], tmp[i*2+1]);
-        }
-
-        return ret;
     }
 
     @Override
@@ -200,24 +87,10 @@ public class LoginPasswordFragment extends BaseFragment implements LoginView {
         //初始化图片验证码
         mCodeUtils = CodeUtils.getInstance();
         //生成图片验证码
-         mBitmap = mCodeUtils.createBitmap();
+        mBitmap = mCodeUtils.createBitmap();
         //展示图片验证码
         mImgPicVerfic.setImageBitmap(mBitmap);
     }
-
-    public static String toHexString(String s) {
-        String str="";
-
-        for (int i=0;i<s.length();i++) {
-
-            int ch = s.charAt(i);
-            String s4 = Integer.toHexString(ch);
-            str = str + s4;
-        }
-
-        return str;
-    }
-
 
     @Override
     public void setListener() {
@@ -277,8 +150,8 @@ public class LoginPasswordFragment extends BaseFragment implements LoginView {
 
     }
     /**
-      * 登录成功
-      */
+     * 登录成功
+     */
     @Override
     public void loginSuccess() {
         startActivity(MainActivity.class);
@@ -286,8 +159,8 @@ public class LoginPasswordFragment extends BaseFragment implements LoginView {
     }
 
     /**
-      * 强制退出登录
-      */
+     * 强制退出登录
+     */
     @Override
     public void compelLogin() {
         popChangeLogin();
@@ -299,8 +172,8 @@ public class LoginPasswordFragment extends BaseFragment implements LoginView {
     }
 
     /**
-      *切换手机号登录模式
-      */
+     *切换手机号登录模式
+     */
     private void popChangeLogin() {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.pop_change_phone, null);
         Button cancel = view.findViewById(R.id.btn_pop_change_phone_cancel);
@@ -364,6 +237,7 @@ public class LoginPasswordFragment extends BaseFragment implements LoginView {
         });
 
     }
+
 
 
 }

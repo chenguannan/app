@@ -27,7 +27,7 @@
             android:checked="true"
             android:drawableTop="@drawable/firstpage_bg"
             android:text="@string/firstpage"
-            android:textColor="@color/mainColor"/>
+            android:textColor="@color/greenback"/>
 
         <RadioButton
             android:id="@+id/rb_main_treasure"

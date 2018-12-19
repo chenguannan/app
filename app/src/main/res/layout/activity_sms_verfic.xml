@@ -18,6 +18,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:theme="@style/CustomAppTheme_textinputLayout"
             android:layout_toStartOf="@+id/tv_change_gesture_password_get_verficcode">
 
             <EditText
@@ -38,7 +39,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:text="@string/get_verfic_code"
-            android:textColor="@color/mainColor"
+            android:textColor="@color/greenback"
             android:textSize="@dimen/s16"
             tools:ignore="RelativeOverlap"/>
 
@@ -46,6 +47,7 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
+        android:theme="@style/CustomAppTheme_textinputLayout"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/x20"
         android:layout_marginTop="@dimen/y10"
@@ -59,6 +61,7 @@
             android:inputType="number"
             android:maxLength="6"
             android:textSize="@dimen/s16"
+
             tools:ignore="Autofill,TextFields"/>
     </android.support.design.widget.TextInputLayout>
 

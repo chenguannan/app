@@ -7,12 +7,12 @@
     android:layout_height="match_parent"
     android:background="@mipmap/start_bg">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/y50"
-        android:src="@mipmap/logo"
-        tools:ignore="ContentDescription"/>
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginBottom="@dimen/y50"-->
+        <!--android:src="@mipmap/logo"-->
+        <!--tools:ignore="ContentDescription"/>-->
 </RelativeLayout>

@@ -101,7 +101,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         resetDrawable();
         switch (i) {
             case 0:
-                mRbMainFirstpage.setTextColor(ContextCompat.getColor(this, R.color.mainColor));
+                mRbMainFirstpage.setTextColor(ContextCompat.getColor(this, R.color.greenback));
                 if (mFirstpageFragment == null) {
                     mFirstpageFragment = new FirstpageFragment();
                     ft.add(R.id.fl_main, mFirstpageFragment);
@@ -111,7 +111,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 break;
 
             case 1:
-                mRbMainTreasure.setTextColor(ContextCompat.getColor(this, R.color.mainColor));
+                mRbMainTreasure.setTextColor(ContextCompat.getColor(this, R.color.greenback));
                 if (mTreasureFragment == null) {
                     mTreasureFragment = new TreasureFragment();
                     ft.add(R.id.fl_main, mTreasureFragment);
@@ -121,7 +121,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
                 break;
             case 2:
-                mRbMainShare.setTextColor(ContextCompat.getColor(this, R.color.mainColor));
+                mRbMainShare.setTextColor(ContextCompat.getColor(this, R.color.greenback));
                 if (mShareFragment == null) {
                     mShareFragment = new ShareFragment();
                     ft.add(R.id.fl_main, mShareFragment);
@@ -134,7 +134,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 //                if (!new RealnameStates(this).isRealname()) {
 //                    return;
 //                }
-                mRbMainMine.setTextColor(ContextCompat.getColor(this, R.color.mainColor));
+                mRbMainMine.setTextColor(ContextCompat.getColor(this, R.color.greenback));
                 if (mMineFragment == null) {
                     mMineFragment = new MineFragment();
                     ft.add(R.id.fl_main, mMineFragment);
